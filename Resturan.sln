@@ -3,9 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Presentaion", "Resturan.Presentaion\Resturan.Presentaion.csproj", "{993E7FD2-2C7D-410B-B00F-62D711C0216B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Presentation", "Resturan.Presentaion\Resturan.Presentation.csproj", "{993E7FD2-2C7D-410B-B00F-62D711C0216B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Domain", "Resturan.Domain\Resturan.Domain.csproj", "{2979072A-0010-48FA-B18E-00DFD7C55444}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{C3505F07-FD9A-4B40-8330-DEBA52984C82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1CC738ED-88FD-4C6B-95CB-D951A9B221AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DF86F773-4C08-473B-919E-9E0119C1D142}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EFCORE6", "Infrastructure.EFCORE6\Infrastructure.EFCORE6.csproj", "{C5FE657D-B8A1-47E3-B719-56764DF54377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +29,18 @@ Global
 		{2979072A-0010-48FA-B18E-00DFD7C55444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2979072A-0010-48FA-B18E-00DFD7C55444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2979072A-0010-48FA-B18E-00DFD7C55444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5FE657D-B8A1-47E3-B719-56764DF54377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5FE657D-B8A1-47E3-B719-56764DF54377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5FE657D-B8A1-47E3-B719-56764DF54377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5FE657D-B8A1-47E3-B719-56764DF54377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{993E7FD2-2C7D-410B-B00F-62D711C0216B} = {1CC738ED-88FD-4C6B-95CB-D951A9B221AB}
+		{2979072A-0010-48FA-B18E-00DFD7C55444} = {C3505F07-FD9A-4B40-8330-DEBA52984C82}
+		{C5FE657D-B8A1-47E3-B719-56764DF54377} = {DF86F773-4C08-473B-919E-9E0119C1D142}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4422AB6-0A91-4335-9310-1D71ABD1A9A3}
