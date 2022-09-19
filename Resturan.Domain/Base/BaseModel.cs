@@ -10,7 +10,7 @@
         {
         }
 
-        public BaseModel(string? name)
+        public BaseModel(string name)
         {
             Name = name;
             this.Guid = System.Guid.NewGuid().ToString();

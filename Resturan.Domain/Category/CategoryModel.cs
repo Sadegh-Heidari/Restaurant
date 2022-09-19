@@ -17,6 +17,7 @@ namespace Resturan.Domain.Category
 
         public CategoryModel(short displayOrder)
         {
+           
             DisplayOrder = displayOrder;
         }
     }
