@@ -9,8 +9,15 @@ namespace Resturan.Domain.FoodType
 {
     public class FoodTypeModel:BaseModel
     {
+        public string Name { get; private set; }
+
         protected FoodTypeModel()
         {
+        }
+
+        public FoodTypeModel(string Name)
+        {
+            this.Name = Name;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Resturan.Domain.Services
     public interface IRepositoryBase<TEntity> where TEntity : BaseModel
     { 
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IEnumerable<TOut>> GetAsync<TOut>(Expression<Func<TEntity, TOut>> Select,Expression<Func<TEntity,bool>>? Where=null);
+        Task<IEnumerable<TOut>> GetAsync<TOut>( Expression<Func<TEntity, TOut>> Select,Expression<Func<TEntity,bool>>? Where=null);
         Task<TEntity?> GetByIdAsync(Expression<Func<TEntity,bool>> Where);
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);

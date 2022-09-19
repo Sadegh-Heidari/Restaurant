@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.EFCORE6.Context;
-using Resturan.Domain.Services;
+﻿using Resturan.Domain.Services;
+using Resturan.Infrastructure.EFCORE6.Context;
 
-namespace Infrastructure.EFCORE6.Repositories
+namespace Resturan.Infrastructure.EFCORE6.Repositories
 {
     public class UnitOfWork:IUnitOfWork
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.EFCORE6.Mapping;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Resturan.Domain.Category;
 using Resturan.Domain.FoodType;
+using Resturan.Infrastructure.EFCORE6.Mapping;
 
-namespace Infrastructure.EFCORE6.Context
+namespace Resturan.Infrastructure.EFCORE6.Context
 {
     public class ApplicationContext:DbContext
     {

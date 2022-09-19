@@ -3,18 +3,21 @@
     public class BaseModel
     {
         public virtual string? Guid { get; private set; }
-        public virtual string? Name { get; private set; }
         public virtual DateTime CreationDate { get; private set; }
+        public virtual bool IsDeleted { get; private set; }
 
-        protected BaseModel()
+        
+        public BaseModel()
         {
-        }
-
-        public BaseModel(string name)
-        {
-            Name = name;
+            
             this.Guid = System.Guid.NewGuid().ToString();
             CreationDate = DateTime.Now;
+            IsDeleted = false;
+        }
+
+        public void Delete()
+        {
+            IsDeleted = true;
         }
     }
 }

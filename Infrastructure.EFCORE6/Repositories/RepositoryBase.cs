@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.EFCORE6.Context;
+﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Resturan.Domain.Base;
 using Resturan.Domain.Services;
+using Resturan.Infrastructure.EFCORE6.Context;
 
-namespace Infrastructure.EFCORE6.Repositories
+namespace Resturan.Infrastructure.EFCORE6.Repositories
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseModel
     {
