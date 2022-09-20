@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Resturan.Application;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO;
 using Resturan.Domain.Services;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.EFCORE6.Repositories;
@@ -16,6 +17,8 @@ namespace Resturan.Infrastructure.Service
             service.AddScoped<IRepositoryCategory, RepositoryCategory>();
             service.AddScoped<IRepositoryFoodType, RepositoryFoodType>();
             service.AddScoped<IApplicationCategory, ApplicationCategory>();
+            service.AddTransient<CreatCategoryDTO>();
+            service.AddTransient<UpdateCategoryDTO>();
             service.AddDbContext<ApplicationContext>(x =>
                 x.UseSqlServer(connection));
         }

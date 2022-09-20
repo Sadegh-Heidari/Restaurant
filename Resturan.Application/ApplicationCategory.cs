@@ -28,24 +28,25 @@ namespace Resturan.Application
             });
         }
 
-        public async Task Add(CategoryDTO category)
+        public async Task Add(CreatCategoryDTO category)
         {
             var entity = new CategoryModel(category.DisplayOrder, category.Name!);
             await _unitOfWork.CategoryRepository.AddAsync(entity);
             _unitOfWork.Save();
         }
 
-        public async Task Update(CategoryDTO category)
+        public async Task Update(UpdateCategoryDTO category)
         {
             var entity = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == category.GUID);
+            if(entity == null) return;
            entity!.Update(category.DisplayOrder,category.Name!);
             _unitOfWork.CategoryRepository.Update(entity);
             _unitOfWork.Save();
         }
 
-        public async Task Delete(string guid)
+        public async Task Delete(DeleteCategoryDTO guid)
         {
-            var entity = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == guid);
+            var entity = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == guid.GUID);
             entity!.Delete();
             _unitOfWork.CategoryRepository.Update(entity);
             _unitOfWork.Save();

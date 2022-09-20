@@ -35,7 +35,7 @@
                 <td class="text-center align-middle">@item.CreationDate</td>
                 <td class="text-center align-middle">
                     <div class="w-50 btn-group justify-content-center">
-                        <a asp-page="Edit" class="btn btn-outline-primary  rounded-start ">
+                        <a asp-page="./Edit" asp-route-Id="@item.GUID" class="btn btn-outline-primary  rounded-start ">
                             <i class="bi  bi-pencil-square "></i>
                         </a>
                         <a asp-page="Delete" class="btn btn-outline-danger ms-3 rounded-end">

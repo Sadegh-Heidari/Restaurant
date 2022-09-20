@@ -10,8 +10,8 @@ namespace Resturan.Application.Service.ApplicationServices
     public interface IApplicationCategory
     {
         Task<IEnumerable<CategoryDTO>> GetAllCategory();
-        Task Add(CategoryDTO category);
-        Task Update(CategoryDTO category);
-        Task Delete(string guid);
+        Task Add(CreatCategoryDTO category);
+        Task Update(UpdateCategoryDTO category);
+        Task Delete(DeleteCategoryDTO guid);
     }
 }

@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Infrastructure.EFC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{2EA059CD-B6E3-48F8-9A39-A2B58E1814FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Application", "Resturan.Application\Resturan.Application.csproj", "{1BBA5484-CBB6-4C1B-9BB7-60C3DF7B6FB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Application", "Resturan.Application\Resturan.Application.csproj", "{1BBA5484-CBB6-4C1B-9BB7-60C3DF7B6FB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Application.Service", "Resturan.Application.Contract\Resturan.Application.Service.csproj", "{E0EFCBEB-F25F-4E49-A701-BD26CD00DE95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Application.Service", "Resturan.Application.Contract\Resturan.Application.Service.csproj", "{E0EFCBEB-F25F-4E49-A701-BD26CD00DE95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Infrastructure.Service", "Resturan.Infrastructure.Service\Resturan.Infrastructure.Service.csproj", "{E79C8BC9-C098-4EDE-A89F-255441EF0BFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Infrastructure.Service", "Resturan.Infrastructure.Service\Resturan.Infrastructure.Service.csproj", "{E79C8BC9-C098-4EDE-A89F-255441EF0BFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
