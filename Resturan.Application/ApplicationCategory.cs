@@ -17,15 +17,14 @@ namespace Resturan.Application
 
         public async Task<IEnumerable<CategoryDTO>> GetAllCategory()
         {
-            
-            var result = await _unitOfWork.CategoryRepository.GetAllAsync();
-            return result.Select(x => new CategoryDTO()
+            var result = await _unitOfWork.CategoryRepository.GetAsync<CategoryDTO>(x => new CategoryDTO()
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 DisplayOrder = x.DisplayOrder,
                 GUID = x.Guid,
                 Name = x.Name
-            });
+            },x=>x.IsDeleted==false);
+            return result;
         }
 
         public async Task Add(CreatCategoryDTO category)

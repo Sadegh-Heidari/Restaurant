@@ -19,5 +19,15 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
         {
             Category = await _applicationCategory.GetAllCategory();
         }
+
+        public async Task<IActionResult> OnGetDelete([FromQuery] string id)
+        {
+           await _applicationCategory.Delete(new DeleteCategoryDTO
+            {
+                GUID = id
+            });
+           TempData["success"] = "Category Edited successfully";
+           return RedirectToPage("./Index");
+        }
     }
 }
