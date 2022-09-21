@@ -9,20 +9,18 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
     public class CreatModel : PageModel
     {
-       [BindProperty] public CreatViewModel? CreatviewModel { get; set; }
+       [BindProperty] public CreatViewModelCategory? CreatviewModel { get; set; }
         private IApplicationCategory ApplicationCat { get; }
-        private CreatCategoryDTO Categorydto { get; set; }
-        public CreatModel(IApplicationCategory applicationCat, CreatCategoryDTO categorydto)
+        public CreatModel(IApplicationCategory applicationCat)
         {
             this.ApplicationCat = applicationCat;
-            Categorydto = categorydto;
         }
 
         public void OnGet()
         {
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost([FromServices] CreatCategoryDTO Categorydto)
         {
             if (ModelState.IsValid)
             {

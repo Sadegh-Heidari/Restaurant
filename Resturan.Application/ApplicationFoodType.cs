@@ -38,11 +38,6 @@ namespace Resturan.Application
 
         }
 
-        Task IApplicationFoodType.Update<T>(T entity)
-        {
-            return Update(entity);
-        }
-
         public async Task Update<T>(T entity) where T:FoodTypeDTO
         {
             var model = await _unitOfWork.FoodTypeRepository.GetByIdAsync(x => x.Guid == entity.Id);

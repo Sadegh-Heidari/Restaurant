@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category.ViewModel
 {
-    public class EditViewModel:CreatViewModel
+    public class EditViewModelCategory:CreatViewModelCategory
 	{
         public string? Id { get; set; }
         

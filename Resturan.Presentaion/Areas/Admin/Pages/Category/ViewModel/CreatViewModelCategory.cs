@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category.ViewModel
 {
-    public class CreatViewModel:IDisposable
+    public class CreatViewModelCategory:IDisposable
     {
         [Required]
         public string? Name { get; set; }

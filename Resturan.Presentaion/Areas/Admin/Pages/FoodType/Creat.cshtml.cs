@@ -8,16 +8,18 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 {
     public class CreatModel : PageModel
     {
-        [BindProperty]public CreatViewModel? Foodmodel { get; set; }
+        [BindProperty] public CreatViewModelFoodType? Foodmodel { get; set; }
+
         public void OnGet()
         {
         }
 
-        public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood)
+        public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood, [FromServices] CreatFoodTypeDTO creatFood)
         {
             if (ModelState.IsValid)
             {
-                await _applicationFood.Add(new CreatFoodTypeDTO { Name = Foodmodel!.Name });
+                creatFood.Name = Foodmodel!.Name;
+                await _applicationFood.Add(creatFood);
                 TempData["success"] = "Type created successfully";
                 return RedirectToPage("./Index");
             }

@@ -2,7 +2,7 @@
 
 namespace Resturan.Presentation.Areas.Admin.Pages.FoodType.ViewModel
 {
-    public class CreatViewModel:IDisposable
+    public class CreatViewModelFoodType:IDisposable
     {
         [Required]
         public virtual string? Name { get; set; }

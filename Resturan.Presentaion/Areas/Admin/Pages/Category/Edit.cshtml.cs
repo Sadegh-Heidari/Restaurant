@@ -9,16 +9,14 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category;
 
 public class EditModel : PageModel
 {
-    public EditModel(IApplicationCategory applicationCategory, UpdateCategoryDTO updateCategory)
+    public EditModel(IApplicationCategory applicationCategory )
     {
         _applicationCategory = applicationCategory;
-        _updateCategory = updateCategory;
-        Editmodel = new EditViewModel();
+        Editmodel = new EditViewModelCategory();
     }
 
-    [BindProperty] public EditViewModel Editmodel { get; set; }
+    [BindProperty] public EditViewModelCategory Editmodel { get; set; }
 
-    private UpdateCategoryDTO _updateCategory { get; set; }
     private IApplicationCategory _applicationCategory { get; }
 
     public void OnGet([FromRoute(Name = "Id")] string id)
@@ -26,14 +24,14 @@ public class EditModel : PageModel
         Editmodel.Id = id;
     }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost([FromServices] UpdateCategoryDTO updateCategory)
     {
         if (ModelState.IsValid)
         {
-            _updateCategory.GUID = Editmodel.Id;
-            _updateCategory.Name = Editmodel.Name;
-            _updateCategory.DisplayOrder = Editmodel.DisplayOrder;
-            await _applicationCategory.Update(_updateCategory);
+            updateCategory.GUID = Editmodel.Id;
+            updateCategory.Name = Editmodel.Name;
+            updateCategory.DisplayOrder = Editmodel.DisplayOrder;
+            await _applicationCategory.Update(updateCategory);
             TempData["success"] = "Category Edited successfully";
             return RedirectToPage("./Index");
         }
