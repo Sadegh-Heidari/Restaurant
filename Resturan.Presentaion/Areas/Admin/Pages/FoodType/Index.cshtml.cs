@@ -8,7 +8,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
     public class IndexModel : PageModel
     {
         private IApplicationFoodType _applicationFood { get; }
-        public IEnumerable<FoodTypeDTO> FoodTypes { get; set; }
+        public IEnumerable<FoodTypeDTO>? FoodTypes { get; set; }
         public IndexModel(IApplicationFoodType applicationFood)
         {
             _applicationFood = applicationFood;
@@ -16,7 +16,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
         public async Task OnGet()
         {
-            FoodTypes = await _applicationFood.GetAllFoodType();
+            FoodTypes = await _applicationFood?.GetAllFoodType()!;
         }
     }
 }

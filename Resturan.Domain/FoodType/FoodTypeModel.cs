@@ -9,7 +9,7 @@ namespace Resturan.Domain.FoodType
 {
     public class FoodTypeModel:BaseModel
     {
-        public string Name { get; private set; }
+        public string? Name { get; private set; }
 
         protected FoodTypeModel()
         {

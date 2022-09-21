@@ -7,8 +7,8 @@ namespace Resturan.Infrastructure.EFCORE6.Context
 {
     public class ApplicationContext:DbContext
     {
-        public DbSet<CategoryModel> Category { get; set; }
-        public DbSet<FoodTypeModel> FoodType { get; set; }
+        public DbSet<CategoryModel>? Category { get; set; }
+        public DbSet<FoodTypeModel>? FoodType { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
