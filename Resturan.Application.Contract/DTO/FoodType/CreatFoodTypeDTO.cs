@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resturan.Application.Service.DTO
+namespace Resturan.Application.Service.DTO.FoodType
 {
-    public class CreatCategoryDTO:IDisposable
+    public class CreatFoodTypeDTO:IDisposable
     {
-        public string Name { get; set; }
-        public short DisplayOrder { get; set; }
-
+        public  string? Name { get; set; }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

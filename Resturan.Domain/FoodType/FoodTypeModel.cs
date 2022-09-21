@@ -19,5 +19,10 @@ namespace Resturan.Domain.FoodType
         {
             this.Name = Name;
         }
+        public void Update(string Name)
+        {
+            this.Name = Name;
+           
+        }
     }
 }

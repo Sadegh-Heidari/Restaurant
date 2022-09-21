@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
+using Resturan.Application.Service.DTO.Category;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
@@ -22,11 +23,11 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
 
         public async Task<IActionResult> OnGetDelete([FromQuery] string id)
         {
-           await _applicationCategory.Delete(new DeleteCategoryDTO
+           await _applicationCategory.Update(new DeleteCategoryDTO
             {
                 GUID = id
             });
-           TempData["success"] = "Category Edited successfully";
+           TempData["success"] = "Category Deleted successfully";
            return RedirectToPage("./Index");
         }
     }

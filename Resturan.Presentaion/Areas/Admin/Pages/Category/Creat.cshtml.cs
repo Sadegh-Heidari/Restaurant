@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
+using Resturan.Application.Service.DTO.Category;
 using Resturan.Presentation.Areas.Admin.Pages.Category.ViewModel;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
