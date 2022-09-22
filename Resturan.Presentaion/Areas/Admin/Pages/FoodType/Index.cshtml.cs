@@ -21,17 +21,17 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
         public async Task<IActionResult> OnGetDelete([FromQuery(Name = "Id")] string id)
         {
-            if (id != null)
-            {
+            if (id == null) return BadRequest();
+
+            
                 await _applicationFood.Update(new DeleteFoodTypeDTO()
                 {
                     Id = id
                 });
                 TempData["success"] = "Type Deleted successfully";
                 return RedirectToPage("./Index");
-            }
+            
 
-            return RedirectToPage("./Index");
         }
     }
 }

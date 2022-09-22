@@ -19,9 +19,11 @@ public class EditModel : PageModel
 
     private IApplicationCategory _applicationCategory { get; }
 
-    public void OnGet([FromRoute(Name = "Id")] string id)
+    public IActionResult OnGet([FromRoute(Name = "Id")] string id)
     {
+        if(id==null)return BadRequest();
         Editmodel.Id = id;
+        return Page();
     }
 
     public async Task<IActionResult> OnPost([FromServices] UpdateCategoryDTO updateCategory)

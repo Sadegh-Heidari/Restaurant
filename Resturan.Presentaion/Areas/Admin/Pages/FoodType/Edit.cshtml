@@ -11,16 +11,12 @@
         </div>
         <div asp-validation-summary="All"></div>
         <div class="mb-3">
-            <input type="hidden" asp-for="Editmodel.Id" />
-            <label asp-for="Editmodel.Name"></label>
-            <input asp-for="Editmodel.Name" class="form-control" />
-            <span asp-validation-for="Editmodel.Name" class="text-danger"></span>
+            <input type="hidden" asp-for="foodModel.Id" />
+            <label asp-for="foodModel.Name"></label>
+            <input asp-for="foodModel.Name" class="form-control" />
+            <span asp-validation-for="foodModel.Name" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="Editmodel.DisplayOrder"></label>
-            <input asp-for="Editmodel.DisplayOrder" class="form-control" />
-            <span asp-validation-for="Editmodel.DisplayOrder" class="text-danger"></span>
-        </div>
+        
         <button type="submit" class="btn btn-primary" style="width: 150px;">Update</button>
         <a asp-page="Index" class="btn btn-secondary" style="width: 150px;"> Back to List</a>
     </div>

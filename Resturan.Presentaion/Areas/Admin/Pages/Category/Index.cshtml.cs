@@ -23,6 +23,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
 
         public async Task<IActionResult> OnGetDelete([FromQuery] string id)
         {
+            if (id == null) return BadRequest();
            await _applicationCategory.Update(new DeleteCategoryDTO
             {
                 GUID = id
