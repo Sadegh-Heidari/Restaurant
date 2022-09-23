@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.Service;
+using Resturan.Presentation.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddService(builder.Configuration.GetConnectionString("sql"));

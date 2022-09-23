@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.FoodType;
+using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 {
+    [ValidationModelState]
+
     public class IndexModel : PageModel
     {
         private IApplicationFoodType _applicationFood { get; }
@@ -21,7 +24,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
         public async Task<IActionResult> OnGetDelete([FromQuery(Name = "Id")] string id)
         {
-            if (id == null) return BadRequest();
+           
 
             
                 await _applicationFood.Update(new DeleteFoodTypeDTO()

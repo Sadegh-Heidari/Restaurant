@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
+using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
+    [ValidationModelState]
     public class IndexModel : PageModel
     {
         public IEnumerable<CategoryDTO> Category { get; set; }
@@ -23,7 +25,6 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
 
         public async Task<IActionResult> OnGetDelete([FromQuery] string id)
         {
-            if (id == null) return BadRequest();
            await _applicationCategory.Update(new DeleteCategoryDTO
             {
                 GUID = id
