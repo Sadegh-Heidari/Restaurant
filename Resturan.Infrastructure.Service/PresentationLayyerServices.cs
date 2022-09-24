@@ -19,8 +19,11 @@ namespace Resturan.Infrastructure.Service
             service.AddScoped<IRepositoryFoodType, RepositoryFoodType>();
             service.AddScoped<IApplicationCategory, ApplicationCategory>();
             service.AddScoped<IApplicationFoodType, ApplicationFoodType>();
+            service.AddScoped<IRepositoryMenuItem, RepositoryMenuItem>();
+            service.AddScoped<IApplicationMenuItem, ApplicationMenuItem>();
             service.AddTransient<CreatCategoryDTO>();
             service.AddTransient<UpdateCategoryDTO>();
+
             service.AddDbContext<ApplicationContext>(x =>
                 x.UseSqlServer(connection));
         }

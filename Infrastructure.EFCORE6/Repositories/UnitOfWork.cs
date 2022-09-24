@@ -14,7 +14,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         private IRepositoryFoodType? _foodTypeRepository;
         private IRepositoryCategory? _categoryRepository;
-
+        private IRepositoryMenuItem? _menuItemRepository;
         public IRepositoryCategory CategoryRepository
         {
             get
@@ -31,6 +31,19 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 if(_foodTypeRepository == null) _foodTypeRepository = new RepositoryFoodType(_context);
                 return _foodTypeRepository;
+            }
+        }
+
+        public IRepositoryMenuItem MenuItemRepository
+        {
+            get
+            {
+                if (_menuItemRepository == null)
+                {
+                    _menuItemRepository = new RepositoryMenuItem(_context);
+                }
+
+                return _menuItemRepository;
             }
         }
 

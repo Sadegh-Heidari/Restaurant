@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Resturan.Domain.Base;
+using Resturan.Domain.MenuItem;
 
 namespace Resturan.Domain.FoodType
 {
     public class FoodTypeModel:BaseModel
     {
         public string? Name { get; private set; }
+        public ICollection<MenuItemModel> MenuItems { get; private set; }
 
         protected FoodTypeModel()
         {

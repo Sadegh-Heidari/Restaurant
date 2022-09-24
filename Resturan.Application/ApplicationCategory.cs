@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq.Expressions;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
@@ -48,6 +49,15 @@ namespace Resturan.Application
             _unitOfWork.Save();
         }
 
-      
+        public async Task<IEnumerable<CategoryDTO>> GetNameCategories()
+        {
+
+            var result = await _unitOfWork.CategoryRepository.GetAsync(x => new CategoryDTO
+            {
+                GUID = x.Guid,
+                Name = x.Name,
+            }, x => x.IsDeleted == false);
+            return result;
+        }
     }
 }

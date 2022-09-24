@@ -4,7 +4,7 @@ using Resturan.Domain.FoodType;
 
 namespace Resturan.Domain.MenuItem
 {
-    public class MenuItem:BaseModel
+    public class MenuItemModel:BaseModel
     {
         public string Name { get; private set; }
         public string Descriptaion { get; private set; }
@@ -15,7 +15,7 @@ namespace Resturan.Domain.MenuItem
         public string CategoryId { get; private set; }
         public CategoryModel Category { get; private set; }
 
-        public MenuItem(string name, string descriptaion, string image, string price, string foodTypeId, string categoryId)
+        public MenuItemModel(string name, string descriptaion, string image, string price, string foodTypeId, string categoryId)
         {
             Name = name;
             Descriptaion = descriptaion;

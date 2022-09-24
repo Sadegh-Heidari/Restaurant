@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO.Category;
 using Resturan.Application.Service.DTO.FoodType;
 using Resturan.Domain.FoodType;
 using Resturan.Domain.Services;
@@ -48,6 +49,16 @@ namespace Resturan.Application
             if(typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
             _unitOfWork.FoodTypeRepository.Update(model);
             _unitOfWork.Save();
+        }
+
+        public async Task<IEnumerable<FoodTypeDTO>> GetTypesFood()
+        {
+            var result = await _unitOfWork.FoodTypeRepository.GetAsync(x => new FoodTypeDTO()
+            {
+                Id = x.Guid,
+                Name = x.Name,
+            }, x => x.IsDeleted == false);
+            return result;
         }
     }
 }

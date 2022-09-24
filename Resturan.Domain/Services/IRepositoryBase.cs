@@ -15,6 +15,6 @@ namespace Resturan.Domain.Services
         Task<TEntity?> GetByIdAsync(Expression<Func<TEntity,bool>> Where);
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
-        
+
     }
 }

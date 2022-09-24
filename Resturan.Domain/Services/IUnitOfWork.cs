@@ -10,6 +10,7 @@ namespace Resturan.Domain.Services
     {
         public IRepositoryCategory CategoryRepository { get; }
         public IRepositoryFoodType FoodTypeRepository { get; }
+        public IRepositoryMenuItem MenuItemRepository { get; }
         void Save();
     }
 }

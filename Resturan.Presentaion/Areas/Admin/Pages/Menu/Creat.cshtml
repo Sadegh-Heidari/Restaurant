@@ -1,0 +1,65 @@
+﻿@page
+@model Resturan.Presentation.Areas.Admin.Pages.Menu.CreatModel
+@{
+}
+@section cdn
+    {
+    <script src="https://cdn.tiny.cloud/1/panb6ftdvct6jm6dz3wyui8cgggvl8j0gdaetrl3hofvn41q/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+}
+    <form method="post" enctype="multipart/form-data">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <div class="col-9">
+                    <h2 class="text-primary pl-3">
+                        Creat Menu Item
+                    </h2>
+                    <hr />
+                    <div class="mb-3">
+                        <label asp-for="CreatView.Name"></label>
+                        <input asp-for="CreatView.Name" class="form-control" />
+                        <span asp-validation-for="CreatView.Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatView.Description"></label>
+                        <textarea asp-for="CreatView.Description" class="form-control"></textarea>
+                        <span asp-validation-for="CreatView.Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatView.Price"></label>
+                        <input asp-for="CreatView.Price" class="form-control" />
+                        <span asp-validation-for="CreatView.Price" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatView.Image"></label>
+                        <input asp-for="CreatView.Image" class="form-control" type="file" />
+                        <span asp-validation-for="CreatView.Image" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatView.CategoryId"></label>
+                        <select asp-for="CreatView.CategoryId" asp-items="Model.CreatView.CategorySelectItems" class="form-select">
+                            <option disabled selected>-Select Category-</option>
+                        </select>
+                        <span asp-validation-for="CreatView.CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CreatView.FoodTypeId"></label>
+                        <select asp-for="CreatView.FoodTypeId" asp-items="Model.CreatView.FoodTypeSelectItems" class="form-select">
+                            <option disabled selected>-Select Food Type-</option>
+                        </select>
+                        <span asp-validation-for="CreatView.FoodTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+            <a asp-page="Index" class="btn btn-secondary" style="width:150px;"> Back to List</a>
+        </div>
+    </form>
+    @section Scripts
+    {
+    <script src="~/js/TinyRichBox.js"></script>
+    <partial name="Shared/_ValidationScriptsPartial" />
+
+}

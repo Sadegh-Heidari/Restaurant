@@ -1,0 +1,55 @@
+﻿@page
+@model Resturan.Presentation.Areas.Admin.Pages.Menu.IndexModel
+@{
+}
+<div class="row pt-4">
+    <div class="col-6 mb-4">
+        <h2 class="text-primary">Menu Item List</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-page="./Creat" class="btn btn-primary">
+            <i class="bi bi-plus-square"></i> &nbsp;Create New Item
+        </a>
+    </div>
+</div>
+
+@*<table class="table table-hover table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center">Creation Date</th>
+        <th scope="col" class="text-center">Status</th>
+    </tr>
+    </thead>
+    <tbody class="table-secondary">
+    @foreach (var item in Model.FoodTypes)
+    {
+        <tr>
+            <td class="text-center align-middle">@item.Name</td>
+            <td class="text-center align-middle">@item.CreationDate</td>
+            <td class="text-center align-middle">
+                <div class="w-50 btn-group justify-content-center">
+                    <a asp-page="./Edit" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
+                        <i class="bi  bi-pencil-square "></i>
+                    </a>
+                    @if(item.IsDeleted == false)
+                    {
+                        <a asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger ms-3 rounded-end">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    }
+                    @if (item.IsDeleted == true)
+                    {
+                        <a asp-page-handler="Active" asp-route-id="@item.Id" class="btn btn-outline-success ms-3 rounded-end">
+                            <i class="bi bi-check-square-fill"></i>
+                        </a>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+
+
+    </tbody>
+</table>
+*@

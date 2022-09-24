@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Resturan.Domain.Base;
+using Resturan.Domain.MenuItem;
 
 namespace Resturan.Domain.Category
 {
     public class CategoryModel:BaseModel
     {
         public short DisplayOrder { get; private set; }
-        public virtual string? Name { get; private set; }
-
+        public string? Name { get; private set; }
+        public ICollection<MenuItemModel> MenuItems { get; private set; }
         protected CategoryModel()
         {
         }
