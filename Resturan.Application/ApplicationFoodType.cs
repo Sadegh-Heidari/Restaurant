@@ -25,8 +25,9 @@ namespace Resturan.Application
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Id = x.Guid,
-                Name = x.Name
-            }, x => x.IsDeleted == false);
+                Name = x.Name,
+                IsDeleted = x.IsDeleted,
+            });
             return result;
         }
 
@@ -44,6 +45,7 @@ namespace Resturan.Application
             if(model == null)return;
             if(typeof(T)==typeof(UpdateFoodTypeDTO))model.Update(entity.Name!);
             if(typeof(T)==typeof(DeleteFoodTypeDTO))model.Delete();
+            if(typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
             _unitOfWork.FoodTypeRepository.Update(model);
             _unitOfWork.Save();
         }

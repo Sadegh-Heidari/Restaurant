@@ -38,9 +38,18 @@
                         <a asp-page="./Edit" asp-route-Id="@item.GUID" class="btn btn-outline-primary  rounded-start ">
                             <i class="bi  bi-pencil-square "></i>
                         </a>
+                        @if(item.IsDeleted == false)
+                        {
                         <a asp-page-handler="Delete" asp-route-id="@item.GUID" class="btn btn-outline-danger ms-3 rounded-end">
                             <i class="bi bi-trash-fill"></i>
                         </a>
+                        }
+                        @if (item.IsDeleted == true)
+                        {
+                            <a asp-page-handler="Active" asp-route-id="@item.GUID" class="btn btn-outline-success ms-3 rounded-end">
+                                <i class="bi bi-check-square-fill"></i>
+                            </a>
+                        }
                     </div>
                 </td>
             </tr>

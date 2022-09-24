@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Resturan.Application;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO.Category;
 using Resturan.Application.Service.DTO.FoodType;
 using Resturan.Presentation.Filters;
 
@@ -35,6 +37,15 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
                 return RedirectToPage("./Index");
             
 
+        }
+        public async Task<RedirectToPageResult> OnGetActive([FromQuery] string id)
+        {
+            await _applicationFood.Update(new ActiveFoodTypeDTO()
+            {
+                Id = id
+            });
+            TempData["success"] = "Type Activated successfully";
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -24,8 +24,9 @@ namespace Resturan.Application
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 DisplayOrder = x.DisplayOrder,
                 GUID = x.Guid,
-                Name = x.Name
-            },x=>x.IsDeleted==false);
+                Name = x.Name,
+                IsDeleted = x.IsDeleted,
+            });
             return result;
         }
 
@@ -42,6 +43,7 @@ namespace Resturan.Application
             if (model == null) return;
             if (typeof(T) == typeof(UpdateCategoryDTO)) model.Update(entity.DisplayOrder,entity.Name!);
             if (typeof(T) == typeof(DeleteCategoryDTO)) model.Delete();
+            if (typeof(T) == typeof(ActiveCategoryDTO)) model.Active();
             _unitOfWork.CategoryRepository.Update(model);
             _unitOfWork.Save();
         }

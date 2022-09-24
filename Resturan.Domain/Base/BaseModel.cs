@@ -5,8 +5,6 @@
         public virtual string? Guid { get; private set; }
         public virtual DateTime CreationDate { get; private set; }
         public virtual bool IsDeleted { get; private set; }
-
-        
         public BaseModel()
         {
             
@@ -18,6 +16,11 @@
         public void Delete()
         {
             IsDeleted = true;
+        }
+
+        public void Active()
+        {
+            IsDeleted = false;
         }
     }
 }
