@@ -1,10 +1,6 @@
-﻿using System.Security.Policy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Resturan.Presentation.Filters
 {
@@ -26,14 +22,15 @@ namespace Resturan.Presentation.Filters
             }
             if (!context.ModelState.IsValid)
             {
-                
+
                 var page = context.HandlerInstance as PageModel;
-                    context.Result = page!.Page();
+
+                context.Result =  page.Page();
             }
         }
-
         public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
         {
+           
         }
 
     }

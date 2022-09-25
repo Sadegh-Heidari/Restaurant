@@ -11,10 +11,12 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
     public class EditModel : PageModel
     {
-        [BindProperty]public EditViewModelFoodType? foodModel { get; set; }
+        [BindProperty] public EditViewModelFoodType? foodModel { get; set; }
+        private UpdateFoodTypeDTO foodType { get; set; }
         public EditModel()
         {
-            foodModel = new EditViewModelFoodType();
+            foodModel = new();
+            foodType = new();
         }
 
         public IActionResult OnGet([FromRoute(Name = "Id")] string id)
@@ -25,11 +27,12 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
         public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType applicationFood)
         {
-           
-                await applicationFood.Update(new UpdateFoodTypeDTO { Id = foodModel!.Id, Name = foodModel.Name });
-                TempData["success"] = "Type Edited Successfully";
-                return RedirectToPage("./Index");
-           
+            foodType.Id = foodModel!.Id;
+            foodType.Name = foodModel.Name;
+            await applicationFood.Update(foodType);
+            TempData["success"] = "Type Edited Successfully";
+            return RedirectToPage("./Index");
+
 
         }
     }

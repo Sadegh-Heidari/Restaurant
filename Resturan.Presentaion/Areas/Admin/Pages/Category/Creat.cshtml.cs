@@ -11,16 +11,16 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
     public class CreatModel : PageModel
     {
        [BindProperty] public CreatViewModelCategory? CreatviewModel { get; set; }
-        private IApplicationCategory ApplicationCat { get; }
-        public CreatModel(IApplicationCategory applicationCat)
+        private CreatCategoryDTO Categorydto { get; set; }
+        public CreatModel()
         {
-            this.ApplicationCat = applicationCat;
+            Categorydto = new();
         }
 
         public void OnGet()
         {
         }
-        public async Task<IActionResult> OnPost([FromServices] CreatCategoryDTO Categorydto)
+        public async Task<IActionResult> OnPost([FromServices] IApplicationCategory ApplicationCat)
         {
             
            

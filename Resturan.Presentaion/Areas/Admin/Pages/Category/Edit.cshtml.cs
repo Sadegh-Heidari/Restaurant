@@ -11,15 +11,14 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category;
 
 public class EditModel : PageModel
 {
-    public EditModel(IApplicationCategory applicationCategory )
+    [BindProperty] public EditViewModelCategory Editmodel { get; set; }
+    private UpdateCategoryDTO updateCategory { get; set; }
+    public EditModel( )
     {
-        _applicationCategory = applicationCategory;
-        Editmodel = new EditViewModelCategory();
+        updateCategory = new();
+        Editmodel = new ();
     }
 
-    [BindProperty] public EditViewModelCategory Editmodel { get; set; }
-
-    private IApplicationCategory _applicationCategory { get; }
 
     public IActionResult OnGet([FromRoute(Name = "Id")] string id)
     {
@@ -28,7 +27,7 @@ public class EditModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPost([FromServices] UpdateCategoryDTO updateCategory)
+    public async Task<IActionResult> OnPost([FromServices] IApplicationCategory _applicationCategory)
     {
             updateCategory.GUID = Editmodel.Id;
             updateCategory.Name = Editmodel.Name;

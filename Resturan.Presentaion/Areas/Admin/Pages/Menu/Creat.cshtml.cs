@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resturan.Application.Service.ApplicationServices;
@@ -9,18 +10,21 @@ using Resturan.Presentation.Tools;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu
 {
-    [ValidationModelState]
     public class CreatModel : PageModel
     {
         [BindProperty] public CreatViewModel CreatView { get; set; }
+        private CreatMenuItem creatMenu { get; set; }
+        private IApplicationCategory _applicationCategory { get; }
+        private IApplicationFoodType _applicationFood { get; }
 
-   
-        public CreatModel()
+        public CreatModel(IApplicationFoodType applicationFood, IApplicationCategory applicationCategory)
         {
+            _applicationFood = applicationFood;
+            _applicationCategory = applicationCategory;
             CreatView = new();
+            creatMenu = new();
         }
-
-        public void OnGet([FromServices] IApplicationCategory _applicationCategory, [FromServices] IApplicationFoodType _applicationFood)
+        public void OnGet()
         {
             CreatView.CategorySelectItems = _applicationCategory.GetNameCategories().Result.Select(x =>
                 new SelectListItem
@@ -35,21 +39,33 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     Value = x.Id
                 }).ToList();
         }
-
-        public async Task<RedirectToPageResult> OnPost([FromServices] IWebHostEnvironment _environment, [FromServices] IApplicationMenuItem _applicationMenu)
+        public async Task<IActionResult> OnPost([FromServices] IWebHostEnvironment _environment, [FromServices] IApplicationMenuItem _applicationMenu)
         {
-            var pathImage = await UploadImage.Send(CreatView.Image!, "MenuItem",_environment.WebRootPath);
-            CreatMenuItem dto = new()
-            {
-                Name = CreatView.Name,
-                Category = CreatView.CategoryId,
-                Descriptaion = CreatView.Description,
-                FoodType = CreatView.FoodTypeId,
-                Image = pathImage,
-                Price = CreatView.Price,
 
-            };
-            await _applicationMenu.AddItem(dto);
+            if (!ModelState.IsValid)
+            {
+                CreatView.CategorySelectItems = _applicationCategory.GetNameCategories().Result.Select(x =>
+                    new SelectListItem
+                    {
+                        Text = x.Name,
+                        Value = x.GUID
+                    }).ToList();
+                CreatView.FoodTypeSelectItems = _applicationFood.GetTypesFood().Result.Select(x =>
+                    new SelectListItem
+                    {
+                        Text = x.Name,
+                        Value = x.Id
+                    }).ToList();
+                return Page();
+            }
+            var pathImage = await UploadImage.Send(CreatView.Image!, "MenuItem",_environment.WebRootPath);
+            creatMenu.Name = CreatView.Name;
+            creatMenu.Category = CreatView.CategoryId;
+            creatMenu.Descriptaion = CreatView.Description;
+            creatMenu.FoodType = CreatView.FoodTypeId;
+            creatMenu.Image = pathImage;
+            creatMenu.Price = CreatView.Price;
+            await _applicationMenu.AddItem(creatMenu);
             TempData["success"] = "Menu Item Created Successfully";
             return RedirectToPage("./Index");
         }

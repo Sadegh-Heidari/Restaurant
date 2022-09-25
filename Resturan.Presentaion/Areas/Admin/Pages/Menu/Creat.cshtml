@@ -11,44 +11,38 @@
         <div class="border p-3 mt-4">
             <div class="row pb-2">
                 <div class="col-9">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <h2 class="text-primary pl-3">
                         Creat Menu Item
                     </h2>
-                    <hr />
+                    <hr/>
                     <div class="mb-3">
                         <label asp-for="CreatView.Name"></label>
-                        <input asp-for="CreatView.Name" class="form-control" />
-                        <span asp-validation-for="CreatView.Name" class="text-danger"></span>
+                        <input asp-for="CreatView.Name" class="form-control"/>
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.Description"></label>
                         <textarea asp-for="CreatView.Description" class="form-control"></textarea>
-                        <span asp-validation-for="CreatView.Description" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.Price"></label>
-                        <input asp-for="CreatView.Price" class="form-control" />
-                        <span asp-validation-for="CreatView.Price" class="text-danger"></span>
+                        <input asp-for="CreatView.Price" class="form-control"/>
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.Image"></label>
-                        <input asp-for="CreatView.Image" class="form-control" type="file" />
-                        <span asp-validation-for="CreatView.Image" class="text-danger"></span>
+                        <input asp-for="CreatView.Image" class="form-control" type="file"/>
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.CategoryId"></label>
                         <select asp-for="CreatView.CategoryId" asp-items="Model.CreatView.CategorySelectItems" class="form-select">
                             <option disabled selected>-Select Category-</option>
                         </select>
-                        <span asp-validation-for="CreatView.CategoryId" class="text-danger"></span>
                     </div>
-
                     <div class="mb-3">
                         <label asp-for="CreatView.FoodTypeId"></label>
                         <select asp-for="CreatView.FoodTypeId" asp-items="Model.CreatView.FoodTypeSelectItems" class="form-select">
                             <option disabled selected>-Select Food Type-</option>
                         </select>
-                        <span asp-validation-for="CreatView.FoodTypeId" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -61,5 +55,5 @@
     {
     <script src="~/js/TinyRichBox.js"></script>
     <partial name="Shared/_ValidationScriptsPartial" />
-
+    <script src="~/js/CustomValidation.js"></script>
 }

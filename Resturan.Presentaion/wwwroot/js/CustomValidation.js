@@ -10,3 +10,13 @@ jQuery.validator.addMethod("MaxSizeFile",function(value, element, params) {
     }
 });
 jQuery.validator.unobtrusive.adapters.addBool("MaxSizeFile");
+
+jQuery.validator.addMethod("FileExtension", function (value, element, params) {
+    var x = value.split('.').pop();
+    if (value.includes("jpg") || value.includes("jpeg") || value.includes("png")) {
+        return true;
+    } else {
+        return false;
+    }
+});
+jQuery.validator.unobtrusive.adapters.addBool("FileExtension");

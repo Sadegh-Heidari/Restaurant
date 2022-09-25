@@ -12,15 +12,17 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
     public class CreatModel : PageModel
     {
         [BindProperty] public CreatViewModelFoodType? Foodmodel { get; set; }
+        private CreatFoodTypeDTO? creatFood { get; set; }
 
         public void OnGet()
         {
+            creatFood = new();
         }
 
-        public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood, [FromServices] CreatFoodTypeDTO creatFood)
+        public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood)
         {
            
-                creatFood.Name = Foodmodel!.Name;
+                creatFood!.Name = Foodmodel!.Name;
                 await _applicationFood.Add(creatFood);
                 TempData["success"] = "Type created successfully";
                 return RedirectToPage("./Index");
