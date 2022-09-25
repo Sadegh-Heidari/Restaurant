@@ -16,5 +16,6 @@ namespace Resturan.Application.Service.ApplicationServices
         Task Add(CreatCategoryDTO category);
         Task Update<T>(T entity) where T : CategoryDTO;
         Task<IEnumerable<CategoryDTO>> GetNameCategories();
+        Task<CategoryDTO> GetCategoryById(string id);
     }
 }

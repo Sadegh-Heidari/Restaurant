@@ -21,7 +21,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             return result;
         }
 
-        public virtual async Task<IEnumerable<TOut>> GetAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>>? Where = null)
+        public virtual async Task<IEnumerable<TOut>> GetAllAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>>? Where = null)
         {
             return Select != null && Where != null
                 ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).ToListAsync()
@@ -29,9 +29,10 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> Where)
+        public virtual async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true)
         {
-            var result = await _context.Set<TEntity>().Where(Where).FirstOrDefaultAsync();
+            var result = AsNoTracking == true ? await _context.Set<TEntity>().AsNoTracking().Where(Where).FirstOrDefaultAsync() :
+                await _context.Set<TEntity>().FirstOrDefaultAsync();
             return result;
         }
 
@@ -47,6 +48,14 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
+        public virtual async Task<TOut> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select,Expression<Func<TEntity, bool>> Where ,bool AsNoTracking= true) 
+        {
+            var result =   AsNoTracking == true
+                ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).FirstOrDefaultAsync()
+                : await _context.Set<TEntity>().Where(Where).Select(Select).FirstOrDefaultAsync();
+            return result!;
+        }
     }
-
-}
+   
+    }
+    

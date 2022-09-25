@@ -13,29 +13,33 @@ public class EditModel : PageModel
 {
     [BindProperty] public EditViewModelCategory Editmodel { get; set; }
     private UpdateCategoryDTO updateCategory { get; set; }
-    public EditModel( )
+    private IApplicationCategory _applicationCategory { get; }
+    public EditModel(IApplicationCategory applicationCategory)
     {
+        _applicationCategory = applicationCategory;
         updateCategory = new();
-        Editmodel = new ();
+        Editmodel = new();
     }
 
-
-    public IActionResult OnGet([FromRoute(Name = "Id")] string id)
+    public async Task<IActionResult> OnGet([FromRoute(Name = "Id")] string id)
     {
-       
-        Editmodel.Id = id;
+
+        var dto = await _applicationCategory.GetCategoryById(id);
+        Editmodel.Id = dto!.GUID;
+        Editmodel.Name = dto.Name;
+        Editmodel.DisplayOrder = dto.DisplayOrder;
         return Page();
     }
 
-    public async Task<IActionResult> OnPost([FromServices] IApplicationCategory _applicationCategory)
+    public async Task<IActionResult> OnPost()
     {
-            updateCategory.GUID = Editmodel.Id;
-            updateCategory.Name = Editmodel.Name;
-            updateCategory.DisplayOrder = Editmodel.DisplayOrder;
-            await _applicationCategory.Update(updateCategory);
-            TempData["success"] = "Category Edited successfully";
-            return RedirectToPage("./Index");
-            
-        
+        updateCategory.GUID = Editmodel.Id;
+        updateCategory.Name = Editmodel.Name;
+        updateCategory.DisplayOrder = Editmodel.DisplayOrder;
+        await _applicationCategory.Update(updateCategory);
+        TempData["success"] = "Category Edited successfully";
+        return RedirectToPage("./Index");
+
+
     }
 }

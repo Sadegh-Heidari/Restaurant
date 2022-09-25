@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Resturan.Infrastructure.Service\Resturan.Infrastructure.Service.csproj" />
+    <ProjectReference Include="..\Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

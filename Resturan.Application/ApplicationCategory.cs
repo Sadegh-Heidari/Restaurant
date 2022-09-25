@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
@@ -12,7 +13,6 @@ namespace Resturan.Application
     public class ApplicationCategory:IApplicationCategory
     {
         private IUnitOfWork _unitOfWork { get; }
-        private IEnumerable<CategoryDTO>?_categoryDTO { get; set; }
         public ApplicationCategory(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -20,7 +20,7 @@ namespace Resturan.Application
 
         public async Task<IEnumerable<CategoryDTO>> GetAllCategory()
         {
-            var result = await _unitOfWork.CategoryRepository.GetAsync(x => new CategoryDTO()
+            var result = await _unitOfWork.CategoryRepository.GetAllAsync(x => new CategoryDTO()
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 DisplayOrder = x.DisplayOrder,
@@ -40,11 +40,11 @@ namespace Resturan.Application
 
         public async Task Update<T>(T entity) where T : CategoryDTO
         {
-            var model = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == entity.GUID);
+            var model = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == entity.GUID, false);
             if (model == null) return;
-            if (typeof(T) == typeof(UpdateCategoryDTO)) model.Update(entity.DisplayOrder,entity.Name!);
-            if (typeof(T) == typeof(DeleteCategoryDTO)) model.Delete();
-            if (typeof(T) == typeof(ActiveCategoryDTO)) model.Active();
+            else if (typeof(T) == typeof(UpdateCategoryDTO)) model.Update(entity.DisplayOrder,entity.Name!);
+            else if(typeof(T) == typeof(DeleteCategoryDTO)) model.Delete();
+            else if (typeof(T) == typeof(ActiveCategoryDTO)) model.Active();
             _unitOfWork.CategoryRepository.Update(model);
             _unitOfWork.Save();
         }
@@ -52,11 +52,22 @@ namespace Resturan.Application
         public async Task<IEnumerable<CategoryDTO>> GetNameCategories()
         {
 
-            var result = await _unitOfWork.CategoryRepository.GetAsync(x => new CategoryDTO
+            var result = await _unitOfWork.CategoryRepository.GetAllAsync(x => new CategoryDTO
             {
                 GUID = x.Guid,
                 Name = x.Name,
             }, x => x.IsDeleted == false);
+            return result;
+        }
+
+        public Task<CategoryDTO> GetCategoryById(string id)
+        {
+            var result = _unitOfWork.CategoryRepository.GetByIdAsync(x => new CategoryDTO
+            {
+                GUID = x.Guid,
+                Name = x.Name,
+                DisplayOrder = x.DisplayOrder,
+            }, x => x.Guid==id);
             return result;
         }
     }

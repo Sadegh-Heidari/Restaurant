@@ -7,7 +7,7 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
-    [ValidationModelStateAttribute]
+    [ValidationModelState]
     public class CreatModel : PageModel
     {
        [BindProperty] public CreatViewModelCategory? CreatviewModel { get; set; }

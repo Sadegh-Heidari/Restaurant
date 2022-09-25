@@ -13,23 +13,27 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
     {
         [BindProperty] public EditViewModelFoodType? foodModel { get; set; }
         private UpdateFoodTypeDTO foodType { get; set; }
-        public EditModel()
+        private IApplicationFoodType _applicationFood { get; }
+        public EditModel(IApplicationFoodType applicationFood)
         {
+            this._applicationFood = applicationFood;
             foodModel = new();
             foodType = new();
         }
 
-        public IActionResult OnGet([FromRoute(Name = "Id")] string id)
+        public async Task<IActionResult> OnGet([FromRoute(Name = "Id")] string id)
         {
-            foodModel!.Id = id;
+            var dto = await _applicationFood.GetFoodTypeById(id);
+            foodModel!.Id = dto.Id!;
+            foodModel.Name = dto.Name;
             return Page();
         }
 
-        public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType applicationFood)
+        public async Task<IActionResult> OnPost()
         {
             foodType.Id = foodModel!.Id;
             foodType.Name = foodModel.Name;
-            await applicationFood.Update(foodType);
+            await _applicationFood.Update(foodType);
             TempData["success"] = "Type Edited Successfully";
             return RedirectToPage("./Index");
 

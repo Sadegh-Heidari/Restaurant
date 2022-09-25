@@ -24,7 +24,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             CreatView = new();
             creatMenu = new();
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             CreatView.CategorySelectItems = _applicationCategory.GetNameCategories().Result.Select(x =>
                 new SelectListItem
@@ -38,6 +38,13 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     Text = x.Name,
                     Value = x.Id
                 }).ToList();
+            if (CreatView.CategorySelectItems.Count == 0 || CreatView.FoodTypeSelectItems.Count == 0)
+            {
+                TempData["Error"] = "Category Or Food Type Is Not Exist. Please Check";
+                return RedirectToPage("./Index");
+            }
+
+            return Page();
         }
         public async Task<IActionResult> OnPost([FromServices] IWebHostEnvironment _environment, [FromServices] IApplicationMenuItem _applicationMenu)
         {

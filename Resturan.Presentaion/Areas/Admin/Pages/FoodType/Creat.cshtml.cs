@@ -14,9 +14,13 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
         [BindProperty] public CreatViewModelFoodType? Foodmodel { get; set; }
         private CreatFoodTypeDTO? creatFood { get; set; }
 
-        public void OnGet()
+        public CreatModel()
         {
             creatFood = new();
+        }
+        public void OnGet()
+        {
+           
         }
 
         public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood)

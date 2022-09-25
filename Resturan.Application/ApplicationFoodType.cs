@@ -22,7 +22,7 @@ namespace Resturan.Application
 
         public async Task<IEnumerable<FoodTypeDTO>> GetAllFoodType()
         {
-            var result = await _unitOfWork.FoodTypeRepository.GetAsync(x => new FoodTypeDTO
+            var result = await _unitOfWork.FoodTypeRepository.GetAllAsync(x => new FoodTypeDTO
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Id = x.Guid,
@@ -44,20 +44,30 @@ namespace Resturan.Application
         {
             var model = await _unitOfWork.FoodTypeRepository.GetByIdAsync(x => x.Guid == entity.Id);
             if(model == null)return;
-            if(typeof(T)==typeof(UpdateFoodTypeDTO))model.Update(entity.Name!);
-            if(typeof(T)==typeof(DeleteFoodTypeDTO))model.Delete();
-            if(typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
+            else if (typeof(T)==typeof(UpdateFoodTypeDTO))model.Update(entity.Name!);
+            else if (typeof(T)==typeof(DeleteFoodTypeDTO))model.Delete();
+            else if (typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
             _unitOfWork.FoodTypeRepository.Update(model);
             _unitOfWork.Save();
         }
 
         public async Task<IEnumerable<FoodTypeDTO>> GetTypesFood()
         {
-            var result = await _unitOfWork.FoodTypeRepository.GetAsync(x => new FoodTypeDTO()
+            var result = await _unitOfWork.FoodTypeRepository.GetAllAsync(x => new FoodTypeDTO()
             {
                 Id = x.Guid,
                 Name = x.Name,
             }, x => x.IsDeleted == false);
+            return result;
+        }
+
+        public async Task<FoodTypeDTO> GetFoodTypeById(string id)
+        {
+            var result = await _unitOfWork.FoodTypeRepository.GetByIdAsync(x => new FoodTypeDTO
+            {
+                Name = x.Name,
+                Id = x.Guid
+            }, x => x.Guid == id);
             return result;
         }
     }

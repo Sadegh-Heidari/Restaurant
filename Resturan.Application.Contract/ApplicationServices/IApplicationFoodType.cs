@@ -8,5 +8,6 @@ namespace Resturan.Application.Service.ApplicationServices
         Task Add(CreatFoodTypeDTO category);
         Task Update<T>(T entity) where T : FoodTypeDTO;
         Task<IEnumerable<FoodTypeDTO>> GetTypesFood();
+        Task<FoodTypeDTO> GetFoodTypeById(string id);
     }
 }
