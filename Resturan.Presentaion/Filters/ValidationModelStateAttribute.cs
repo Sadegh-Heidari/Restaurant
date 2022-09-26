@@ -20,7 +20,7 @@ namespace Resturan.Presentation.Filters
                 if (param.Key == "id" && param.Value == null)
                 {
                     var view = context.HandlerInstance as PageModel;
-                    context.Result = view.RedirectToPage("/Admin/Errors/404/NotFound");
+                    context.Result = new BadRequestResult();
                 }
             }
             if (!context.ModelState.IsValid)

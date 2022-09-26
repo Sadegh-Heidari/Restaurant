@@ -31,7 +31,7 @@ namespace Resturan.Presentation.Middelware
                 await next();
                 if (context.Response.StatusCode == 404)
                 {
-                    context.Request.Path = "/Admin/Errors/404/NotFound";
+                    context.Request.Path = "/Errors/404/NotFound";
                     await next();
                 }
             });
