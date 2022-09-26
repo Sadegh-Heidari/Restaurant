@@ -6,7 +6,6 @@ namespace Resturan.Presentation.Tools
     public class MaxSizeFileAttribute:ValidationAttribute,IClientModelValidator
     {
         private int MaxSize { get; }
-
         public MaxSizeFileAttribute(int maxSize)
         {
             MaxSize = maxSize;
@@ -20,7 +19,13 @@ namespace Resturan.Presentation.Tools
 
         public void AddValidation(ClientModelValidationContext context)
         {
-            context.Attributes.Add("data-val-MaxSizeFile",ErrorMessage);
+            if(String.IsNullOrWhiteSpace(ErrorMessageResourceName))
+            context.Attributes.Add("data-val-MaxSizeFile",ErrorMessage!);
+            else
+            {
+                context.Attributes.Add("data-val-MaxSizeFile", ErrorMessageString!);
+
+            }
         }
     }
 }

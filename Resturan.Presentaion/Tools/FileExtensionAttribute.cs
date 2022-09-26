@@ -37,7 +37,13 @@ namespace Resturan.Presentation.Tools
         }
         public void AddValidation(ClientModelValidationContext context)
         {
-            context.Attributes.Add("data-val-FileExtension", ErrorMessage!);
+            if (String.IsNullOrWhiteSpace(ErrorMessageResourceName))
+                context.Attributes.Add("data-val-MaxSizeFile", ErrorMessage!);
+            else
+            {
+                context.Attributes.Add("data-val-MaxSizeFile", ErrorMessageString!);
+
+            }
         }
 
     }

@@ -32,7 +32,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         public virtual async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true)
         {
             var result = AsNoTracking == true ? await _context.Set<TEntity>().AsNoTracking().Where(Where).FirstOrDefaultAsync() :
-                await _context.Set<TEntity>().FirstOrDefaultAsync();
+                await _context.Set<TEntity>().Where(Where).FirstOrDefaultAsync();
             return result;
         }
 
