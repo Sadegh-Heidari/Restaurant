@@ -10,7 +10,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
     [ValidationModelState]
     public class CreatModel : PageModel
     {
-       [BindProperty] public CreatViewModelCategory? CreatviewModel { get; set; }
+        [BindProperty] public CreatViewModelCategory? CreatviewModel { get; set; }
         private CreatCategoryDTO Categorydto { get; set; }
         public CreatModel()
         {
@@ -22,15 +22,15 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
         }
         public async Task<IActionResult> OnPost([FromServices] IApplicationCategory ApplicationCat)
         {
-            
-           
-                Categorydto.Name = CreatviewModel!.Name;
-                Categorydto.DisplayOrder = CreatviewModel.DisplayOrder;
-                await ApplicationCat.Add(Categorydto);
-                TempData["success"] = "Category created successfully";
-                return RedirectToPage("./Index");
-           
-            
+
+
+            Categorydto.Name = CreatviewModel!.Name;
+            Categorydto.DisplayOrder = CreatviewModel.DisplayOrder;
+            await ApplicationCat.Add(Categorydto);
+            TempData["success"] = "Category created successfully";
+            return RedirectToPage("./Index");
+
+
         }
     }
 }

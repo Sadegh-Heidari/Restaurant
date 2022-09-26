@@ -25,21 +25,27 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
 
         public async Task<RedirectToPageResult> OnGetDelete([FromQuery] string id)
         {
-           await _applicationCategory.Update(new DeleteCategoryDTO
+            var result = await _applicationCategory.Update(new DeleteCategoryDTO
             {
                 GUID = id
             });
-           TempData["success"] = "Category Deleted successfully";
-           return RedirectToPage("./Index");
+            if (result)
+                TempData["success"] = "Category Deleted successfully";
+            else
+                TempData["Error"] = "Category Deleted Unsuccessfully";
+            return RedirectToPage("./Index");
         }
 
         public async Task<RedirectToPageResult> OnGetActive([FromQuery] string id)
         {
-            await _applicationCategory.Update(new ActiveCategoryDTO
+            var result = await _applicationCategory.Update(new ActiveCategoryDTO
             {
                 GUID = id
             });
-            TempData["success"] = "Category Activated successfully";
+            if (result)
+                TempData["success"] = "Category Activated successfully";
+            else
+                TempData["Error"] = "Category Activated Unsuccessfully";
             return RedirectToPage("./Index");
         }
     }

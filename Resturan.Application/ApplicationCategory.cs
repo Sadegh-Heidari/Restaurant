@@ -38,15 +38,16 @@ namespace Resturan.Application
             _unitOfWork.Save();
         }
 
-        public async Task Update<T>(T entity) where T : CategoryDTO
+        public async Task<bool> Update<T>(T entity) where T : CategoryDTO
         {
             var model = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == entity.GUID, false);
-            if (model == null) return;
+            if (model == null) return false;
             else if (typeof(T) == typeof(UpdateCategoryDTO)) model.Update(entity.DisplayOrder,entity.Name!);
             else if(typeof(T) == typeof(DeleteCategoryDTO)) model.Delete();
             else if (typeof(T) == typeof(ActiveCategoryDTO)) model.Active();
             _unitOfWork.CategoryRepository.Update(model);
             _unitOfWork.Save();
+            return true;
         }
 
         public async Task<IEnumerable<CategoryDTO>> GetNameCategories()
@@ -60,7 +61,7 @@ namespace Resturan.Application
             return result;
         }
 
-        public Task<CategoryDTO> GetCategoryById(string id)
+        public Task<CategoryDTO?> GetCategoryById(string id)
         {
             var result = _unitOfWork.CategoryRepository.GetByIdAsync(x => new CategoryDTO
             {

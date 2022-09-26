@@ -21,10 +21,6 @@
                         <input asp-for="CreatView.Name" class="form-control" />
                     </div>
                     <div class="mb-3">
-                        <label asp-for="CreatView.Description"></label>
-                        <textarea asp-for="CreatView.Description" class="form-control"></textarea>
-                    </div>
-                    <div class="mb-3">
                         <label asp-for="CreatView.Price"></label>
                         <input asp-for="CreatView.Price" class="form-control" />
                     </div>
@@ -44,9 +40,13 @@
                             <option disabled selected>-Select Food Type-</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label asp-for="CreatView.Description"></label>
+                        <textarea asp-for="CreatView.Description" class="form-control"></textarea>
+                    </div>
                 </div>
                 <div class="col-3">
-                    <img width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                    <img width="100%" />
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>

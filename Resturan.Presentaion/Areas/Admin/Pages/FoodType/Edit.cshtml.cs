@@ -24,17 +24,27 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
         public async Task<IActionResult> OnGet([FromRoute(Name = "Id")] string id)
         {
             var dto = await _applicationFood.GetFoodTypeById(id);
-            foodModel!.Id = dto.Id!;
-            foodModel.Name = dto.Name;
-            return Page();
+            if (dto != null)
+            {
+                foodModel!.Id = dto.Id!;
+                foodModel.Name = dto.Name;
+                return Page();
+            }
+            TempData["Error"] = "Food Type Is Not Found";
+            return RedirectToPage("./Index");
         }
 
         public async Task<IActionResult> OnPost()
         {
             foodType.Id = foodModel!.Id;
             foodType.Name = foodModel.Name;
-            await _applicationFood.Update(foodType);
-            TempData["success"] = "Type Edited Successfully";
+            var result = await _applicationFood.Update(foodType);
+            if (result == true)
+                TempData["success"] = "Food Type Edited successfully";
+            else
+            {
+                TempData["Error"] = "Food Type Edited Unsuccessfully";
+            }
             return RedirectToPage("./Index");
 
 

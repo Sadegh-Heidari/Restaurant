@@ -5,6 +5,8 @@
 
     reader.onloadend = function () {
         preview.src = reader.result;
+        preview.setAttribute("style", "border-radius:5px; border:1px solid #bbb9b9"); 
+
     }
 
     if (file) {

@@ -15,7 +15,7 @@ namespace Resturan.Domain.Services
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true);
-        Task<TOut> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where,
+        Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where,
             bool AsNoTracking = true);
 
 

@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Application.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Infrastructure.Service", "Resturan.Infrastructure.Service\Resturan.Infrastructure.Service.csproj", "{E79C8BC9-C098-4EDE-A89F-255441EF0BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resturan.Infrastructure.Tools", "Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj", "{0F16D038-B0EA-41E2-8A84-23E897495ED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resturan.Infrastructure.Tools", "Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj", "{0F16D038-B0EA-41E2-8A84-23E897495ED4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

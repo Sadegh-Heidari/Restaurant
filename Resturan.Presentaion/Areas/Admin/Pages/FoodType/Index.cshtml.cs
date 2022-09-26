@@ -26,25 +26,29 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 
         public async Task<IActionResult> OnGetDelete([FromQuery(Name = "Id")] string id)
         {
-           
 
-            
-                await _applicationFood.Update(new DeleteFoodTypeDTO()
-                {
-                    Id = id
-                });
-                TempData["success"] = "Type Deleted successfully";
-                return RedirectToPage("./Index");
-            
+            var result = await _applicationFood.Update(new DeleteFoodTypeDTO()
+            {
+                Id = id
+            });
+
+            if (result)
+                TempData["success"] = "Food Type Deleted successfully";
+            else
+                TempData["Error"] = "Food Type Deleted Unsuccessfully";
+            return RedirectToPage("./Index");
 
         }
         public async Task<RedirectToPageResult> OnGetActive([FromQuery] string id)
         {
-            await _applicationFood.Update(new ActiveFoodTypeDTO()
+            var result = await _applicationFood.Update(new ActiveFoodTypeDTO()
             {
                 Id = id
             });
-            TempData["success"] = "Type Activated successfully";
+            if (result)
+                TempData["success"] = "Food Type Activated successfully";
+            else
+                TempData["Error"] = "Food Type Activated Unsuccessfully";
             return RedirectToPage("./Index");
         }
     }

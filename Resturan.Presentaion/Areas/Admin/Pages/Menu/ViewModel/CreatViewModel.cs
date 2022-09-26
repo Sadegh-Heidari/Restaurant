@@ -2,7 +2,7 @@
 using System.Resources;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resturan.Infrastructure.Tools.Resource;
-using Resturan.Presentation.Tools;
+using Resturan.Infrastructure.Tools.Tools;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu.ViewModel
 {

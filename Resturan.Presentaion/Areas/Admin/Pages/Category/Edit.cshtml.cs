@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
@@ -25,10 +26,16 @@ public class EditModel : PageModel
     {
 
         var dto = await _applicationCategory.GetCategoryById(id);
-        Editmodel.Id = dto!.GUID;
-        Editmodel.Name = dto.Name;
-        Editmodel.DisplayOrder = dto.DisplayOrder;
-        return Page();
+        if (dto != null)
+        {
+            Editmodel.Id = dto!.GUID;
+            Editmodel.Name = dto.Name;
+            Editmodel.DisplayOrder = dto.DisplayOrder;
+            return Page();
+        }
+
+        TempData["Error"] = "Category Is Not Found";
+        return RedirectToPage("./Index");
     }
 
     public async Task<IActionResult> OnPost()
@@ -36,8 +43,13 @@ public class EditModel : PageModel
         updateCategory.GUID = Editmodel.Id;
         updateCategory.Name = Editmodel.Name;
         updateCategory.DisplayOrder = Editmodel.DisplayOrder;
-        await _applicationCategory.Update(updateCategory);
-        TempData["success"] = "Category Edited successfully";
+        var result = await _applicationCategory.Update(updateCategory);
+        if (result == true)
+            TempData["success"] = "Category Edited successfully";
+        else
+        {
+            TempData["Error"] = "Category Edited Unsuccessfully";
+        }
         return RedirectToPage("./Index");
 
 

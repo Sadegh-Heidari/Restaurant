@@ -1,4 +1,6 @@
-﻿namespace Resturan.Presentation.Tools
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Resturan.Infrastructure.Tools.Tools
 {
     public class UploadImage
     {

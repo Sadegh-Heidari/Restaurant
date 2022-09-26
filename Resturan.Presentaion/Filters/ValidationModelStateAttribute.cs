@@ -17,8 +17,11 @@ namespace Resturan.Presentation.Filters
             {
                 var argument = context.HandlerArguments.ToList();
                 var param = argument.FirstOrDefault(x=>x.Key.Contains("id"));
-                if (param.Key == "id" &&param.Value == null)
-                    context.Result = new BadRequestResult();
+                if (param.Key == "id" && param.Value == null)
+                {
+                    var view = context.HandlerInstance as PageModel;
+                    context.Result = view.RedirectToPage("/Admin/Errors/404/NotFound");
+                }
             }
             if (!context.ModelState.IsValid)
             {

@@ -48,7 +48,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
-        public virtual async Task<TOut> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select,Expression<Func<TEntity, bool>> Where ,bool AsNoTracking= true) 
+        public virtual async Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select,Expression<Func<TEntity, bool>> Where ,bool AsNoTracking= true) 
         {
             var result =   AsNoTracking == true
                 ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).FirstOrDefaultAsync()

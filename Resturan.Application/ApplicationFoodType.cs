@@ -40,15 +40,16 @@ namespace Resturan.Application
 
         }
 
-        public async Task Update<T>(T entity) where T:FoodTypeDTO
+        public async Task<bool> Update<T>(T entity) where T:FoodTypeDTO
         {
             var model = await _unitOfWork.FoodTypeRepository.GetByIdAsync(x => x.Guid == entity.Id);
-            if(model == null)return;
+            if(model == null)return false;
             else if (typeof(T)==typeof(UpdateFoodTypeDTO))model.Update(entity.Name!);
             else if (typeof(T)==typeof(DeleteFoodTypeDTO))model.Delete();
             else if (typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
             _unitOfWork.FoodTypeRepository.Update(model);
             _unitOfWork.Save();
+            return true;
         }
 
         public async Task<IEnumerable<FoodTypeDTO>> GetTypesFood()
@@ -61,7 +62,7 @@ namespace Resturan.Application
             return result;
         }
 
-        public async Task<FoodTypeDTO> GetFoodTypeById(string id)
+        public async Task<FoodTypeDTO?> GetFoodTypeById(string id)
         {
             var result = await _unitOfWork.FoodTypeRepository.GetByIdAsync(x => new FoodTypeDTO
             {

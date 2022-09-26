@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Myrmec;
 
-namespace Resturan.Presentation.Tools
+namespace Resturan.Infrastructure.Tools.Tools
 {
     public class FileExtensionAttribute : ValidationAttribute, IClientModelValidator
     {
@@ -38,10 +39,10 @@ namespace Resturan.Presentation.Tools
         public void AddValidation(ClientModelValidationContext context)
         {
             if (String.IsNullOrWhiteSpace(ErrorMessageResourceName))
-                context.Attributes.Add("data-val-MaxSizeFile", ErrorMessage!);
+                context.Attributes.Add("data-val-FileExtension", ErrorMessage!);
             else
             {
-                context.Attributes.Add("data-val-MaxSizeFile", ErrorMessageString!);
+                context.Attributes.Add("data-val-FileExtension", ErrorMessageString!);
 
             }
         }

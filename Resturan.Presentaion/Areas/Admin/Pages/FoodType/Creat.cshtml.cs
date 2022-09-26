@@ -20,19 +20,19 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
         }
         public void OnGet()
         {
-           
+
         }
 
         public async Task<IActionResult> OnPost([FromServices] IApplicationFoodType _applicationFood)
         {
-           
-                creatFood!.Name = Foodmodel!.Name;
-                await _applicationFood.Add(creatFood);
-                TempData["success"] = "Type created successfully";
-                return RedirectToPage("./Index");
-           
 
-            
+            creatFood!.Name = Foodmodel!.Name;
+            await _applicationFood.Add(creatFood);
+            TempData["success"] = "Type created successfully";
+            return RedirectToPage("./Index");
+
+
+
         }
     }
 }

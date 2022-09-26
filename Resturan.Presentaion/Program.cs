@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.Service;
 using Resturan.Presentation.Filters;
+using Resturan.Presentation.Middelware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -19,6 +20,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseErrorNotFound();
+
 app.UseStaticFiles();
 
 app.UseRouting();
