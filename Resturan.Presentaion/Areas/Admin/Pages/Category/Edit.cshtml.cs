@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Areas.Admin.Pages.Category.ViewModel;
 using Resturan.Presentation.Filters;
 
@@ -34,7 +35,7 @@ public class EditModel : PageModel
             return Page();
         }
 
-        TempData["Error"] = "Category Is Not Found";
+        TempData["Error"] = $"Category {ErrorMessagesResource.NotFound}";
         return RedirectToPage("./Index");
     }
 
@@ -45,10 +46,10 @@ public class EditModel : PageModel
         updateCategory.DisplayOrder = Editmodel.DisplayOrder;
         var result = await _applicationCategory.Update(updateCategory);
         if (result == true)
-            TempData["success"] = "Category Edited successfully";
+            TempData["success"] = $"Category {ErrorMessagesResource.EditedSuccessfully}";
         else
         {
-            TempData["Error"] = "Category Edited Unsuccessfully";
+            TempData["Error"] = $"Category {ErrorMessagesResource.EditedUnuccessfully}";
         }
         return RedirectToPage("./Index");
 

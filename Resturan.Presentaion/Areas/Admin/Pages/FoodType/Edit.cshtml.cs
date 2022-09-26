@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.FoodType;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Areas.Admin.Pages.FoodType.ViewModel;
 using Resturan.Presentation.Filters;
 
@@ -30,7 +31,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
                 foodModel.Name = dto.Name;
                 return Page();
             }
-            TempData["Error"] = "Food Type Is Not Found";
+            TempData["Error"] = $"Food Type {ErrorMessagesResource.NotFound}";
             return RedirectToPage("./Index");
         }
 
@@ -40,10 +41,10 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
             foodType.Name = foodModel.Name;
             var result = await _applicationFood.Update(foodType);
             if (result == true)
-                TempData["success"] = "Food Type Edited successfully";
+                TempData["success"] = $"Food Type {ErrorMessagesResource.EditedSuccessfully}";
             else
             {
-                TempData["Error"] = "Food Type Edited Unsuccessfully";
+                TempData["Error"] = $"Food Type {ErrorMessagesResource.EditedUnuccessfully}";
             }
             return RedirectToPage("./Index");
 

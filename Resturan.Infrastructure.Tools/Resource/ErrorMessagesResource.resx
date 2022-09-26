@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivatedSuccessfully" xml:space="preserve">
+    <value>Activated Successfully</value>
+  </data>
+  <data name="ActivatedUnsuccessfully" xml:space="preserve">
+    <value>Activated Unsuccessfully</value>
+  </data>
   <data name="CategoryIdRequired" xml:space="preserve">
     <value>Category Is Required</value>
+  </data>
+  <data name="CategoryOrFoodTypeNull" xml:space="preserve">
+    <value>Category Or Food Type Is Not Exist. Please Check</value>
+  </data>
+  <data name="CreatedSuccessfully" xml:space="preserve">
+    <value>Created Successfully</value>
+  </data>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>Deleted Successfully</value>
+  </data>
+  <data name="DeletedUnuccessfully" xml:space="preserve">
+    <value>Deleted Unsuccessfully</value>
   </data>
   <data name="DescriptionRequired" xml:space="preserve">
     <value> Description Is Required</value>
@@ -128,6 +146,12 @@
   </data>
   <data name="DisplayRang" xml:space="preserve">
     <value>Display order must be in range of 1-100!!!</value>
+  </data>
+  <data name="EditedSuccessfully" xml:space="preserve">
+    <value>Edited successfully</value>
+  </data>
+  <data name="EditedUnuccessfully" xml:space="preserve">
+    <value>Edited Unsuccessfully</value>
   </data>
   <data name="FileExtension" xml:space="preserve">
     <value>File Extension Is Not Valid</value>
@@ -143,6 +167,9 @@
   </data>
   <data name="NameRequired" xml:space="preserve">
     <value>Name Is Required</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Is Not Found</value>
   </data>
   <data name="PriceRange" xml:space="preserve">
     <value>Price should be between $1 and $1000</value>

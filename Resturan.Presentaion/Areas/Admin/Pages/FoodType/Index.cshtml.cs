@@ -4,6 +4,7 @@ using Resturan.Application;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.Category;
 using Resturan.Application.Service.DTO.FoodType;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
@@ -33,9 +34,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
             });
 
             if (result)
-                TempData["success"] = "Food Type Deleted successfully";
+                TempData["success"] = $"Food Type {ErrorMessagesResource.DeletedSuccessfully}";
             else
-                TempData["Error"] = "Food Type Deleted Unsuccessfully";
+                TempData["Error"] = $"Food Type {ErrorMessagesResource.DeletedUnuccessfully}";
             return RedirectToPage("./Index");
 
         }
@@ -46,9 +47,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
                 Id = id
             });
             if (result)
-                TempData["success"] = "Food Type Activated successfully";
+                TempData["success"] = $"Food Type {ErrorMessagesResource.ActivatedSuccessfully}";
             else
-                TempData["Error"] = "Food Type Activated Unsuccessfully";
+                TempData["Error"] = $"Food Type {ErrorMessagesResource.ActivatedUnsuccessfully}";
             return RedirectToPage("./Index");
         }
     }

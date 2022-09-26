@@ -61,11 +61,65 @@ namespace Resturan.Infrastructure.Tools.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activated Successfully.
+        /// </summary>
+        public static string ActivatedSuccessfully {
+            get {
+                return ResourceManager.GetString("ActivatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activated Unsuccessfully.
+        /// </summary>
+        public static string ActivatedUnsuccessfully {
+            get {
+                return ResourceManager.GetString("ActivatedUnsuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category Is Required.
         /// </summary>
         public static string CategoryIdRequired {
             get {
                 return ResourceManager.GetString("CategoryIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category Or Food Type Is Not Exist. Please Check.
+        /// </summary>
+        public static string CategoryOrFoodTypeNull {
+            get {
+                return ResourceManager.GetString("CategoryOrFoodTypeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Successfully.
+        /// </summary>
+        public static string CreatedSuccessfully {
+            get {
+                return ResourceManager.GetString("CreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted Successfully.
+        /// </summary>
+        public static string DeletedSuccessfully {
+            get {
+                return ResourceManager.GetString("DeletedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted Unsuccessfully.
+        /// </summary>
+        public static string DeletedUnuccessfully {
+            get {
+                return ResourceManager.GetString("DeletedUnuccessfully", resourceCulture);
             }
         }
         
@@ -93,6 +147,24 @@ namespace Resturan.Infrastructure.Tools.Resource {
         public static string DisplayRang {
             get {
                 return ResourceManager.GetString("DisplayRang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edited successfully.
+        /// </summary>
+        public static string EditedSuccessfully {
+            get {
+                return ResourceManager.GetString("EditedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edited Unsuccessfully.
+        /// </summary>
+        public static string EditedUnuccessfully {
+            get {
+                return ResourceManager.GetString("EditedUnuccessfully", resourceCulture);
             }
         }
         
@@ -138,6 +210,15 @@ namespace Resturan.Infrastructure.Tools.Resource {
         public static string NameRequired {
             get {
                 return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Not Found.
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
             }
         }
         

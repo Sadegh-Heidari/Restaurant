@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.MenuItem;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Infrastructure.Tools.Tools;
 using Resturan.Presentation.Areas.Admin.Pages.Menu.ViewModel;
 using Resturan.Presentation.Filters;
@@ -40,7 +41,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                 }).ToList();
             if (CreatView.CategorySelectItems.Count == 0 || CreatView.FoodTypeSelectItems.Count == 0)
             {
-                TempData["Error"] = "Category Or Food Type Is Not Exist. Please Check";
+                TempData["Error"] = $"{ErrorMessagesResource.CategoryOrFoodTypeNull}";
                 return RedirectToPage("./Index");
             }
 
@@ -73,7 +74,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             creatMenu.Image = pathImage;
             creatMenu.Price = CreatView.Price;
             await _applicationMenu.AddItem(creatMenu);
-            TempData["success"] = "Menu Item Created Successfully";
+            TempData["success"] = $"Menu Item {ErrorMessagesResource.CreatedSuccessfully}";
             return RedirectToPage("./Index");
         }
     }

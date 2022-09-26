@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
@@ -30,9 +31,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
                 GUID = id
             });
             if (result)
-                TempData["success"] = "Category Deleted successfully";
+                TempData["success"] = $"Category {ErrorMessagesResource.DeletedSuccessfully}";
             else
-                TempData["Error"] = "Category Deleted Unsuccessfully";
+                TempData["Error"] = $"Category {ErrorMessagesResource.DeletedUnuccessfully}";
             return RedirectToPage("./Index");
         }
 
@@ -43,9 +44,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
                 GUID = id
             });
             if (result)
-                TempData["success"] = "Category Activated successfully";
+                TempData["success"] = $"Category {ErrorMessagesResource.ActivatedSuccessfully}";
             else
-                TempData["Error"] = "Category Activated Unsuccessfully";
+                TempData["Error"] = $"Category {ErrorMessagesResource.ActivatedUnsuccessfully}";
             return RedirectToPage("./Index");
         }
     }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.Category;
+using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Areas.Admin.Pages.Category.ViewModel;
 using Resturan.Presentation.Filters;
 
@@ -27,7 +28,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
             Categorydto.Name = CreatviewModel!.Name;
             Categorydto.DisplayOrder = CreatviewModel.DisplayOrder;
             await ApplicationCat.Add(Categorydto);
-            TempData["success"] = "Category created successfully";
+            TempData["success"] = $"Category {ErrorMessagesResource.CreatedSuccessfully}";
             return RedirectToPage("./Index");
 
 
