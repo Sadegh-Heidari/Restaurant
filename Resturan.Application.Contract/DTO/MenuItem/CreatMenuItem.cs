@@ -12,7 +12,7 @@ namespace Resturan.Application.Service.DTO.MenuItem
         public override string? Descriptaion { get; set; }
         public override string? Image { get; set; }
         public override string? Price { get; set; }
-        public override string? FoodType { get; set; }
-        public override string? Category { get; set; }
+        public override string? FoodTypeName { get; set; }
+        public override string? CategoryName { get; set; }
     }
 }

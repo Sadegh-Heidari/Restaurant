@@ -10,5 +10,6 @@ namespace Resturan.Application.Service.ApplicationServices
     public interface IApplicationMenuItem
     {
         Task AddItem(CreatMenuItem dto);
+        Task<IEnumerable<MenuItemDTO>> GetAllItems();
     }
 }

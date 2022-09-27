@@ -68,9 +68,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             }
             var pathImage = await UploadImage.Send(CreatView.Image!, "MenuItem",_environment.WebRootPath);
             creatMenu.Name = CreatView.Name;
-            creatMenu.Category = CreatView.CategoryId;
+            creatMenu.CategoryName = CreatView.CategoryId;
             creatMenu.Descriptaion = CreatView.Description;
-            creatMenu.FoodType = CreatView.FoodTypeId;
+            creatMenu.FoodTypeName = CreatView.FoodTypeId;
             creatMenu.Image = pathImage;
             creatMenu.Price = CreatView.Price;
             await _applicationMenu.AddItem(creatMenu);

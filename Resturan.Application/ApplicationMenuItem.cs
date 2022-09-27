@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,23 @@ namespace Resturan.Application
 
         public async Task AddItem(CreatMenuItem dto)
         {
-            MenuItemModel model = new(dto.Name!, dto.Descriptaion!, dto.Image!, dto.Price!, dto.FoodType!, dto.Category!);
+            MenuItemModel model = new(dto.Name!, dto.Descriptaion!, dto.Image!, dto.Price!, dto.FoodTypeName!, dto.CategoryName!);
             await _unitOfWork!.MenuItemRepository.AddAsync(model);
             _unitOfWork.Save();
+        }
+
+        public async Task<IEnumerable<MenuItemDTO>> GetAllItems()
+        {
+            var result = await _unitOfWork.MenuItemRepository.GetAllAsync(x=>new MenuItemDTO
+            {
+                CategoryName = x.Category.Name,
+                CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
+                FoodTypeName = x.FoodType.Name,
+                Id = x.Guid,
+                Price = x.Price,
+                Name = x.Name,
+            },Include:"Category,FoodType");
+            return result;
         }
     }
 }
