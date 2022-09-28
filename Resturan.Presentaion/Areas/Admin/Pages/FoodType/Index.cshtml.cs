@@ -20,9 +20,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
             _applicationFood = applicationFood;
         }
 
-        public async Task OnGet()
+        public async Task OnGet([FromRoute(Name = "page")] int page = 1, [FromRoute(Name = "pagesize")] int pagesize = 10)
         {
-            FoodTypes = await _applicationFood?.GetAllFoodType()!;
+            FoodTypes = await _applicationFood?.GetAllFoodType(page,pagesize)!;
         }
 
         public async Task<IActionResult> OnGetDelete([FromQuery(Name = "Id")] string id)

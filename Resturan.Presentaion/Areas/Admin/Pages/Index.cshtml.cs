@@ -13,7 +13,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-            var result = await _ApplicationCategory.GetAllCategory();
+            
         }
     }
 }

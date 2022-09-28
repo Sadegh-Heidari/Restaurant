@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="LazZiya.TagHelpers" Version="6.0.2" />
 		<PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
 			<PrivateAssets>all</PrivateAssets>

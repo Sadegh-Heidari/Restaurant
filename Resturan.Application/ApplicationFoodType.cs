@@ -20,7 +20,7 @@ namespace Resturan.Application
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<FoodTypeDTO>> GetAllFoodType()
+        public async Task<IEnumerable<FoodTypeDTO>> GetAllFoodType(int page, int pagesize)
         {
             var result = await _unitOfWork.FoodTypeRepository.GetAllAsync(x => new FoodTypeDTO
             {
@@ -28,7 +28,7 @@ namespace Resturan.Application
                 Id = x.Guid,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-            });
+            },page,pagesize);
             return result;
         }
 

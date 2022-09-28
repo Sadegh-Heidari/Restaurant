@@ -26,7 +26,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseHttpsRedirection();
-app.UseCors("my");
+//app.UseCors("my");
 app.UseErrorNotFound();
 
 app.UseStaticFiles();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.MenuItem;
 using Resturan.Domain.MenuItem;
 using Resturan.Domain.Services;
@@ -27,9 +28,9 @@ namespace Resturan.Application
             _unitOfWork.Save();
         }
 
-        public async Task<IEnumerable<MenuItemDTO>> GetAllItems()
+        public async Task<Pageniation> GetAllItems(Pageniation pg)
         {
-            var result = await _unitOfWork.MenuItemRepository.GetAllAsync(x=>new MenuItemDTO
+            pg.MenuItem = await _unitOfWork.MenuItemRepository.GetAllAsync(x=>new MenuItemDTO
             {
                 CategoryName = x.Category.Name,
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
@@ -37,8 +38,9 @@ namespace Resturan.Application
                 Id = x.Guid,
                 Price = x.Price,
                 Name = x.Name,
-            },Include:"Category,FoodType");
-            return result;
+            },Include:"Category,FoodType",page:pg.page,pagesize:pg.pagesize);
+            pg.Count = _unitOfWork.MenuItemRepository.GetCount();
+            return pg;
         }
     }
 }

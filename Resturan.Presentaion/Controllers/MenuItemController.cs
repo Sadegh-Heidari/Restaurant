@@ -19,11 +19,11 @@ namespace Resturan.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<string> Get([FromRoute(Name = "page")] int page = 1, [FromRoute(Name = "pagesize")] int pagesize = 10)
             {
-            var item = await _applicationMenu.GetAllItems();
-            var x = item.ToJson();
-            return x;
+            ////var item = await _applicationMenu.GetAllItems(page,pagesize);
+            //var x = item.ToJson();
+            return null;
         }
     }
 }

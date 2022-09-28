@@ -5,23 +5,29 @@ using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
 using Resturan.Infrastructure.Tools.Resource;
 using Resturan.Presentation.Filters;
+using X.PagedList;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
     [ValidationModelState]
     public class IndexModel : PageModel
     {
-        public IEnumerable<CategoryDTO> Category { get; set; }
+        public Pageniation Category { get; set; }
         private IApplicationCategory _applicationCategory { get; }
         public IndexModel(IApplicationCategory applicationCategory)
         {
             _applicationCategory = applicationCategory;
-            Category = new List<CategoryDTO>();
         }
 
-        public async Task OnGet()
+        public async Task OnGet([FromQuery(Name = "PageNumber")]int page = 1, [FromQuery(Name = "PageSize")]int pagesiza=1)
         {
-            Category = await _applicationCategory.GetAllCategory();
+            Category = await _applicationCategory.GetAllCategory(new Pageniation
+            {
+                page = page,
+                pagesize = pagesiza
+            });
+
+
         }
 
         public async Task<RedirectToPageResult> OnGetDelete([FromQuery] string id)

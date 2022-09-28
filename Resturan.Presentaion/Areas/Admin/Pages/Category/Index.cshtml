@@ -1,6 +1,15 @@
 ﻿@page
+@using Resturan.Application.Service.ApplicationServices
+@using X.PagedList
 @model Resturan.Presentation.Areas.Admin.Pages.Category.IndexModel
+@addTagHelper *,LazZiya.TagHelpers
+@inject IApplicationCategory app
+
 @{
+    int PageNumber = 1;
+    int PageSize = 1;
+    int.TryParse(HttpContext.Request.Query["PageNumber"],out PageNumber);
+    int.TryParse(HttpContext.Request.Query["PageSize"], out PageSize);
 }
 @section icon
     {
@@ -27,7 +36,7 @@
             </tr>
         </thead>
         <tbody class="table-secondary">
-        @foreach (var item in Model.Category)
+        @foreach (var item in Model.Category.category)
         {
             <tr>
                 <td class="text-center align-middle">@item.Name</td>
@@ -40,9 +49,9 @@
                         </a>
                         @if(item.IsDeleted == false)
                         {
-                        <a asp-page-handler="Delete" asp-route-id="@item.GUID" class="btn btn-outline-danger ms-3 rounded-end">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
+                            <a asp-page-handler="Delete" asp-route-id="@item.GUID" class="btn btn-outline-danger ms-3 rounded-end">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
                         }
                         @if (item.IsDeleted == true)
                         {
@@ -53,8 +62,26 @@
                     </div>
                 </td>
             </tr>
+            
         }
 
 
     </tbody>
 </table>
+<div>
+    <ul class="pagination">
+        <paging total-records="Model.Category.Count"
+                page-no="PageNumber==0?1:PageNumber"
+                page-size="PageSize==0?1:PageSize",
+                show-prev-next="true",
+                show-total-records="false",
+                show-total-pages="false",
+                show-gap="false",
+                show-first-last="false",
+                show-page-size-nav="false",
+                query-string-key-page-no="PageNumber"
+                query-string-key-page-size="PageSize">
+        </paging>
+    </ul>
+</div>
+

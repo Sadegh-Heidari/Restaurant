@@ -18,16 +18,19 @@ namespace Resturan.Application
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetAllCategory()
+        public async Task<Pageniation> GetAllCategory(Pageniation pg)
         {
-            var result = await _unitOfWork.CategoryRepository.GetAllAsync(x => new CategoryDTO()
+
+            pg.category = await _unitOfWork.CategoryRepository.GetAllAsync(x => new CategoryDTO()
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 DisplayOrder = x.DisplayOrder,
                 GUID = x.Guid,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-            });
+            }, pg.page, pg.pagesize);
+            pg.Count = _unitOfWork.CategoryRepository.GetCount();
+            var result = pg;
             return result;
         }
 
@@ -70,6 +73,11 @@ namespace Resturan.Application
                 DisplayOrder = x.DisplayOrder,
             }, x => x.Guid==id);
             return result;
+        }
+
+        public async Task<int> Count()
+        {
+            return  _unitOfWork.CategoryRepository.GetCount();
         }
     }
 }

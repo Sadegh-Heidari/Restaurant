@@ -12,10 +12,11 @@ namespace Resturan.Application.Service.ApplicationServices
 {
     public interface IApplicationCategory
     {
-        Task<IEnumerable<CategoryDTO>> GetAllCategory();
+        Task<Pageniation> GetAllCategory(Pageniation pg);
         Task Add(CreatCategoryDTO category);
         Task<bool> Update<T>(T entity) where T : CategoryDTO;
         Task<IEnumerable<CategoryDTO>> GetNameCategories();
         Task<CategoryDTO?> GetCategoryById(string id);
+        Task<int> Count();
     }
 }

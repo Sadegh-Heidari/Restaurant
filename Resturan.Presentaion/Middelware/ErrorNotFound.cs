@@ -14,10 +14,15 @@ namespace Resturan.Presentation.Middelware
 			_next = next;
 		}
 
-		public Task Invoke(HttpContext httpContext)
+		public async Task Invoke(HttpContext httpContext)
 		{
-
-			return _next(httpContext);
+            await _next(httpContext);
+            if (httpContext.Response.StatusCode == 404)
+            {
+                httpContext.Request.Path = "/Errors/404/NotFound";
+                await _next(httpContext);
+            }
+          
 		}
 	}
 
@@ -26,15 +31,6 @@ namespace Resturan.Presentation.Middelware
 	{
 		public static IApplicationBuilder UseErrorNotFound(this IApplicationBuilder builder)
 		{
-            builder.Use(async (context, next) =>
-            {
-                await next();
-                if (context.Response.StatusCode == 404)
-                {
-                    context.Request.Path = "/Errors/404/NotFound";
-                    await next();
-                }
-            });
             return builder.UseMiddleware<ErrorNotFound>();
 		}
 	}
