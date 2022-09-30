@@ -4,7 +4,6 @@ using Resturan.Domain.Base;
 using Resturan.Domain.Services;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.EFCORE6.Pagination;
-using X.PagedList;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Resturan.Infrastructure.EFCORE6.Repositories

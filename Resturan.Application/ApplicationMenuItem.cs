@@ -40,6 +40,7 @@ namespace Resturan.Application
                 Name = x.Name,
             },Include:"Category,FoodType",page:pg.page,pagesize:pg.pagesize);
             pg.Count = _unitOfWork.MenuItemRepository.GetCount();
+
             return pg;
         }
     }

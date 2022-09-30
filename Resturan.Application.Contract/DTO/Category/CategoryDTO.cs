@@ -6,7 +6,7 @@
         public virtual string?  Name { get; set; }
         public virtual string?  CreationDate { get; set; }
         public virtual short DisplayOrder { get; set; }
-        public virtual bool IsDeleted { get; set; } = false;
+        public virtual bool IsDeleted { get; set; }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

@@ -1,10 +1,16 @@
 ﻿@page
 @model Resturan.Presentation.Areas.Admin.Pages.FoodType.IndexModel
+@addTagHelper *,LazZiya.TagHelpers
 @{
+    int PageSize = 1;
+    int PageNumber = 10;
+    int.TryParse(HttpContext.Request.Query["PageSize"], out PageSize);
+    int.TryParse(HttpContext.Request.Query["PageNumber"], out PageNumber);
 }
 @section icon
 {
     <link rel="stylesheet" href="~/css/bootstrap-icons-1.9.1/bootstrap-icons.min.css" />
+    
 }
 <div class="row pt-4">
     <div class="col-6 mb-4">
@@ -26,7 +32,7 @@
     </tr>
     </thead>
     <tbody class="table-secondary">
-    @foreach (var item in Model.FoodTypes)
+    @foreach (var item in Model.FoodTypes.FoodType)
     {
         <tr>
             <td class="text-center align-middle">@item.Name</td>
@@ -38,15 +44,15 @@
                     </a>
                     @if(item.IsDeleted == false)
                     {
-                        <a asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger ms-3 rounded-end">
+                            <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
                             <i class="bi bi-trash-fill"></i>
-                        </a>
+                        </button>
                     }
                     @if (item.IsDeleted == true)
                     {
-                            <a asp-page-handler="Active" asp-route-id="@item.Id" class="btn btn-outline-success ms-3 rounded-end">
+                            <button id="Status" data-val-id="@item.Id" data-val-status="Active" class="btn btn-outline-success ms-3 rounded-end" onclick="Excute(this)">
                             <i class="bi bi-check-square-fill"></i>
-                        </a>
+                        </button>
                     }
                 </div>
             </td>
@@ -56,3 +62,23 @@
 
     </tbody>
 </table>
+<div>
+    <ul class="pagination">
+        <paging total-records="Model.FoodTypes.Count"
+                page-no="PageNumber==0?1:PageNumber"
+                page-size="PageSize==0?10:PageSize"
+                show-prev-next="true" 
+                show-total-records="false" 
+                show-total-pages="false" 
+                show-gap="false" 
+                show-first-last="false" 
+                show-page-size-nav="false" 
+                query-string-key-page-no="PageNumber"
+                query-string-key-page-size="PageSize">
+        </paging>
+    </ul>
+</div>
+@section Scripts
+{
+    <script src="~/js/FoodType.js"></script>
+}

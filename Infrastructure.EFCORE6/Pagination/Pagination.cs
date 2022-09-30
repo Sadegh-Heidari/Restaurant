@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-
-namespace Resturan.Infrastructure.EFCORE6.Pagination
+﻿namespace Resturan.Infrastructure.EFCORE6.Pagination
 {
     public static class Pagination
     {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
 using Resturan.Application.Service.DTO.FoodType;
 using Resturan.Domain.FoodType;
@@ -20,16 +21,17 @@ namespace Resturan.Application
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<FoodTypeDTO>> GetAllFoodType(int page, int pagesize)
+        public async Task<Pageniation> GetAllFoodType(Pageniation pg)
         {
-            var result = await _unitOfWork.FoodTypeRepository.GetAllAsync(x => new FoodTypeDTO
+            pg.FoodType = await _unitOfWork.FoodTypeRepository.GetAllAsync(x => new FoodTypeDTO
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Id = x.Guid,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-            },page,pagesize);
-            return result;
+            },pg.page,pg.pagesize);
+            pg.Count = _unitOfWork.FoodTypeRepository.GetCount();
+            return pg;
         }
 
         public async Task Add(CreatFoodTypeDTO category)
