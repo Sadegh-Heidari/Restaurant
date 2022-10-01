@@ -8,15 +8,15 @@ namespace Resturan.Application.Service.DTO.MenuItem
 {
     public class MenuItemDTO:IDisposable
     {
-        public virtual string? Id  { get; set; }
-        public virtual string? Name { get;  set; }
-        public virtual bool? IsDeletd { get; set; }
-        public virtual string?  CreationDate { get; set; }
-        public virtual string? Descriptaion { get; set; }
-        public virtual string? Image { get; set; }
-        public virtual string? Price { get;  set; }
-        public virtual string? FoodTypeName { get;  set; }
-        public virtual string? CategoryName { get; set; }
+        public  string? Id  { get; set; }
+        public  string? Name { get;  set; }
+        public  bool? IsDeletd { get; set; }
+        public  string?  CreationDate { get; set; }
+        public  string? Descriptaion { get; set; }
+        public  string? Image { get; set; }
+        public  string? Price { get;  set; }
+        public  string? FoodTypeName { get;  set; }
+        public  string? CategoryName { get; set; }
 
         public void Dispose()
         {

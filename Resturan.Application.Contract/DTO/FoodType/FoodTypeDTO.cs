@@ -11,7 +11,7 @@ namespace Resturan.Application.Service.DTO.FoodType
         public virtual string?  Id { get; set; }
         public virtual string? Name { get; set; }
         public virtual string? CreationDate { get; set; }
-        public virtual bool IsDeleted { get; set; } = false;
+        public virtual bool? IsDeleted { get; set; }
 
         public void Dispose()
         {

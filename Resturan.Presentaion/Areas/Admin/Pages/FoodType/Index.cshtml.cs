@@ -21,12 +21,12 @@ namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
             _applicationFood = applicationFood;
         }
 
-        public async Task OnGet([FromQuery(Name = "page")] int page = 1, [FromQuery(Name = "pagesize")] int pagesize = 10)
+        public async Task OnGet([FromQuery(Name = "PageSize")] int page = 1, [FromQuery(Name = "PageNumber")] int pagesize = 10)
         {
             FoodTypes = await _applicationFood?.GetAllFoodType(new Pageniation
             {
-                page = page,
-                pagesize = pagesize
+                PageSize = page,
+                PageNumber = pagesize
             })!;
         }
     }

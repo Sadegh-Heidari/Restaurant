@@ -29,7 +29,7 @@ namespace Resturan.Application
                 Id = x.Guid,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-            },pg.page,pg.pagesize);
+            },pg.PageSize,pg.PageNumber);
             pg.Count = _unitOfWork.FoodTypeRepository.GetCount();
             return pg;
         }

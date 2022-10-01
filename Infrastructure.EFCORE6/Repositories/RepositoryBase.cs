@@ -10,7 +10,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseModel
     {
-        private ApplicationContext _context { get; }
+        protected ApplicationContext _context { get; }
         private DbSet<TEntity> dbset { get; }
         public RepositoryBase(ApplicationContext context)
         {
@@ -61,7 +61,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 query = query.AsNoTracking().Where(Where);
             }
-
+            
             if (Include != null)
             {
                 foreach (var item in Include.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

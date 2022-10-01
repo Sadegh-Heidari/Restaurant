@@ -38,10 +38,19 @@ namespace Resturan.Application
                 Id = x.Guid,
                 Price = x.Price,
                 Name = x.Name,
-            },Include:"Category,FoodType",page:pg.page,pagesize:pg.pagesize);
+            },Include:"Category,FoodType",page:pg.PageSize,pagesize:pg.PageNumber);
             pg.Count = _unitOfWork.MenuItemRepository.GetCount();
 
             return pg;
+        }
+
+        public async Task<bool> DeleteItem(DeleteMenuItemDTO dto)
+        {
+            var item = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.GUId, false);
+            if (item == null) return false;
+           var result = _unitOfWork.MenuItemRepository.Delete(item);
+           if (result != false) _unitOfWork.Save();
+           return result;
         }
     }
 }

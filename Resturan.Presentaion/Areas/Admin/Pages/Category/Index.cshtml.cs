@@ -22,8 +22,8 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Category
         {
             Category = await _applicationCategory.GetAllCategory(new Pageniation
             {
-                page = page,
-                pagesize = pagesiza
+                PageSize = page,
+                PageNumber = pagesiza
             });
 
 

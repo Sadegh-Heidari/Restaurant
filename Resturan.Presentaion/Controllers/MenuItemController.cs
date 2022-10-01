@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using NuGet.Protocol;
 using Resturan.Application.Service.ApplicationServices;
+using Resturan.Application.Service.DTO.MenuItem;
 
 namespace Resturan.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class MenuItemController : ControllerBase
     {
@@ -19,11 +20,13 @@ namespace Resturan.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<string> Get([FromRoute(Name = "page")] int page = 1, [FromRoute(Name = "pagesize")] int pagesize = 10)
+        public async Task<bool> Delete([FromQuery] string id)
+        {
+            var result = await _applicationMenu.DeleteItem(new DeleteMenuItemDTO
             {
-            ////var item = await _applicationMenu.GetAllItems(page,pagesize);
-            //var x = item.ToJson();
-            return null;
+                GUId = id
+            });
+            return result;
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Resturan.Application.Service.DTO
         public IEnumerable<FoodTypeDTO> FoodType { get; set; }
         public IEnumerable<MenuItemDTO> MenuItem { get; set; }
         public  int  Count { get; set; }
-        public  int  page { get; set; }
-        public  int  pagesize { get; set; }
+        public  int  PageSize { get; set; }
+        public  int  PageNumber { get; set; }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

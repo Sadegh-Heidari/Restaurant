@@ -28,7 +28,7 @@ namespace Resturan.Application
                 GUID = x.Guid,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-            }, pg.page, pg.pagesize);
+            }, pg.PageSize, pg.PageNumber);
             pg.Count = _unitOfWork.CategoryRepository.GetCount();
             var result = pg;
             return result;

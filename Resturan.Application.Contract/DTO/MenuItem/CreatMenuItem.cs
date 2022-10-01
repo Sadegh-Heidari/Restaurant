@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace Resturan.Application.Service.DTO.MenuItem
 {
-    public class CreatMenuItem:MenuItemDTO
+    public class CreatMenuItem:IDisposable
     {
-        public override string? Name { get; set; }
-        public override string? Descriptaion { get; set; }
-        public override string? Image { get; set; }
-        public override string? Price { get; set; }
-        public override string? FoodTypeName { get; set; }
-        public override string? CategoryName { get; set; }
+        public  string? Name { get; set; }
+        public  string? Descriptaion { get; set; }
+        public  string? Image { get; set; }
+        public  string? Price { get; set; }
+        public  string? FoodTypeName { get; set; }
+        public  string? CategoryName { get; set; }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

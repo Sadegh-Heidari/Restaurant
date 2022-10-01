@@ -12,5 +12,6 @@ namespace Resturan.Application.Service.ApplicationServices
     {
         Task AddItem(CreatMenuItem dto);
         Task<Pageniation > GetAllItems(Pageniation pg);
+        Task<bool> DeleteItem(DeleteMenuItemDTO dto);
     }
 }
