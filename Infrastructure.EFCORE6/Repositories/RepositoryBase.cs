@@ -71,7 +71,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             }
 
             var skip = (page - 1) * pagesize;
-            var result = await query.AsNoTracking().Select(Select).Skip(skip).Take(pagesize).ToListAsync();
+            var result = query.AsNoTracking().Select(Select).Skip(skip).Take(pagesize);
             return result;
             //var result = Select != null && Where != null
             //    ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).ToListAsync()

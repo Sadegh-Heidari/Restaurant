@@ -8,7 +8,6 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Category
 {
-    [ValidationModelState]
     public class IndexModel : PageModel
     {
         public Pageniation Category { get; set; }

@@ -25,15 +25,17 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             CreatView = new();
             creatMenu = new();
         }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            CreatView.CategorySelectItems = _applicationCategory.GetNameCategories().Result.Select(x =>
+            var seletcCategory = await _applicationCategory.GetNameCategories();
+            CreatView.CategorySelectItems = seletcCategory.Select(x =>
                 new SelectListItem
                 {
                     Text = x.Name,
                     Value = x.GUID
                 }).ToList();
-            CreatView.FoodTypeSelectItems = _applicationFood.GetTypesFood().Result.Select(x =>
+            var selectFood = await _applicationFood.GetTypesFood();
+            CreatView.FoodTypeSelectItems = selectFood.Select(x =>
                 new SelectListItem
                 {
                     Text = x.Name,

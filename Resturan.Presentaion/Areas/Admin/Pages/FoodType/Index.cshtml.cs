@@ -10,7 +10,6 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 {
-    [ValidationModelState]
 
     public class IndexModel : PageModel
     {

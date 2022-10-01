@@ -26,6 +26,7 @@ namespace Resturan.Application
             MenuItemModel model = new(dto.Name!, dto.Descriptaion!, dto.Image!, dto.Price!, dto.FoodTypeName!, dto.CategoryName!);
             await _unitOfWork!.MenuItemRepository.AddAsync(model);
             _unitOfWork.Save();
+            _unitOfWork.Dispose();
         }
 
         public async Task<Pageniation> GetAllItems(Pageniation pg)
@@ -49,8 +50,32 @@ namespace Resturan.Application
             var item = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.GUId, false);
             if (item == null) return false;
            var result = _unitOfWork.MenuItemRepository.Delete(item);
-           if (result != false) _unitOfWork.Save();
+           if (result != false){ _unitOfWork.Save(); _unitOfWork.Dispose(); }
            return result;
+        }
+
+        public async Task<MenuItemDTO?> getItem(string id)
+        {
+            var result = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => new MenuItemDTO
+            {
+                Id = x.Guid,
+                Name = x.Name,
+                Price = x.Price,
+                Image = x.Image,
+                Descriptaion = x.Descriptaion,
+            }, x => x.Guid == id);
+            return result;
+        }
+
+        public async Task<bool> UpdateItem(UpdateMenuItemDTO dto)
+        {
+            var model = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.Id, false);
+            if (model == null) return false;
+            model.Update(dto.Name!,dto.Descriptaion!,dto.Image!,dto.Price!,dto.FoodTypeName!,dto.CategoryName!);
+             _unitOfWork.MenuItemRepository.Update(model);
+             _unitOfWork.Save();
+             _unitOfWork.Dispose();
+             return true;
         }
     }
 }

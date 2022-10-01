@@ -47,7 +47,7 @@
                 <td class="text-center align-middle">@item.FoodTypeName</td>
                 <td class="text-center align-middle">
                     <div class="w-50 btn-group justify-content-center">
-                        <a asp-page="./Edit" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
+                        <a asp-page="./Update" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
                             <i class="bi  bi-pencil-square "></i>
                         </a>
                         <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
