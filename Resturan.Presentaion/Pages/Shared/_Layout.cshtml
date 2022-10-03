@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Resturan.Presentaion</title>
     <link rel="stylesheet" href="~/css/BootsWatch.css" />
-    @await RenderSectionAsync("cdn",false)
-    @await RenderSectionAsync("icon",false)
+    
 </head>
 <body>
 <header>
@@ -17,7 +16,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Admin" asp-page="/Category/Index">Category</a>
@@ -29,13 +28,12 @@
                         <a class="nav-link text-light" asp-area="Admin" asp-page="/Menu/Index">Menu Item</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div>
     </nav>
 </header>
 <div class="container">
     <main role="main" class="pb-3">
-        <partial name="_Notification" />
         @RenderBody()
     </main>
 </div>
@@ -43,6 +41,5 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>

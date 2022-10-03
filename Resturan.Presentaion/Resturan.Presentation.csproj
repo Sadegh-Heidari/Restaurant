@@ -19,9 +19,6 @@
 		<ProjectReference Include="..\Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Pages\Shared\" />
-	</ItemGroup>
-	<ItemGroup>
 		<Content Update="wwwroot\css\bootstrap-icons-1.9.1\bootstrap-icons.css">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

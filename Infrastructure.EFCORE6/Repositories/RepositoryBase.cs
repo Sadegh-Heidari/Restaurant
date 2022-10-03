@@ -142,6 +142,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             
             return  dbset.Count();
         }
+
     }
 
 }

@@ -20,7 +20,7 @@ namespace Resturan.Application
 
         public async Task<Pageniation> GetAllCategory(Pageniation pg)
         {
-
+            
             pg.category = await _unitOfWork.CategoryRepository.GetAllAsync(x => new CategoryDTO()
             {
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
