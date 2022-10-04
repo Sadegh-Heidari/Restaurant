@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Resturan.Application;
+using Resturan.Application.Query;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO;
 using Resturan.Application.Service.DTO.Category;
@@ -21,6 +22,7 @@ namespace Resturan.Infrastructure.Service
             service.AddScoped<IApplicationFoodType, ApplicationFoodType>();
             service.AddScoped<IRepositoryMenuItem, RepositoryMenuItem>();
             service.AddScoped<IApplicationMenuItem, ApplicationMenuItem>();
+            service.AddScoped<IApplicationQuery, ApplicationQuery>();
             service.AddDbContext<ApplicationContext>(x =>
                 x.UseSqlServer(connection));
         }

@@ -5,5 +5,5 @@ namespace Resturan.Application.Query;
 
 public interface IApplicationQuery
 {
-    Task<IEnumerable<>> GetCustomerQuery<Tout>()
+    Task<IEnumerable<CustomerDto>> GetCustomerQuery();
 }

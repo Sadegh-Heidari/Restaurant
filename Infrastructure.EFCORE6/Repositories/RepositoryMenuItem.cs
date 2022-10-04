@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,10 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             }
             return false;
         }
-        public async Task<IEnumerable<Tout>> GetCustomer<Tout>(Expression<Func<MenuItemModel, Tout>> select, Expression<Func<MenuItemModel, bool>> where, Func<IQueryable<MenuItemModel>,IOrderedQueryable<Tout>> orderby, string? Include = null)
+        public async Task<IEnumerable<Tout>> GetCustomer<Tout>(Expression<Func<MenuItemModel, Tout>> select, Func<IQueryable<MenuItemModel>, IOrderedQueryable<MenuItemModel>> orderby, Expression<Func<MenuItemModel, bool>>? where=null, string? Include = null)
         {
             IQueryable<MenuItemModel> query = _context.Set<MenuItemModel>();
+            if(where != null)
             query = query.Where(where);
             if (Include != null)
             {
@@ -38,9 +40,9 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
                 }
             }
 
-            query.Select(select);
-            var result = orderby(query);
-            return result;
+            query = orderby(query);
+            var result =  query.AsNoTracking().Select(select);
+           return await result.ToListAsync();
         }
     }
 }
