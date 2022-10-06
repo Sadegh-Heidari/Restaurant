@@ -22,6 +22,7 @@ namespace Resturan.Presentation.Controllers
         [HttpGet]
         public async Task<bool> Delete([FromQuery] string id)
         {
+            if (id == null) return false;
             var result = await _applicationMenu.DeleteItem(new DeleteMenuItemDTO
             {
                 GUId = id

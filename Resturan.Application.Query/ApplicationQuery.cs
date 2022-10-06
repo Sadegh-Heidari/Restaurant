@@ -22,9 +22,25 @@ namespace Resturan.Application.Query
                     FoodTypeName = x.FoodType.Name,
                     Image = x.Image,
                     Name = x.Name,
-                    Price = x.Price
+                    Price = x.Price,
+                    id = x.Guid
                 }, 
                 c => c.OrderBy(x => x.Category.DisplayOrder), x => x.IsDeleted == false && x.Category.IsDeleted == false && x.FoodType.IsDeleted == false, "Category,FoodType");
+            return result;
+        }
+
+        public async Task<CustomerDto?> GetCustomerById(string id)
+        {
+            var result = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => new CustomerDto
+            {
+                id = x.Guid,
+                Price = x.Price,
+                Image = x.Image,
+                CategoryName = x.Category.Name,
+                FoodTypeName = x.FoodType.Name,
+                Description = x.Descriptaion,
+                Name = x.Name
+            }, x => x.Guid == id, true, "Category,FoodType");
             return result;
         }
     }

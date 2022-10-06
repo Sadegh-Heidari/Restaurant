@@ -171,6 +171,9 @@
   <data name="NotFound" xml:space="preserve">
     <value>Is Not Found</value>
   </data>
+  <data name="OrderRang" xml:space="preserve">
+    <value>Please select a count between 1 and 100</value>
+  </data>
   <data name="PriceRange" xml:space="preserve">
     <value>Price should be between $1 and $1000</value>
   </data>

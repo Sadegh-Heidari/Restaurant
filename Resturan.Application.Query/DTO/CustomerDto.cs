@@ -8,6 +8,7 @@ namespace Resturan.Application.Query.DTO
 {
     public class CustomerDto
     {
+        public string? id { get; set; }
         public string? CategoryName { get; set; }
         public string? FoodTypeName { get; set; }
         public string? Name { get; set; }

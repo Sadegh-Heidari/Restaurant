@@ -1,6 +1,9 @@
+using System.Drawing;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualBasic.CompilerServices;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.MenuItem;
 using Resturan.Infrastructure.Tools.Resource;
@@ -10,6 +13,7 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu
 {
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public class UpdateModel : PageModel
     {
         private IApplicationMenuItem _applicationMenu { get; }

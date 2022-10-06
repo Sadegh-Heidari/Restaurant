@@ -31,6 +31,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseCsp(option =>
+{
+    option.ScriptSources(d => d.Self().CustomSources("https://cdn.tiny.cloud/")).ScriptSources(x=>x.UnsafeInline());
+});
 app.MapRazorPages();
 app.MapControllers();
 app.Run();

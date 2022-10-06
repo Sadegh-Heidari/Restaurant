@@ -29,11 +29,12 @@
                                     <p> @Html.Raw(item.Description)</p>
                                 </div>
                                 <div class="col-12 p-1">
-                                    <a class="btn btn-dark form-control btn-sm p-2" style="height: 40px">View Details</a>
+                                    <a asp-page="./Detail" asp-route-food="@item.id" class="btn btn-dark form-control btn-sm p-2" style="height: 40px">View Details</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 }
             </div>
         </div>

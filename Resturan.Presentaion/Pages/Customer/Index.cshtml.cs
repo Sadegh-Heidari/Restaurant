@@ -8,7 +8,7 @@ namespace Resturan.Presentation.Pages.Customer
     public class IndexModel : PageModel
     {
         private IApplicationQuery _applicationQuery { get; }
-        public ILookup<string,CustomerDto> Customer { get; set; }
+        public IEnumerable<IGrouping<string?,CustomerDto?>>? Customer { get; set; }
         public IndexModel(IApplicationQuery applicationQuery)
         {
             _applicationQuery = applicationQuery;
@@ -18,7 +18,7 @@ namespace Resturan.Presentation.Pages.Customer
         public async Task OnGet()
         {
             var result = await _applicationQuery.GetCustomerQuery();
-            Customer = result.ToLookup(x=>x.CategoryName);
+            Customer = result?.GroupBy(x=>x.CategoryName);
         }
     }
 }

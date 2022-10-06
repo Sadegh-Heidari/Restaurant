@@ -19,6 +19,7 @@ namespace Resturan.Presentation.Controllers
         [HttpGet]
         public async Task<bool> Delete([FromQuery] string id)
         {
+            if (id == null) return false;
            var result = await _applicationCategory.Update(new DeleteCategoryDTO()
             {
                 GUID = id
@@ -28,6 +29,7 @@ namespace Resturan.Presentation.Controllers
 
         public async Task<bool> Active([FromQuery] string id)
         {
+            if (id == null) return false;
             var result = await _applicationCategory.Update(new ActiveCategoryDTO
             {
                 GUID = id

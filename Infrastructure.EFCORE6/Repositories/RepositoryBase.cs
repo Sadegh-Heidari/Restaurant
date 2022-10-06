@@ -61,7 +61,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 query = query.AsNoTracking().Where(Where);
             }
-            
+
             if (Include != null)
             {
                 foreach (var item in Include.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -72,10 +72,8 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
             var skip = (page - 1) * pagesize;
             var result = query.AsNoTracking().Select(Select).Skip(skip).Take(pagesize);
-            return result;
-            //var result = Select != null && Where != null
-            //    ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).ToListAsync()
-            //    : await _context.Set<TEntity>().AsNoTracking().Select(Select!).ToListAsync();
+            return await result.ToListAsync();
+           
 
         }
 
@@ -99,8 +97,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
             return result;
 
-            //var result = AsNoTracking == true ? await _context.Set<TEntity>().AsNoTracking().Where(Where).FirstOrDefaultAsync() :
-            //    await _context.Set<TEntity>().Where(Where).FirstOrDefaultAsync();
+            
         }
 
         public virtual async Task AddAsync(TEntity entity)
@@ -115,7 +112,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
-        public virtual async Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true)
+        public virtual async Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true, string? include = null)
         {
 
             IQueryable<TEntity> query = dbset;
@@ -124,6 +121,13 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
                 query = query.AsNoTracking();
             }
 
+            if (include != null)
+            {
+                foreach (var item in include.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(item);
+                }
+            }
             if (Where != null)
             {
                 query = query.Where(Where);
@@ -131,16 +135,12 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
             var result = await query.Select(Select).FirstOrDefaultAsync();
             return result;
-            //var result =   AsNoTracking == true
-            //    ? await _context.Set<TEntity>().AsNoTracking().Where(Where).Select(Select).FirstOrDefaultAsync()
-            //    : await _context.Set<TEntity>().Where(Where).Select(Select).FirstOrDefaultAsync();
-            //return result!;
         }
 
         public int GetCount()
         {
-            
-            return  dbset.Count();
+
+            return dbset.Count();
         }
 
     }

@@ -223,6 +223,15 @@ namespace Resturan.Infrastructure.Tools.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a count between 1 and 100.
+        /// </summary>
+        public static string OrderRang {
+            get {
+                return ResourceManager.GetString("OrderRang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price should be between $1 and $1000.
         /// </summary>
         public static string PriceRange {
