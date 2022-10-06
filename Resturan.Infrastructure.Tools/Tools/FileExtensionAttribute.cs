@@ -14,7 +14,7 @@ namespace Resturan.Infrastructure.Tools.Tools
             supportedFiles = new()
             {
                 new Record("jpeg", "ff,d8,ff,e0"),
-                new Record("jpg", "ff,d8,ff,e0"),
+                new Record("jpg", "FF,D9,FF,E8"),
                 new Record("png", "89,50,4e,47,0d,0a,1a,0a"),
             };
             sniffer = new();
@@ -32,7 +32,7 @@ namespace Resturan.Infrastructure.Tools.Tools
         private byte[] ReadFileHead(IFormFile file)
         {
             using var fs = new BinaryReader(file.OpenReadStream());
-            var bytes = new byte[20];
+            var bytes = new byte[200];
             fs.Read(bytes, 0, 20);
             return bytes;
         }

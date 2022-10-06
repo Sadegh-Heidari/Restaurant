@@ -46,7 +46,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                 TempData["Error"] = $"{ErrorMessagesResource.CategoryOrFoodTypeNull}";
                 return RedirectToPage("./Index");
             }
-
+            
             return Page();
         }
         public async Task<IActionResult> OnPost([FromServices] IWebHostEnvironment _environment, [FromServices] IApplicationMenuItem _applicationMenu)
@@ -66,6 +66,8 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                         Text = x.Name,
                         Value = x.Id
                     }).ToList();
+                if (CreatView.Image != null)
+                    CreatView.Base64Img = await ConvertImgToBase64String.Base64StringAsync(CreatView.Image.OpenReadStream());
                 return Page();
             }
             var pathImage = await UploadImage.Send(CreatView.Image!, "MenuItem",_environment.WebRootPath);

@@ -35,6 +35,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu.ViewModel
 
         public List<SelectListItem>? FoodTypeSelectItems { get; set; }
         public List<SelectListItem>? CategorySelectItems { get; set; }
+        public string? Base64Img { get; set; }
 
         public void Dispose()
         {

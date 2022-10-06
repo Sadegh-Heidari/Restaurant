@@ -7,6 +7,5 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu.ViewModel
         [Required]
         public string? Id { get; set; }
 
-        public string? ImagePath { get; set; }
     }
 }

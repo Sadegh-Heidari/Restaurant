@@ -13,19 +13,20 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu
 {
-    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public class UpdateModel : PageModel
     {
         private IApplicationMenuItem _applicationMenu { get; }
         private IApplicationCategory _applicationCategory { get; }
         private IApplicationFoodType _applicationFood { get; }
-       [BindProperty] public UpdateViewModel UpdateView { get; set; }
-       private UpdateMenuItemDTO updateMenu { get; set; }
-        public UpdateModel(IApplicationMenuItem applicationMenu, IApplicationFoodType applicationFood, IApplicationCategory applicationCategory)
+        private IWebHostEnvironment _webHostEnvironment { get; }
+        [BindProperty] public UpdateViewModel UpdateView { get; set; }
+        private UpdateMenuItemDTO updateMenu { get; set; }
+        public UpdateModel(IApplicationMenuItem applicationMenu, IApplicationFoodType applicationFood, IApplicationCategory applicationCategory, IWebHostEnvironment webHostEnvironment)
         {
             _applicationMenu = applicationMenu;
             _applicationFood = applicationFood;
             _applicationCategory = applicationCategory;
+            _webHostEnvironment = webHostEnvironment;
             updateMenu = new();
             UpdateView = new();
         }
@@ -36,9 +37,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             if (item != null)
             {
                 UpdateView.Id = item.Id!;
-                UpdateView.Name=item.Name;
+                UpdateView.Name = item.Name;
                 UpdateView.Price = item.Price;
-                UpdateView.ImagePath = item.Image;
+                UpdateView.Base64Img = item.Image;
                 UpdateView.Description = item.Descriptaion;
                 var seletcCategory = await _applicationCategory.GetNameCategories();
                 UpdateView.CategorySelectItems = seletcCategory.Select(x =>
@@ -60,11 +61,14 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     return RedirectToPage("./Index");
                 }
 
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, UpdateView.Base64Img!);
+                UpdateView.Base64Img = await ConvertImgToBase64String.Base64StringAsync(path);
                 return Page();
             }
             TempData["Error"] = $"Item Menu {ErrorMessagesResource.NotFound}";
-            return RedirectToPage("./Index"); }
-        public async Task<IActionResult> OnPost([FromServices] IWebHostEnvironment _environment)
+            return RedirectToPage("./Index");
+        }
+        public async Task<IActionResult> OnPost()
         {
 
             if (!ModelState.IsValid)
@@ -81,9 +85,15 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                         Text = x.Name,
                         Value = x.Id
                     }).ToList();
+                if (UpdateView.Image != null)
+                {
+                    UpdateView.Base64Img = await ConvertImgToBase64String.Base64StringAsync(UpdateView.Image.OpenReadStream());
+                    UpdateView.Image = UpdateView.Image;
+                }
+
                 return Page();
             }
-            var pathImage = await UploadImage.Send(UpdateView.Image!, "MenuItem", _environment.WebRootPath);
+            var pathImage = await UploadImage.Send(UpdateView.Image!, "MenuItem", _webHostEnvironment.WebRootPath);
             updateMenu.Name = UpdateView.Name;
             updateMenu.CategoryName = UpdateView.CategoryId;
             updateMenu.Descriptaion = UpdateView.Description;
@@ -91,8 +101,8 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             updateMenu.Image = pathImage;
             updateMenu.Price = UpdateView.Price;
             updateMenu.Id = UpdateView.Id!;
-            var result =  await _applicationMenu.UpdateItem(updateMenu);
-            if(result) TempData["success"] = $"Menu Item {ErrorMessagesResource.EditedSuccessfully}";
+            var result = await _applicationMenu.UpdateItem(updateMenu);
+            if (result) TempData["success"] = $"Menu Item {ErrorMessagesResource.EditedSuccessfully}";
             else
                 TempData["success"] = $"Menu Item {ErrorMessagesResource.EditedUnuccessfully}";
             return RedirectToPage("./Index");
