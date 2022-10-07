@@ -87,7 +87,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     }).ToList();
                 if (UpdateView.Image != null)
                 {
-                    UpdateView.Base64Img = await ConvertImgToBase64String.Base64StringAsync(UpdateView.Image.OpenReadStream());
+                    UpdateView.Base64Img =  ConvertImgToBase64String.Base64StringAsync(UpdateView.Image.OpenReadStream());
                     UpdateView.Image = UpdateView.Image;
                 }
 

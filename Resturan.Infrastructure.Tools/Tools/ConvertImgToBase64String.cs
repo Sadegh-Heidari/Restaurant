@@ -15,16 +15,14 @@ namespace Resturan.Infrastructure.Tools.Tools
             var base64 = Convert.ToBase64String(img);
             return base64;
         }
-        public static async Task<string> Base64StringAsync(Stream stream)
+        public static string Base64StringAsync(Stream stream)
         {
-            var result = await Task.Run(() =>
-            {
+           
                 var ste = new BinaryReader(stream);
                 var byt = ste.ReadBytes((int)stream.Length);
                 var base64 = Convert.ToBase64String(byt);
                 return base64;
-            });
-            return result;
+           
         }
     }
 }

@@ -1,3 +1,4 @@
+using bootstraper;
 using Microsoft.EntityFrameworkCore;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.Service;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddService(builder.Configuration.GetConnectionString("sql"));
-
+builder.Services.AddAccountServices(builder.Configuration.GetConnectionString("sql"));
 var app = builder.Build();
 app.Services.CreatDataBase();
 // Configure the HTTP request pipeline.
