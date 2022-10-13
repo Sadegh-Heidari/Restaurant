@@ -16,7 +16,7 @@
 		<PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\bootstraper\bootstraper.csproj" />
+		<ProjectReference Include="..\Acc.Bootstraper\Acc.Bootstraper.csproj" />
 		<ProjectReference Include="..\Resturan.Infrastructure.Service\Resturan.Infrastructure.Service.csproj" />
 		<ProjectReference Include="..\Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj" />
 	</ItemGroup>

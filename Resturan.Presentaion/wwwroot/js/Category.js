@@ -11,7 +11,7 @@ function Excute(Element) {
         success: function (response) {
             if (response == true) {
                 if (span == "Delete") {
-                    Element.getAttribute("data-val-status", "Delete");
+                    Element.setAttribute("data-val-status", "Delete");
                     Element.firstElementChild.setAttribute("class", "bi bi-check-square-fill");
                     Element.setAttribute("class", "");
                     Element.setAttribute("class", "btn btn-outline-success ms-3 rounded-end");

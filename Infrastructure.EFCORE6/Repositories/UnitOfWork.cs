@@ -10,7 +10,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             _context = context;
         }
 
-        private ApplicationContext _context { get; }
+        private ApplicationContext? _context { get;  }
 
         private IRepositoryFoodType? _foodTypeRepository;
         private IRepositoryCategory? _categoryRepository;
@@ -20,7 +20,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             get
             {
                 if (_categoryRepository == null)
-                    _categoryRepository = new RepositoryCategory(_context);
+                    _categoryRepository = new RepositoryCategory(_context!);
                     return _categoryRepository;
             }
         }
@@ -29,7 +29,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         {
             get
             {
-                if(_foodTypeRepository == null) _foodTypeRepository = new RepositoryFoodType(_context);
+                if(_foodTypeRepository == null) _foodTypeRepository = new RepositoryFoodType(_context!);
                 return _foodTypeRepository;
             }
         }
@@ -40,7 +40,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 if (_menuItemRepository == null)
                 {
-                    _menuItemRepository = new RepositoryMenuItem(_context);
+                    _menuItemRepository = new RepositoryMenuItem(_context!);
                 }
 
                 return _menuItemRepository;
@@ -49,12 +49,30 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         public void Dispose()
         {
-            if(_context != null) _context.Dispose();
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         public void Save()
         {
-            _context.SaveChanges();
+            _context!.SaveChanges();
         }
+        private bool isDisposed = false;
+
+        private  void Dispose(bool disposing)
+        {
+            if(isDisposed) return;
+
+            
+                if (disposing)
+                {
+                    if (_context != null)
+                    {
+                        _context.Dispose();
+                    }
+                }
+            
+            this.isDisposed = true;
+        }
+
     }
 }

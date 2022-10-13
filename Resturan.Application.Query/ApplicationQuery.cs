@@ -26,6 +26,7 @@ namespace Resturan.Application.Query
                     id = x.Guid
                 }, 
                 c => c.OrderBy(x => x.Category.DisplayOrder), x => x.IsDeleted == false && x.Category.IsDeleted == false && x.FoodType.IsDeleted == false, "Category,FoodType");
+            _unitOfWork.Dispose();
             return result;
         }
 
@@ -41,6 +42,7 @@ namespace Resturan.Application.Query
                 Description = x.Descriptaion,
                 Name = x.Name
             }, x => x.Guid == id, true, "Category,FoodType");
+            _unitOfWork.Dispose();
             return result;
         }
     }

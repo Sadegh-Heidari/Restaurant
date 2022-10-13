@@ -39,7 +39,6 @@ namespace Resturan.Application
             var entity = new CategoryModel(category.DisplayOrder, category.Name!);
             await _unitOfWork.CategoryRepository.AddAsync(entity);
             _unitOfWork.Save();
-            _unitOfWork.Dispose();
         }
 
         public async Task<bool> Update<T>(T entity) where T : CategoryDTO
@@ -51,7 +50,6 @@ namespace Resturan.Application
             else if (typeof(T) == typeof(ActiveCategoryDTO)) model.Active();
             _unitOfWork.CategoryRepository.Update(model);
             _unitOfWork.Save();
-            _unitOfWork.Dispose();
             return true;
         }
 
@@ -77,9 +75,6 @@ namespace Resturan.Application
             return result;
         }
 
-        public async Task<int> Count()
-        {
-            return  _unitOfWork.CategoryRepository.GetCount();
-        }
+      
     }
 }

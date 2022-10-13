@@ -26,7 +26,6 @@ namespace Resturan.Application
             MenuItemModel model = new(dto.Name!, dto.Descriptaion!, dto.Image!, dto.Price!, dto.FoodTypeName!, dto.CategoryName!);
             await _unitOfWork!.MenuItemRepository.AddAsync(model);
             _unitOfWork.Save();
-            _unitOfWork.Dispose();
         }
 
         public async Task<Pageniation> GetAllItems(Pageniation pg)
@@ -41,7 +40,6 @@ namespace Resturan.Application
                 Name = x.Name,
             },Include:"Category,FoodType",page:pg.PageSize,pagesize:pg.PageNumber);
             pg.Count = _unitOfWork.MenuItemRepository.GetCount();
-
             return pg;
         }
 
@@ -50,7 +48,7 @@ namespace Resturan.Application
             var item = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.GUId, false);
             if (item == null) return false;
            var result = _unitOfWork.MenuItemRepository.Delete(item);
-           if (result != false){ _unitOfWork.Save(); _unitOfWork.Dispose(); }
+            _unitOfWork.Save();
            return result;
         }
 
@@ -74,7 +72,6 @@ namespace Resturan.Application
             model.Update(dto.Name!,dto.Descriptaion!,dto.Image!,dto.Price!,dto.FoodTypeName!,dto.CategoryName!);
              _unitOfWork.MenuItemRepository.Update(model);
              _unitOfWork.Save();
-             _unitOfWork.Dispose();
              return true;
         }
     }

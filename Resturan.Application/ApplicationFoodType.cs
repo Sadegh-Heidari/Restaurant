@@ -39,7 +39,6 @@ namespace Resturan.Application
             FoodTypeModel model = new(category.Name!);
            await _unitOfWork.FoodTypeRepository.AddAsync(model);
            _unitOfWork.Save();
-            _unitOfWork.Dispose();
         }
 
         public async Task<bool> Update<T>(T entity) where T:FoodTypeDTO
@@ -51,7 +50,6 @@ namespace Resturan.Application
             else if (typeof(T)==typeof(ActiveFoodTypeDTO))model.Active();
             _unitOfWork.FoodTypeRepository.Update(model);
             _unitOfWork.Save();
-            _unitOfWork.Dispose();
             return true;
         }
 

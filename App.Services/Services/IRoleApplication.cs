@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Acc.Services.DTO;
+
+namespace Acc.Services.Services
+{
+    public interface IRoleApplication
+    {
+        Task<bool> CreatRole(Role role);
+    }
+}
