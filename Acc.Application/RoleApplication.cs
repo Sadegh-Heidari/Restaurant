@@ -6,23 +6,28 @@ using System.Threading.Tasks;
 using Acc.Domain.Services;
 using Acc.Services.DTO;
 using Acc.Services.Services;
+using AccResources;
 
 namespace Acc.Application
 {
     public class RoleApplication:IRoleApplication
     {
         private IAccUnitOfWork _unitOfWork { get; }
-        public RoleApplication(IAccUnitOfWork unitOfWork)
+        private IOperationValue _operationValue { get; }
+        public RoleApplication(IAccUnitOfWork unitOfWork, IOperationValue operationValue)
         {
             _unitOfWork = unitOfWork;
+            _operationValue = operationValue;
         }
-        public async Task<bool> CreatRole(Role role)
+        public async Task<IOperationValue> CreatRole(Role role)
         {
             var existRole =
-                await _unitOfWork.RoleAccRepository.IsExistRole(x => x.RoleName.ToLower() == role.Name.ToLower());
-            if (existRole == true) return false;
-             await _unitOfWork.RoleAccRepository.AddAsync(new Domain.Models.Role(role.Name));
-             return true;
+                await _unitOfWork.RoleAccRepository.IsExistRole(x => x.RoleName.ToLower() == role.Name!.ToLower());
+            if (existRole == true) return _operationValue.ShowResult(false, AccountResource.RoleIsExist);
+             await _unitOfWork.RoleAccRepository.AddAsync(new Domain.Models.Role(role.Name!));
+             _unitOfWork.SaveChanges();
+
+            return _operationValue.ShowResult(true, AccountResource.RoleAdded);
         }
     }
 }

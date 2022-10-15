@@ -7,9 +7,17 @@ using Resturan.Presentation.Middelware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddService(builder.Configuration.GetConnectionString("sql"));
-builder.Services.AccService(builder.Configuration.GetConnectionString("sql"));
+builder.Services.AddRazorPages(op =>
+{
+    op.Conventions.AuthorizeAreaFolder("Admin", "/","AccessArea");
+});
+var ConnectionStrign = builder.Configuration["ConnectionString"];
+builder.Services.AddService(ConnectionStrign);
+builder.Services.AccService(ConnectionStrign, "/Reg/Login", "/Errors/AccessDenied/Access");
+builder.Services.AddAuthorization(op =>
+{
+    op.AddPolicy("AccessArea", x=>x.RequireRole("Admin"));
+});
 //builder.Services.AddAccountServices(builder.Configuration.GetConnectionString("sql"));
 var app = builder.Build();
 app.Services.CreatDataBase();
@@ -23,19 +31,20 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapGet("/", async (context) =>
 {
-     context.Response.Redirect("/Customer");
+    context.Response.Redirect("/Customer");
 });
+
 app.UseErrorNotFound();
-
 app.UseStaticFiles();
-
+app.UseAuthentication();
+app.UseCheckIpClient();
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseAuthentication();
+
 app.UseCsp(option =>
 {
-    option.ScriptSources(d => d.Self().CustomSources("https://cdn.tiny.cloud/")).ScriptSources(x=>x.UnsafeInline());
+    option.ScriptSources(d => d.Self().CustomSources("https://cdn.tiny.cloud/")).ScriptSources(x => x.UnsafeInline());
 });
 app.MapRazorPages();
 app.MapControllers();

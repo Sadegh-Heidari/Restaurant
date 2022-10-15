@@ -46,7 +46,6 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                 TempData["Error"] = $"{ErrorMessagesResource.CategoryOrFoodTypeNull}";
                 return RedirectToPage("./Index");
             }
-            
             return Page();
         }
         public async Task<IActionResult> OnPost([FromServices] IWebHostEnvironment _environment, [FromServices] IApplicationMenuItem _applicationMenu)

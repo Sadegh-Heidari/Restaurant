@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="~/AuthenticationStyles/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/AuthenticationStyles/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AuthenticationStyles/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AuthenticationStyles/style.css" />
+
+</head>
+<body class="ltr">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+
+<partial name="_ValidationScriptsPartial"/>
+</body>
+</html>
+

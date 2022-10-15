@@ -9,6 +9,6 @@ namespace Acc.Services.Services
 {
     public interface IRoleApplication
     {
-        Task<bool> CreatRole(Role role);
+        Task<IOperationValue> CreatRole(Role role);
     }
 }

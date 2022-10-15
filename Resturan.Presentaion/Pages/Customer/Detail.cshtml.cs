@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Query;
@@ -6,6 +7,7 @@ using Resturan.Presentation.Pages.Customer.ViewModel;
 
 namespace Resturan.Presentation.Pages.Customer
 {
+    [Authorize]
     [ValidationModelState]
     public class DetailModel : PageModel
     {

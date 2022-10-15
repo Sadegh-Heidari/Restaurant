@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AccContext))]
-    [Migration("20221011083258_initial")]
+    [Migration("20221014183932_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

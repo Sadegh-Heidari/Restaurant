@@ -17,10 +17,14 @@ namespace Acc.Infrastructure.EFCore.Repository
         {
         }
 
-        public async Task<Role?> FindRoleAsync(Expression<Func<Role, bool>> where)
+        public async Task<Role?> FindRoleAsync(Expression<Func<Role, bool>> where, bool AsNoTracking = false)
         {
             IQueryable<Role> query = _context.Set<Role>();
             query= query.Where(where);
+            if (AsNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
             var result = await query.FirstOrDefaultAsync();
             return result;
         }

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Acc.Services.DTO;
+﻿using Acc.Services.DTO;
 
 namespace Acc.Services.Services
 {
     public interface IUserApplication
     {
-        Task<bool> CreatUserAsync(CreatUser userDTO);
-        Task<bool> AddRoleUserAsync(UserDTO userDTO,string RoleName);
-        Task<UserDTO?> FindUserAsync(UserDTO userDTO);
-
+        Task<IOperationValue> CreatUserAsync(UserDTO userDTO);
+        Task<IOperationValue> AddRoleUserAsync(UserDTO userDTO,string RoleName);
+        Task<UserDTO?> FindUserByIdAsync(UserDTO userDTO);
+        Task<IEnumerable<Role>> GetUserRole(UserDTO userDto);
+        Task<UserDTO?> FindUserByEmailAsync(UserDTO userDto);
+        Task<UserDTO?> FindUserByPhoneNumberAsync(UserDTO userDto);
+        Task<IOperationValue> IsUserExist(UserDTO userDto);
     }
 }

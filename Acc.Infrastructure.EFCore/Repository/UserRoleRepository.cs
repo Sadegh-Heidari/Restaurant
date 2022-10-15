@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Acc.Domain.Models;
@@ -32,6 +33,13 @@ namespace Acc.Infrastructure.EFCore.Repository
             if (await IsExistUserRoleAsync(userRole)) return false;
             await _context.UserRoleDb.AddAsync(userRole);
             return true;
+        }
+        public async Task<IEnumerable<T>> GetUserRole<T>(Expression<Func<UserRole, T>> select, Expression<Func<UserRole, bool>> where)
+        {
+            IQueryable<UserRole> query = _context.Set<UserRole>();
+            query = query.Where(where).AsNoTracking();
+            var result = await query.Select(select).ToListAsync();
+            return result;
         }
     }
 }

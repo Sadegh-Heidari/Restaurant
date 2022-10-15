@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Acc.Services.DTO
 {
-    public class Role
+    public class Role:IDisposable
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

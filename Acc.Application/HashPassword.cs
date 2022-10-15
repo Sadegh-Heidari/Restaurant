@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Acc.Services.HashPassword;
-using static System.Net.Mime.MediaTypeNames;
-
+﻿using Acc.Services.HashPassword;
 namespace Acc.Application
 {
-    internal class HashPassword : IHashPassword
+    public class HashPassword : IHashPassword
     {
         public string Hash(string password)
         {
