@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Resturan.Presentation.Pages.Reg.ViewModel
 {
-    public class LoginViewModel
+    public class LoginViewModel:IDisposable
     {
         [DataType(DataType.EmailAddress)]
         [Required]
@@ -13,5 +13,9 @@ namespace Resturan.Presentation.Pages.Reg.ViewModel
         public string? Password { get; set; }
         public bool IsPersistent { get; set; } = false;
 
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

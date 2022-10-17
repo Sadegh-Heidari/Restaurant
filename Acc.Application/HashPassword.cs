@@ -40,5 +40,10 @@ namespace Acc.Application
             if (result == Hash) return true;
             return false;
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

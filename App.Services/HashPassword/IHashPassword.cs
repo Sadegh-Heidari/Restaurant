@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Acc.Services.HashPassword
 {
-    public interface IHashPassword
+    public interface IHashPassword:IDisposable
     {
         string Hash(string password);
         bool CheckPassword(string Hash,string Password);

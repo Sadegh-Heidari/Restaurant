@@ -11,5 +11,6 @@ namespace Acc.Domain.Services
     {
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
+        Task<int> GetCount();
     }
 }

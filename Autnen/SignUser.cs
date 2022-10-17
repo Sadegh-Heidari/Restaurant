@@ -120,5 +120,10 @@ namespace Autnen
 
             return result!;
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace Acc.Application
             this.ResultMessage = Message;
             return this;
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

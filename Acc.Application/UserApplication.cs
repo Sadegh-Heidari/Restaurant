@@ -114,5 +114,22 @@ namespace Acc.Application
 
             return _operationValue.ShowResult(false, AccountResource.UserIsNotExist);
         }
+
+        public async Task<Pagenition> GetUsers(Pagenition pg)
+        {
+            pg.users = await _unitOfWork.UserAccRepository.GetUsers(x => new UserDTO
+            {
+                UserName = x.UserName,
+                Id = x.Id,
+                Email = x.Email
+            }, pg.PageSize, pg.PageNumber,x=>x.UserName!=AccountResource.Administrator);
+            pg.Count = await _unitOfWork.UserAccRepository.GetCount();
+            return pg;
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

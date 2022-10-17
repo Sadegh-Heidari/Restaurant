@@ -1,0 +1,75 @@
+﻿@page
+@model Resturan.Presentation.Areas.Admin.Pages.Users.IndexModel
+@{
+}
+@addTagHelper *,LazZiya.TagHelpers
+@{
+    int PageNumber = 1;
+    int PageSize = 50;
+    int.TryParse(HttpContext.Request.Query["PageNumber"], out PageNumber);
+    int.TryParse(HttpContext.Request.Query["PageSize"], out PageSize);
+}
+@section icon
+    {
+
+    <link rel="stylesheet" href="~/css/bootstrap-icons-1.9.1/bootstrap-icons.min.css" />
+}
+    <div class="row pt-4">
+        <div class="col-6 mb-4">
+            <h2 class="text-primary">Users List</h2>
+        </div>
+
+    </div>
+
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-secondary">
+        @foreach (var item in Model.users.users)
+        {
+            <tr>
+                <td class="text-center align-middle">@item.UserName</td>
+                <td class="text-center align-middle">@item.Email</td>
+                <td class="text-center align-middle">
+                    <div class="w-50 btn-group justify-content-center">
+                        <a asp-page="./Edit" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
+                            <i class="bi  bi-pencil-square "></i>
+                        </a>
+                        <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+
+    </tbody>
+</table>
+<div>
+    <ul class="pagination">
+        <paging total-records="@((int)Model.users.Count)"
+                page-no="PageNumber==0?1:PageNumber"
+                page-size="PageSize==0?50:PageSize"
+                show-prev-next="true"
+                show-total-records="false"
+                show-total-pages="false"
+                show-gap="false"
+                show-first-last="false"
+                show-page-size-nav="false"
+                query-string-key-page-no="PageNumber"
+                query-string-key-page-size="PageSize">
+        </paging>
+    </ul>
+</div>
+@section Scripts
+    {
+
+}

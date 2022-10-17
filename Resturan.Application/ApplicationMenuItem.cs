@@ -39,7 +39,7 @@ namespace Resturan.Application
                 Price = x.Price,
                 Name = x.Name,
             },Include:"Category,FoodType",page:pg.PageSize,pagesize:pg.PageNumber);
-            pg.Count = _unitOfWork.MenuItemRepository.GetCount();
+            pg.Count = await _unitOfWork.MenuItemRepository.GetCount();
             return pg;
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Acc.Services.Services
 {
-    public interface IOperationValue
+    public interface IOperationValue : IDisposable
     {
         public bool IsSucessed { get; set; }
         public string ResultMessage { get; set; }

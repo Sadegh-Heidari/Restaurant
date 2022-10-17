@@ -29,7 +29,7 @@ namespace Resturan.Application
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
             }, pg.PageSize, pg.PageNumber);
-            pg.Count = _unitOfWork.CategoryRepository.GetCount();
+            pg.Count = await _unitOfWork.CategoryRepository.GetCount();
             var result = pg;
             return result;
         }

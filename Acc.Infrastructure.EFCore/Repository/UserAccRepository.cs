@@ -49,6 +49,13 @@ namespace Acc.Infrastructure.EFCore.Repository
             return result;
         }
 
-       
+        public async Task<IEnumerable<T>> GetUsers<T>(Expression<Func<Users, T>> select, int page, int pagesize, Expression<Func<Users, bool>> where)
+        {
+            IQueryable<Users> query = _context.Set<Users>();
+            query = query.Where(where);
+            query= query.ToPaged( pagesize,page);
+            var result = await query.Select(select).ToListAsync();
+            return result;
+        }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AccContext))]
-    [Migration("20221014183932_initial")]
+    [Migration("20221017130426_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,23 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "383cac8c-52db-4910-9d82-436ec592b223",
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "3062d373-692a-4719-af17-e539348cedf5",
+                            RoleName = "Kitchen"
+                        },
+                        new
+                        {
+                            Id = "7d873ea9-74df-417a-b56a-660d16d87a27",
+                            RoleName = "FrontDesk"
+                        });
                 });
 
             modelBuilder.Entity("Acc.Domain.Models.UserRole", b =>
@@ -84,6 +101,35 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c2fba437-1de8-440b-902d-8dda014454e0",
+                            Email = "Admin@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "Manager"
+                        },
+                        new
+                        {
+                            Id = "130447bc-a90b-418d-8e2c-fbc5a710dd80",
+                            Email = "Kitchen@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "Kitchen"
+                        },
+                        new
+                        {
+                            Id = "ec5575d0-b739-46f1-b91b-d30e26db1491",
+                            Email = "FrontDesk@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "FrontDesk"
+                        });
                 });
 
             modelBuilder.Entity("Acc.Domain.Models.UserRole", b =>

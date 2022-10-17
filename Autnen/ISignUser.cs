@@ -8,7 +8,7 @@ using Acc.Services.Services;
 
 namespace Autnen
 {
-    public interface ISignUser
+    public interface ISignUser:IDisposable
     {
         Task<IOperationValue> SignInAsync(UserDTO userDTO, bool IsPersistent = false);
         Task<IOperationValue> SignInWithPasswordAsync(UserDTO userDto, string Password, bool IsPersistent = false);

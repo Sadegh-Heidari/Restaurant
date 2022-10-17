@@ -3,6 +3,7 @@ using Acc.Infrastructure.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AccContext))]
-    partial class AccContextModelSnapshot : ModelSnapshot
+    [Migration("20221017130747_AddSeedUserRole")]
+    partial class AddSeedUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

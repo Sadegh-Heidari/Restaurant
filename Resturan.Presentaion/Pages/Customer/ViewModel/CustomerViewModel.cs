@@ -4,7 +4,7 @@ using Resturan.Infrastructure.Tools.Resource;
 
 namespace Resturan.Presentation.Pages.Customer.ViewModel
 {
-    public class CustomerViewModel
+    public class CustomerViewModel:IDisposable
     {
         public string? id { get; set; }
         public string? CategoryName { get; set; }
@@ -15,5 +15,10 @@ namespace Resturan.Presentation.Pages.Customer.ViewModel
         public string? Description { get; set; }
         [Range(1,100,ErrorMessageResourceType = typeof(ErrorMessagesResource),ErrorMessageResourceName = "OrderRang")]
         public int Count { get; set; }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

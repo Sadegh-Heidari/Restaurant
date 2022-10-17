@@ -21,7 +21,7 @@ namespace Resturan.Domain.Services
         Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where,
             bool AsNoTracking = true,string? include=null);
 
-        int GetCount();
+        Task<int> GetCount();
 
     }
 }

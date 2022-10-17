@@ -2,7 +2,7 @@
 
 namespace Resturan.Presentation.Pages.Reg.ViewModel
 {
-    public class RegisterViewModel
+    public class RegisterViewModel:IDisposable
     {
         
         [Display(Name = "Name")]
@@ -13,6 +13,8 @@ namespace Resturan.Presentation.Pages.Reg.ViewModel
         public string? Email { get; set; }
         [Display(Name = "Phone Number")]
         [Required]
+        
+        [DataType(DataType.PhoneNumber,ErrorMessage = "Entered phone format is not valid.")]    
         public string? PhoneNumber { get; set; }
         [DataType(DataType.Password)]
         [Required]
@@ -24,5 +26,10 @@ namespace Resturan.Presentation.Pages.Reg.ViewModel
         public string? ConfirmPassword { get; set; }
 
         public bool IsPersistent { get; set; } = false;
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

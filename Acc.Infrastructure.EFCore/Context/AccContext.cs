@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Acc.Domain.Models;
 using Acc.Infrastructure.EFCore.Mapping;
+using Acc.Infrastructure.EFCore.SeedData;
 using Microsoft.EntityFrameworkCore;
 
 namespace Acc.Infrastructure.EFCore.Context
@@ -23,6 +24,7 @@ namespace Acc.Infrastructure.EFCore.Context
         {
             var assembly = typeof(UserMapping).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
     }

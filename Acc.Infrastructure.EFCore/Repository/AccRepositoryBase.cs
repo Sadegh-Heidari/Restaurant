@@ -32,5 +32,12 @@ namespace Acc.Infrastructure.EFCore.Repository
                 _context.Set<TEntity>().Update(entity: entity);
             }
         }
+
+        public async Task<int> GetCount()
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            var result = await query.CountAsync();
+            return result;
+        }
     }
 }

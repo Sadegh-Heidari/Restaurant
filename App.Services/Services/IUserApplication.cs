@@ -2,7 +2,7 @@
 
 namespace Acc.Services.Services
 {
-    public interface IUserApplication
+    public interface IUserApplication:IDisposable
     {
         Task<IOperationValue> CreatUserAsync(UserDTO userDTO);
         Task<IOperationValue> AddRoleUserAsync(UserDTO userDTO,string RoleName);
@@ -11,5 +11,6 @@ namespace Acc.Services.Services
         Task<UserDTO?> FindUserByEmailAsync(UserDTO userDto);
         Task<UserDTO?> FindUserByPhoneNumberAsync(UserDTO userDto);
         Task<IOperationValue> IsUserExist(UserDTO userDto);
+        Task<Pagenition> GetUsers(Pagenition pg);
     }
 }

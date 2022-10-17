@@ -137,10 +137,10 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             return result;
         }
 
-        public int GetCount()
+        public async Task<int> GetCount()
         {
 
-            return dbset.Count();
+            return await dbset.CountAsync();
         }
 
     }

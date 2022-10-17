@@ -7,7 +7,7 @@ using Acc.Services.DTO;
 
 namespace Acc.Services.Services
 {
-    public interface IRoleApplication
+    public interface IRoleApplication : IDisposable
     {
         Task<IOperationValue> CreatRole(Role role);
     }

@@ -11,6 +11,8 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\Acc.Application\Acc.Application.csproj" />
 	  <ProjectReference Include="..\Acc.Domain\Acc.Domain.csproj" />
+	  <ProjectReference Include="..\App.Services\Acc.Services.csproj" />
 	</ItemGroup>
 </Project>

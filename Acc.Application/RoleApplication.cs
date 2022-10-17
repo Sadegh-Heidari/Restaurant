@@ -29,5 +29,10 @@ namespace Acc.Application
 
             return _operationValue.ShowResult(true, AccountResource.RoleAdded);
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }
