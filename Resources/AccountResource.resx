@@ -120,6 +120,12 @@
   <data name="Administrator" xml:space="preserve">
     <value>Manager</value>
   </data>
+  <data name="DeleteUserSuccessfully" xml:space="preserve">
+    <value>User Deleted Successfully</value>
+  </data>
+  <data name="DeleteUserUnSuccessfully" xml:space="preserve">
+    <value>User Deleted UnSuccessfully</value>
+  </data>
   <data name="Operation" xml:space="preserve">
     <value>Operation is not Successfully</value>
   </data>

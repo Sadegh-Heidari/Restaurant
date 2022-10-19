@@ -1,6 +1,8 @@
 ﻿@page
 @model Resturan.Presentation.Areas.Admin.Pages.Users.IndexModel
-@{
+@section cdn
+    {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
 @addTagHelper *,LazZiya.TagHelpers
 @{
@@ -29,7 +31,7 @@
                 <th scope="col" class="text-center">Status</th>
             </tr>
         </thead>
-        <tbody class="table-secondary">
+        <tbody class="table-secondary" id="wrapper">
         @foreach (var item in Model.users.users)
         {
             <tr>
@@ -37,11 +39,11 @@
                 <td class="text-center align-middle">@item.Email</td>
                 <td class="text-center align-middle">
                     <div class="w-50 btn-group justify-content-center">
-                        <a asp-page="./Edit" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
-                            <i class="bi  bi-pencil-square "></i>
+                        <a asp-page="./Addrole" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
+                            <i class="bi bi-pen"></i>
                         </a>
-                        <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
-                            <i class="bi bi-trash-fill"></i>
+                        <button id="@item.Id"  class="btn btn-outline-danger ms-3 rounded-end" >
+                            <i id="@item.Id" class="bi bi-trash-fill"></i>
                         </button>
 
                     </div>
@@ -71,5 +73,5 @@
 </div>
 @section Scripts
     {
-
+        <script src="~/js/UserManagment.js"></script>
 }

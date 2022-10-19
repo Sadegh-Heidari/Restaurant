@@ -30,7 +30,6 @@ namespace Acc.Infrastructure.EFCore.Repository
 
         public async Task<bool> AddUserRoleAsync(UserRole userRole)
         {
-            if (await IsExistUserRoleAsync(userRole)) return false;
             await _context.UserRoleDb.AddAsync(userRole);
             return true;
         }
@@ -40,6 +39,19 @@ namespace Acc.Infrastructure.EFCore.Repository
             query = query.Where(where).AsNoTracking();
             var result = await query.Select(select).ToListAsync();
             return result;
+        }
+
+        public async Task<IEnumerable<UserRole>> GetUserRole(Expression<Func<UserRole, bool>> where)
+        {
+            IQueryable<UserRole> query = _context.Set<UserRole>();
+            query = query.Where(where);
+            return await query.ToListAsync();
+        }
+
+        public bool DeleteUserRole(IEnumerable<UserRole> userRoles)
+        {
+            _context.Set<UserRole>().RemoveRange(userRoles);
+            return true;
         }
     }
 }

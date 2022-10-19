@@ -32,9 +32,7 @@ namespace Autnen
 
         public async Task<IOperationValue> SignInAsync(UserDTO userDTO, bool IsPersistent = false)
         {
-            //var user = await _userApplication.FindUserByEmailAsync(userDTO);
-            //if (user == null) return _operationValue.ShowResult(false, AccountResource.UserIsNotExist);
-           var mac = GetMacAddress();
+            var mac = GetMacAddress();
            var UserRole = await _userApplication.GetUserRole(userDTO);
             var Claims = new List<Claim>
             {
@@ -67,8 +65,6 @@ namespace Autnen
 
         public async Task<IOperationValue> SignInWithPasswordAsync(UserDTO userDto, string Password, bool IsPersistent = false)
         {
-            //var user = await _userApplication.FindUserByEmailAsync(userDto);
-            //if (user == null) return _operationValue.ShowResult(false, AccountResource.UserIsNotExist);
             var mac = GetMacAddress();
             var CorrectPassword = _hashPassword.CheckPassword(userDto.Password!, Password);
             if (!CorrectPassword) return _operationValue.ShowResult(false,AccountResource.PasswordIsNotCorrect);

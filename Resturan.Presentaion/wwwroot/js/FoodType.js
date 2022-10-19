@@ -1,32 +1,47 @@
-﻿function Excute(Element) {
-    var id = Element.getAttribute("data-val-id");
-    var span = Element.getAttribute("data-val-status");
-    var url = "/api/foodtype/" + span;
-    $.ajax({
-        type: "GET",
-        url: url,
-        data: "id=" + id,
-        success: function (response) {
-            if (response == true) {
-                if (span == "Delete") {
-                    Element.setAttribute("data-val-status", "Active");
-                    Element.firstElementChild.setAttribute("class", "bi bi-check-square-fill");
-                    Element.setAttribute("class", "");
-                    Element.setAttribute("class", "btn btn-outline-success ms-3 rounded-end");
-                };
-                if (span == "Active") {
-                    Element.setAttribute("data-val-status", "Delete");
-                    Element.firstElementChild.setAttribute("class", "bi bi-trash-fill");
+﻿var wrapp = document.getElementById("wrapper");
+wrapp.addEventListener("click", (event) => {
+    if (event.target.parentElement.localName == "button" || event.target.localName == "button") {
+        var id = event.target.getAttribute("data-val-id");
+        var span = event.target.getAttribute("data-val-status");
+        var url = "/api/foodtype/" + span;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: "id=" + id,
+            success: function (response) {
+                if (response == true) {
+                    if (span == "Delete") {
+                        if (event.target.localName == "button") {
+                            event.target.setAttribute("data-val-status", "Active");
+                            event.target.firstElementChild.setAttribute("class", "bi bi-check-square-fill");
+                            event.target.setAttribute("class", "");
+                            event.target.setAttribute("class", "btn btn-outline-success ms-3 rounded-end");
+                        }
+                        else if (event.target.parentElement.localName == "button") {
+                            event.target.parentElement.setAttribute("data-val-status", "Active");
+                            event.target.parentElement.firstElementChild.setAttribute("class", "bi bi-check-square-fill");
+                            event.target.parentElement.setAttribute("class", "");
+                            event.target.parentElement.setAttribute("class", "btn btn-outline-success ms-3 rounded-end");
+                        }
 
-                    Element.setAttribute("class", "");
-                    Element.setAttribute("class", "btn btn-outline-danger ms-3 rounded-end");
-
-
-
+                    };
+                    if (span == "Active") {
+                        if (event.target.localName == "button") {
+                            event.target.setAttribute("data-val-status", "Delete");
+                            event.target.firstElementChild.setAttribute("class", "bi bi-trash-fill");
+                            event.target.setAttribute("class", "");
+                            event.target.setAttribute("class", "btn btn-outline-danger ms-3 rounded-end");
+                        }
+                        else if (event.target.parentElement.localName == "button") {
+                            event.target.parentElement.setAttribute("data-val-status", "Delete");
+                            event.target.parentElement.firstElementChild.setAttribute("class", "bi bi-trash-fill");
+                            event.target.parentElement.setAttribute("class", "");
+                            event.target.parentElement.setAttribute("class", "btn btn-outline-danger ms-3 rounded-end");
+                        }
+                    }
                 }
             }
-        }
-    });
-
-
-};
+        });
+    }
+    
+});

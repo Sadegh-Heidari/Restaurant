@@ -36,5 +36,13 @@ namespace Acc.Infrastructure.EFCore.Repository
            var result = await query.AnyAsync();
            return result;
         }
+
+        public async Task<IEnumerable<T?>> GetAllRole<T>(Expression<Func<Role, T>> select, bool AsNoTracking = false)
+        {
+            IQueryable<Role> query = _context.Set<Role>();
+            if (AsNoTracking) query = query.AsNoTracking();
+            var result = await query.Select(select).ToListAsync();
+            return result;
+        }
     }
 }

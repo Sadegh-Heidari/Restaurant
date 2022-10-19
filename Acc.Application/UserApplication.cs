@@ -39,7 +39,7 @@ namespace Acc.Application
 
         public async Task<IOperationValue> AddRoleUserAsync(UserDTO userDTO, string RoleName)
         {
-            var UserFind = await _unitOfWork.UserAccRepository.FindUserAsync(x => x.Id == userDTO.Id);
+            var UserFind = await _unitOfWork.UserAccRepository.FindUserAsync(x => x.Email == userDTO.Email);
             var RoleFind = await _unitOfWork.RoleAccRepository.FindRoleAsync(x => x.RoleName.ToLower() == RoleName.ToLower());
             if (UserFind == null)
                 return _operationValue.ShowResult(false, AccountResource.UserIsNotExist);
@@ -48,11 +48,11 @@ namespace Acc.Application
             if (await _unitOfWork.UserRoleRepository.IsExistUserRoleAsync(new UserRole(RoleFind.Id, UserFind.Id)))
                 return _operationValue.ShowResult(false, AccountResource.UserRoleIsExist);
             var result = await _unitOfWork.UserRoleRepository.AddUserRoleAsync(new UserRole(RoleFind.Id, UserFind.Id));
-            if (result)
-                return _operationValue.ShowResult(true, AccountResource.UserRoleAdded);
+            if (!result)
+                return _operationValue.ShowResult(false, AccountResource.Operation);
             _unitOfWork.SaveChanges();
 
-            return _operationValue.ShowResult(false, AccountResource.Operation);
+            return _operationValue.ShowResult(true, AccountResource.UserRoleAdded);
         }
 
         public async Task<UserDTO?> FindUserByIdAsync(UserDTO userDTO)
@@ -125,6 +125,27 @@ namespace Acc.Application
             }, pg.PageSize, pg.PageNumber,x=>x.UserName!=AccountResource.Administrator);
             pg.Count = await _unitOfWork.UserAccRepository.GetCount();
             return pg;
+        }
+
+        public async Task<IOperationValue> DeleteUser(UserDTO userDTO)
+        {
+            var User = await _unitOfWork.UserAccRepository.FindUserAsync(x => x.Id == userDTO.Id);
+            if (User==null) return _operationValue.ShowResult(false, AccountResource.UserIsNotExist);
+            var UserDelete = _unitOfWork.UserAccRepository.DeleteEntity(User);
+            if(UserDelete==false) return _operationValue.ShowResult(false, AccountResource.Operation);
+            var RoleUser = await _unitOfWork.UserRoleRepository.GetUserRole(x => x.UserId == User.Id);
+            if (RoleUser.Count() == 0)
+            {
+                _unitOfWork.SaveChanges();
+                return _operationValue.ShowResult(true, AccountResource.DeleteUserSuccessfully);
+            }
+
+            var result = _unitOfWork.UserRoleRepository.DeleteUserRole(RoleUser);
+            _unitOfWork.SaveChanges();
+            return result == true
+                ? _operationValue.ShowResult(true, AccountResource.DeleteUserSuccessfully)
+                : _operationValue.ShowResult(false, AccountResource.DeleteUserUnSuccessfully);
+
         }
 
         public void Dispose()

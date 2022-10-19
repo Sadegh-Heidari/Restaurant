@@ -30,6 +30,12 @@ namespace Acc.Application
             return _operationValue.ShowResult(true, AccountResource.RoleAdded);
         }
 
+        public async Task<IEnumerable<Role>> GetRoles()
+        {
+            var result = await _unitOfWork.RoleAccRepository.GetAllRole(x => new Role { Name = x.RoleName }, true);
+            return result;
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

@@ -57,5 +57,7 @@ namespace Acc.Infrastructure.EFCore.Repository
             var result = await query.Select(select).ToListAsync();
             return result;
         }
+
+      
     }
 }

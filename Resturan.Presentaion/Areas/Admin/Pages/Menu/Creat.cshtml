@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.Image"></label>
-                        <input onchange="ShowImg()" asp-for="CreatView.Image" class="form-control" type="file" />
+                        <input  asp-for="CreatView.Image" class="form-control" type="file" />
                     </div>
                     <div class="mb-3">
                         <label asp-for="CreatView.CategoryId"></label>
@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <img src="data:image/*;base64, @Model.CreatView.Base64Img" width="100%" />
+@*                    <input type="hidden" asp-for="@Model.CreatView.Base64Img"/>
+*@                    <img  src="~/@Model.CreatView.ImagePath" width="100%"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
@@ -56,7 +57,7 @@
     @section Scripts
     {
         <script src="~/js/site.js"></script>
-    <script src="~/js/TinyRichBox.js"></script>
+@*    <script src="~/js/TinyRichBox.js"></script>
     <partial name="Shared/_ValidationScriptsPartial" />
-    <script src="~/js/CustomValidation.js"></script>
+    <script src="~/js/CustomValidation.js"></script>*@
 }

@@ -14,5 +14,7 @@ namespace Acc.Domain.Services
         Task<bool> AddUserRoleAsync(UserRole userRole);
         Task<IEnumerable<T>> GetUserRole<T>(Expression<Func<UserRole, T>> select,
             Expression<Func<UserRole, bool>> where);
+        Task<IEnumerable<UserRole>> GetUserRole(Expression<Func<UserRole, bool>> where);
+        bool DeleteUserRole(IEnumerable<UserRole> userRoles);
     }
 }

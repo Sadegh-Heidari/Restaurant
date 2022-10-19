@@ -12,5 +12,6 @@ namespace Acc.Services.Services
         Task<UserDTO?> FindUserByPhoneNumberAsync(UserDTO userDto);
         Task<IOperationValue> IsUserExist(UserDTO userDto);
         Task<Pagenition> GetUsers(Pagenition pg);
+        Task<IOperationValue> DeleteUser(UserDTO userDTO);
     }
 }

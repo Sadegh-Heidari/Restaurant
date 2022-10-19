@@ -9,7 +9,7 @@
 }
 @section cdn
 {
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
 @section icon
     {
@@ -37,7 +37,7 @@
                 <th scope="col" class="text-center">Status</th>
             </tr>
         </thead>
-        <tbody class="table-secondary">
+        <tbody class="table-secondary" id="wrapper">
         @foreach (var item in Model.pagemodel.MenuItem)
         {
             <tr>
@@ -50,8 +50,8 @@
                         <a asp-page="./Update" asp-route-Id="@item.Id" class="btn btn-outline-primary  rounded-start ">
                             <i class="bi  bi-pencil-square "></i>
                         </a>
-                        <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
-                                <i class="bi bi-trash-fill"></i>
+                        <button id="@item.Id" class="btn btn-outline-danger ms-3 rounded-end " >
+                                <i id="@item.Id" class="bi bi-trash-fill"></i>
                             </button>
                     </div>
                 </td>
@@ -79,5 +79,5 @@
 </div>
 @section Scripts
 {
-    <script src="~/js/MenuItem.js"></script>
+    <script src="~/js/MenuItem.js" ></script>
 }

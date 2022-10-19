@@ -39,8 +39,9 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                 UpdateView.Id = item.Id!;
                 UpdateView.Name = item.Name;
                 UpdateView.Price = item.Price;
-                UpdateView.Base64Img = item.Image;
+                UpdateView.ImagePath = item.Image;
                 UpdateView.Description = item.Descriptaion;
+                UpdateView.ImagePath = item.Image;
                 var seletcCategory = await _applicationCategory.GetNameCategories();
                 UpdateView.CategorySelectItems = seletcCategory.Select(x =>
                     new SelectListItem
@@ -60,9 +61,6 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     TempData["Error"] = $"{ErrorMessagesResource.CategoryOrFoodTypeNull}";
                     return RedirectToPage("./Index");
                 }
-
-                var path = Path.Combine(_webHostEnvironment.WebRootPath, UpdateView.Base64Img!);
-                UpdateView.Base64Img = await ConvertImgToBase64String.Base64StringAsync(path);
                 return Page();
             }
             TempData["Error"] = $"Item Menu {ErrorMessagesResource.NotFound}";
@@ -87,8 +85,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                     }).ToList();
                 if (UpdateView.Image != null)
                 {
-                    UpdateView.Base64Img =  ConvertImgToBase64String.Base64StringAsync(UpdateView.Image.OpenReadStream());
-                    UpdateView.Image = UpdateView.Image;
+                    UpdateView.ImagePath = await UploadImage.Send(UpdateView.Image!, "MenuItem", _webHostEnvironment.WebRootPath);
                 }
 
                 return Page();

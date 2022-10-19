@@ -39,5 +39,16 @@ namespace Acc.Infrastructure.EFCore.Repository
             var result = await query.CountAsync();
             return result;
         }
+
+        public bool DeleteEntity(TEntity entity)
+        {
+            if (_context.Entry(entity).State != EntityState.Deleted)
+            {
+                _context.Set<TEntity>().Remove(entity);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

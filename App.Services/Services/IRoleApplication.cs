@@ -10,5 +10,6 @@ namespace Acc.Services.Services
     public interface IRoleApplication : IDisposable
     {
         Task<IOperationValue> CreatRole(Role role);
+        Task<IEnumerable<Role>> GetRoles();
     }
 }

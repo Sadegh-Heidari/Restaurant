@@ -36,16 +36,9 @@ namespace Resturan.Presentation.Pages.Reg
             _user.PhoneNumber = RegisterView.PhoneNumber;
             _user.Email = RegisterView.Email;
             _user.Password = RegisterView.Password;
-            var Finduser = await _userApplication.FindUserByEmailAsync(_user);
-            if (Finduser != null)
-            {
-                TempData["AuthenError"] = "This User Is Exist Please Log In";
-                return Page();
-            }
             var result = await _userApplication.CreatUserAsync(_user);
             if (!result.IsSucessed)
             {
-
                 TempData["AuthenError"] = result.ResultMessage;
                 return Page();
             }

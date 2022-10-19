@@ -70,6 +70,24 @@ namespace AccResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Deleted Successfully.
+        /// </summary>
+        public static string DeleteUserSuccessfully {
+            get {
+                return ResourceManager.GetString("DeleteUserSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Deleted UnSuccessfully.
+        /// </summary>
+        public static string DeleteUserUnSuccessfully {
+            get {
+                return ResourceManager.GetString("DeleteUserUnSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation is not Successfully.
         /// </summary>
         public static string Operation {

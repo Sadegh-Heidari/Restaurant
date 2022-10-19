@@ -33,9 +33,9 @@ app.MapGet("/", async (context) =>
 {
     context.Response.Redirect("/Customer");
 });
+app.UseStaticFiles();
 
 app.UseErrorNotFound();
-app.UseStaticFiles();
 app.UseAuthentication();
 app.UseCheckIpClient();
 app.UseRouting();
@@ -44,8 +44,12 @@ app.UseAuthorization();
 
 app.UseCsp(option =>
 {
-    option.ScriptSources(d => d.Self().CustomSources("https://cdn.tiny.cloud/")).ScriptSources(x => x.UnsafeInline());
+    option.ScriptSources(x =>
+        x.Self().CustomSources(
+            "cdn.tiny.cloud", "cdn.jsdelivr.net"));
+    
 });
+
 app.MapRazorPages();
 app.MapControllers();
 app.Run();

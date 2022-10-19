@@ -31,7 +31,7 @@
         <th scope="col" class="text-center">Status</th>
     </tr>
     </thead>
-    <tbody class="table-secondary">
+    <tbody class="table-secondary" id="wrapper">
     @foreach (var item in Model.FoodTypes.FoodType)
     {
         <tr>
@@ -44,14 +44,14 @@
                     </a>
                     @if(item.IsDeleted == false)
                     {
-                            <button id="Status" data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" onclick="Excute(this)">
-                            <i class="bi bi-trash-fill"></i>
+                        <button  data-val-id="@item.Id" data-val-status="Delete" class="btn btn-outline-danger ms-3 rounded-end" >
+                                <i data-val-status="Delete" data-val-id="@item.Id" class="bi bi-trash-fill"></i>
                         </button>
                     }
                     @if (item.IsDeleted == true)
                     {
-                            <button id="Status" data-val-id="@item.Id" data-val-status="Active" class="btn btn-outline-success ms-3 rounded-end" onclick="Excute(this)">
-                            <i class="bi bi-check-square-fill"></i>
+                        <button data-val-id="@item.Id" data-val-status="Active" class="btn btn-outline-success ms-3 rounded-end" >
+                                <i data-val-status="Active" data-val-id="@item.Id" class="bi bi-check-square-fill"></i>
                         </button>
                     }
                 </div>

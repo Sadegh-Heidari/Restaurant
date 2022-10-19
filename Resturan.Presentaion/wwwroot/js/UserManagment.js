@@ -1,8 +1,8 @@
-﻿var wrapp = document.getElementById("wrapper");
-wrapp.addEventListener("click", (event) => {
+﻿var wrap = document.getElementById("wrapper");
+wrap.addEventListener("click", (event) => {
     if (event.target.parentElement.localName == "button" || event.target.localName == "button") {
         swal.fire({
-            title: "Are you sure to want delete this item?",
+            title: "Are you sure to want delete this User?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yep",
@@ -14,19 +14,19 @@ wrapp.addEventListener("click", (event) => {
             buttonsStyling: false,
         }).then(res => {
             if (res.isConfirmed) {
-                var target = event.target.id;
+                var id = event.target.id;
+
                 var tr = "";
                 if (event.target.parentElement.localName == "div") {
-                    tr = event.target.parentElement.parentElement.parentElement;
+                    tr = event.target.parentNode.parentNode.parentNode;
+                } else if (event.target.parentElement.localName == "button") {
+                    tr = event.target.parentNode.parentNode.parentNode.parentNode;
                 }
-                else if (event.target.parentElement.localName == "button") {
-                    tr = event.target.parentElement.parentElement.parentElement.parentElement;
-                }
-                var url = "/api/menuitem/delete";
+                var url = "/api/User/Deleteuser/";
                 $.ajax({
                     type: "GET",
                     url: url,
-                    data: "id=" + target,
+                    data: "id=" + id,
                     success: function (response) {
                         if (response == true) {
                             var tbody = document.querySelector("tbody");
@@ -36,6 +36,13 @@ wrapp.addEventListener("click", (event) => {
                                 var pagination = document.querySelector('#page');
                                 pagination.remove();
                             }
+                        }
+                        if (response == false) {
+                            swal.fire({
+                                title: "User can not deleted.Please try Again",
+                                icon: "error",
+                                button: "ok",
+                            });
                         }
                     }
                 });

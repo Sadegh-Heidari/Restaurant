@@ -66,7 +66,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
                         Value = x.Id
                     }).ToList();
                 if (CreatView.Image != null)
-                    CreatView.Base64Img =  ConvertImgToBase64String.Base64StringAsync(CreatView.Image.OpenReadStream());
+                    CreatView.ImagePath = await UploadImage.Send(CreatView.Image, "MenuItem", _environment.WebRootPath);
                 return Page();
             }
             var pathImage = await UploadImage.Send(CreatView.Image!, "MenuItem",_environment.WebRootPath);

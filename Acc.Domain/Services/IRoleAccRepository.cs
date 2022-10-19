@@ -6,5 +6,6 @@ namespace Acc.Domain.Services
     {
         Task<Role?> FindRoleAsync(Expression<Func<Role, bool>> where, bool AsNoTracking = false);
         Task<bool> IsExistRole(Expression<Func<Role, bool>> where);
+        Task<IEnumerable<T?>> GetAllRole<T>(Expression<Func<Role,T>> select, bool AsNoTracking = false);
     }
 }
