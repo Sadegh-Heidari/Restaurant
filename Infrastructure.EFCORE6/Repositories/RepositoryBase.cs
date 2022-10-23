@@ -31,6 +31,8 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 query = query.AsNoTracking().Where(Where);
             }
+            var q = query.AsNoTracking().Select(Select).ToQueryString();
+
             var result = await query.AsNoTracking().Select(Select).ToListAsync();
             return result;
         }
@@ -85,7 +87,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true)
+        public virtual async Task<TEntity?> GetByFilter(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true)
         {
             IQueryable<TEntity> query = dbset;
             if (AsNoTracking)
@@ -112,7 +114,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
 
         }
 
-        public virtual async Task<TOut?> GetByIdAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true, string? include = null)
+        public virtual async Task<TOut?> GetByFilter<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true, string? include = null)
         {
 
             IQueryable<TEntity> query = dbset;
@@ -132,7 +134,6 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             {
                 query = query.Where(Where);
             }
-
             var result = await query.Select(Select).FirstOrDefaultAsync();
             return result;
         }

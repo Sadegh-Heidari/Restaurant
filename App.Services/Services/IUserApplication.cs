@@ -1,4 +1,5 @@
-﻿using Acc.Services.DTO;
+﻿using System.Security.Claims;
+using Acc.Services.DTO;
 
 namespace Acc.Services.Services
 {
@@ -13,5 +14,6 @@ namespace Acc.Services.Services
         Task<IOperationValue> IsUserExist(UserDTO userDto);
         Task<Pagenition> GetUsers(Pagenition pg);
         Task<IOperationValue> DeleteUser(UserDTO userDTO);
+        Task<UserDTO?> FindUserAsync(ClaimsPrincipal claimsPrincipal);
     }
 }

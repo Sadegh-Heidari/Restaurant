@@ -43,7 +43,7 @@ namespace Resturan.Application
 
         public async Task<bool> Update<T>(T entity) where T : CategoryDTO
         {
-            var model = await _unitOfWork.CategoryRepository.GetByIdAsync(x => x.Guid == entity.GUID, false);
+            var model = await _unitOfWork.CategoryRepository.GetByFilter(x => x.Guid == entity.GUID, false);
             if (model == null) return false;
             else if (typeof(T) == typeof(UpdateCategoryDTO)) model.Update(entity.DisplayOrder,entity.Name!);
             else if(typeof(T) == typeof(DeleteCategoryDTO)) model.Delete();
@@ -66,7 +66,7 @@ namespace Resturan.Application
 
         public Task<CategoryDTO?> GetCategoryById(string id)
         {
-            var result = _unitOfWork.CategoryRepository.GetByIdAsync(x => new CategoryDTO
+            var result = _unitOfWork.CategoryRepository.GetByFilter(x => new CategoryDTO
             {
                 GUID = x.Guid,
                 Name = x.Name,
@@ -75,6 +75,10 @@ namespace Resturan.Application
             return result;
         }
 
-      
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resturan.Application.Query.DTO
+namespace Resturan.Application.Service.DTO.ShoppingCart
 {
-    public class CustomerDto:IDisposable
+    public class ShoppingCartDto:IDisposable
     {
-        public string? id { get; set; }
+        public string? MenuItemId { get; set; }
+        public string? MenuItemName { get; set; }
         public string? CategoryName { get; set; }
-        public string? FoodTypeName { get; set; }
-        public string? Name { get; set; }
         public string? Price { get; set; }
         public string? Image { get; set; }
-        public string? Description { get; set; }
+        public string? FoodTypeName { get; set; }
+        public short count { get; set; } = 0;
 
         public void Dispose()
         {

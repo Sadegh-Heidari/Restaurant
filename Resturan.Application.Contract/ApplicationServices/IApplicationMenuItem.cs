@@ -8,7 +8,7 @@ using Resturan.Application.Service.DTO.MenuItem;
 
 namespace Resturan.Application.Service.ApplicationServices
 {
-    public interface IApplicationMenuItem
+    public interface IApplicationMenuItem:IDisposable
     {
         Task AddItem(CreatMenuItem dto);
         Task<Pageniation > GetAllItems(Pageniation pg);

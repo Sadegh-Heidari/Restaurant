@@ -1,6 +1,7 @@
 ﻿using Resturan.Domain.Base;
 using Resturan.Domain.Category;
 using Resturan.Domain.FoodType;
+using Resturan.Domain.ShoppingCart;
 
 namespace Resturan.Domain.MenuItem
 {
@@ -14,6 +15,7 @@ namespace Resturan.Domain.MenuItem
         public FoodTypeModel FoodType { get; private set; }
         public string CategoryId { get; private set; }
         public CategoryModel Category { get; private set; }
+        public ICollection<ShoppingCartModel> ShoppingCart { get; private set; }
 
         public MenuItemModel(string name, string descriptaion, string image, string price, string foodTypeId, string categoryId)
         {

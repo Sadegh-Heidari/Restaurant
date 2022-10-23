@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Acc.Domain.Models;
@@ -147,6 +148,24 @@ namespace Acc.Application
                 : _operationValue.ShowResult(false, AccountResource.DeleteUserUnSuccessfully);
 
         }
+
+        public async Task<UserDTO?> FindUserAsync(ClaimsPrincipal claimsPrincipal)
+        {
+            var user = claimsPrincipal.FindFirst(ClaimTypes.Email);
+            if (user == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var result = await _unitOfWork.UserAccRepository.FindUserAsync(x => x.Email == user.Value,x=> new UserDTO
+            {
+                Email = x.Email,
+                Id = x.Id,
+                PhoneNumber = x.PhoneNumber,
+                UserName = x.UserName,
+            },true);
+            return result;
+;        }
 
         public void Dispose()
         {

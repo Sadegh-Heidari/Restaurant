@@ -15,6 +15,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         private IRepositoryFoodType? _foodTypeRepository;
         private IRepositoryCategory? _categoryRepository;
         private IRepositoryMenuItem? _menuItemRepository;
+        private IShoppingCartRepository? _shoppingCartRepository;
         public IRepositoryCategory CategoryRepository
         {
             get
@@ -44,6 +45,19 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
                 }
 
                 return _menuItemRepository;
+            }
+        }
+
+        public IShoppingCartRepository ShoppingCartRepository
+        {
+            get
+            {
+                if (_shoppingCartRepository == null)
+                {
+                    _shoppingCartRepository = new ShoppingCartRepository(_context!);
+                }
+
+                return _shoppingCartRepository;
             }
         }
 

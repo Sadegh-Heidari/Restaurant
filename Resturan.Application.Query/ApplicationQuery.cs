@@ -13,9 +13,9 @@ namespace Resturan.Application.Query
         }
 
 
-        public async Task<IEnumerable<CustomerDto>> GetCustomerQuery()
+        public async Task<IEnumerable<CustomerDto>> GetMenuItemQueryAsync()
         {
-            var result = await _unitOfWork.MenuItemRepository.GetCustomer(x => new CustomerDto
+            var result = await _unitOfWork.MenuItemRepository.GetMenuItemAllAsync(x => new CustomerDto
                 {
                     CategoryName = x.Category.Name,
                     Description = x.Descriptaion,
@@ -30,9 +30,9 @@ namespace Resturan.Application.Query
             return result;
         }
 
-        public async Task<CustomerDto?> GetCustomerById(string id)
+        public async Task<CustomerDto?> GetMenuItemQueryByIdAsync(string id)
         {
-            var result = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => new CustomerDto
+            var result = await _unitOfWork.MenuItemRepository.GetByFilter(x => new CustomerDto
             {
                 id = x.Guid,
                 Price = x.Price,
@@ -44,6 +44,14 @@ namespace Resturan.Application.Query
             }, x => x.Guid == id, true, "Category,FoodType");
             _unitOfWork.Dispose();
             return result;
+        }
+        public async Task<CustomerDto> GetPrice(CustomerDto dto)
+        {
+            var result = await _unitOfWork.MenuItemRepository.GetByFilter(x => new CustomerDto()
+            {
+                Price = x.Price
+            }, x => x.Guid == dto.id);
+            return result!;
         }
     }
 }

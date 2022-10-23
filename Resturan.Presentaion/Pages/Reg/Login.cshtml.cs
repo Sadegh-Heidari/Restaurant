@@ -13,7 +13,7 @@ namespace Resturan.Presentation.Pages.Reg
         private UserDTO _userDTO { get; set; }
         private IUserApplication _userapplication { get; }
         private ISignUser _signUser { get; }
-        [FromQuery] public string? ReturnUrl { get; set; } = "/Customer/Index";
+        [FromQuery] public string? ReturnUrl { get; set; } = "/Customer/Home/Index";
         public LoginModel( IUserApplication userapplication, ISignUser signUser)
         {
             _userDTO = new();

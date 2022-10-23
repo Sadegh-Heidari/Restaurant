@@ -11,6 +11,7 @@ namespace Resturan.Domain.Services
         public IRepositoryCategory CategoryRepository { get; }
         public IRepositoryFoodType FoodTypeRepository { get; }
         public IRepositoryMenuItem MenuItemRepository { get; }
+        public IShoppingCartRepository ShoppingCartRepository { get; }
         void Save();
     }
 }

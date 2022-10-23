@@ -2,6 +2,7 @@
 using Resturan.Domain.Category;
 using Resturan.Domain.FoodType;
 using Resturan.Domain.MenuItem;
+using Resturan.Domain.ShoppingCart;
 using Resturan.Infrastructure.EFCORE6.Mapping;
 
 namespace Resturan.Infrastructure.EFCORE6.Context
@@ -11,6 +12,7 @@ namespace Resturan.Infrastructure.EFCORE6.Context
         public DbSet<CategoryModel>? Category { get; set; }
         public DbSet<FoodTypeModel>? FoodType { get; set; }
         public DbSet<MenuItemModel> MenuItem { get; set; }
+        public DbSet<ShoppingCartModel> ShoppingCart { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             

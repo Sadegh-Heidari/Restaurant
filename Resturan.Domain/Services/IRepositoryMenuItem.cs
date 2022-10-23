@@ -12,7 +12,7 @@ namespace Resturan.Domain.Services
     {
         bool Delete(MenuItemModel model);
 
-        Task<IEnumerable<Tout>> GetCustomer<Tout>(Expression<Func<MenuItemModel, Tout>> select,
+        Task<IEnumerable<Tout>> GetMenuItemAllAsync<Tout>(Expression<Func<MenuItemModel, Tout>> select,
             Func<IQueryable<MenuItemModel>, IOrderedQueryable<MenuItemModel>> orderby,
             Expression<Func<MenuItemModel, bool>>? where = null, string? Include = null);
 

@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
 using Resturan.Infrastructure.Tools.Resource;
 
-namespace Resturan.Presentation.Pages.Customer.ViewModel
+namespace Resturan.Presentation.Pages.Customer.Home.ViewModel
 {
     public class CustomerViewModel:IDisposable
     {
+        [Required]
         public string? id { get; set; }
         public string? CategoryName { get; set; }
         public string? FoodTypeName { get; set; }

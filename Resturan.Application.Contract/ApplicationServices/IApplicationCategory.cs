@@ -10,7 +10,7 @@ using Resturan.Application.Service.DTO.FoodType;
 
 namespace Resturan.Application.Service.ApplicationServices
 {
-    public interface IApplicationCategory
+    public interface IApplicationCategory:IDisposable
     {
         Task<Pageniation> GetAllCategory(Pageniation pg);
         Task Add(CreatCategoryDTO category);

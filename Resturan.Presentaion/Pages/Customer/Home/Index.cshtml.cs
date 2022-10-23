@@ -17,7 +17,7 @@ namespace Resturan.Presentation.Pages.Customer
 
         public async Task OnGet()
         {
-            var result = await _applicationQuery.GetCustomerQuery();
+            var result = await _applicationQuery.GetMenuItemQueryAsync();
             Customer = result?.GroupBy(x=>x.CategoryName);
         }
     }

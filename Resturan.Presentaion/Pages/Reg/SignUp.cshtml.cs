@@ -48,7 +48,7 @@ namespace Resturan.Presentation.Pages.Reg
                 TempData["AuthenError"] = ress.ResultMessage;
                 return Page();
             }
-            return RedirectToPage("/Customer/Index");
+            return RedirectToPage("/Customer/Home/Index");
            
         }
 

@@ -27,7 +27,7 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             }
             return false;
         }
-        public async Task<IEnumerable<Tout>> GetCustomer<Tout>(Expression<Func<MenuItemModel, Tout>> select, Func<IQueryable<MenuItemModel>, IOrderedQueryable<MenuItemModel>> orderby, Expression<Func<MenuItemModel, bool>>? where=null, string? Include = null)
+        public async Task<IEnumerable<Tout>> GetMenuItemAllAsync<Tout>(Expression<Func<MenuItemModel, Tout>> select, Func<IQueryable<MenuItemModel>, IOrderedQueryable<MenuItemModel>> orderby, Expression<Func<MenuItemModel, bool>>? where=null, string? Include = null)
         {
             IQueryable<MenuItemModel> query = _context.Set<MenuItemModel>();
             if(where != null)

@@ -9,7 +9,7 @@ namespace Resturan.Presentation.Pages.Reg
         public async Task<RedirectToPageResult> OnGet()
         {
             await HttpContext.SignOutAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToPage("/Customer/Index");
+            return RedirectToPage("/Customer/Home/Index");
         }
     }
 }

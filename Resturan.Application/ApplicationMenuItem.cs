@@ -45,7 +45,7 @@ namespace Resturan.Application
 
         public async Task<bool> DeleteItem(DeleteMenuItemDTO dto)
         {
-            var item = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.GUId, false);
+            var item = await _unitOfWork.MenuItemRepository.GetByFilter(x => x.Guid == dto.GUId, false);
             if (item == null) return false;
            var result = _unitOfWork.MenuItemRepository.Delete(item);
             _unitOfWork.Save();
@@ -54,7 +54,7 @@ namespace Resturan.Application
 
         public async Task<MenuItemDTO?> getItem(string id)
         {
-            var result = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => new MenuItemDTO
+            var result = await _unitOfWork.MenuItemRepository.GetByFilter(x => new MenuItemDTO
             {
                 Id = x.Guid,
                 Name = x.Name,
@@ -67,12 +67,17 @@ namespace Resturan.Application
 
         public async Task<bool> UpdateItem(UpdateMenuItemDTO dto)
         {
-            var model = await _unitOfWork.MenuItemRepository.GetByIdAsync(x => x.Guid == dto.Id, false);
+            var model = await _unitOfWork.MenuItemRepository.GetByFilter(x => x.Guid == dto.Id, false);
             if (model == null) return false;
             model.Update(dto.Name!,dto.Descriptaion!,dto.Image!,dto.Price!,dto.FoodTypeName!,dto.CategoryName!);
              _unitOfWork.MenuItemRepository.Update(model);
              _unitOfWork.Save();
              return true;
         }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

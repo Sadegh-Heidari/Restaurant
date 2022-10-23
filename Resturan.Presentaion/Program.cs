@@ -31,7 +31,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapGet("/", async (context) =>
 {
-    context.Response.Redirect("/Customer");
+    context.Response.Redirect("/Customer/Home");
 });
 app.UseStaticFiles();
 
