@@ -16,6 +16,8 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         private IRepositoryCategory? _categoryRepository;
         private IRepositoryMenuItem? _menuItemRepository;
         private IShoppingCartRepository? _shoppingCartRepository;
+        private IRepositoryOrderHeader? _orderHeader;
+        private IRepositoryOrderDetail? _orderDetail;
         public IRepositoryCategory CategoryRepository
         {
             get
@@ -58,6 +60,32 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
                 }
 
                 return _shoppingCartRepository;
+            }
+        }
+
+        public IRepositoryOrderHeader OrderHeader
+        {
+            get
+            {
+                if (_orderHeader == null)
+                {
+                    _orderHeader = new RepositoryOrderHeader(_context!);
+                }
+
+                return _orderHeader;
+            }
+        }
+
+        public IRepositoryOrderDetail OrderDetail
+        {
+            get
+            {
+                if (_orderDetail == null)
+                {
+                    _orderDetail = new RepositoryOrderDetail(_context!);
+                }
+
+                return _orderDetail;
             }
         }
 
