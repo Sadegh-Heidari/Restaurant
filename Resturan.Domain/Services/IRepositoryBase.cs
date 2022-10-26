@@ -17,8 +17,8 @@ namespace Resturan.Domain.Services
         Task<IEnumerable<TOut>> GetAllAsync<TOut>(Expression<Func<TEntity, TOut>> Select, int page , int pagesize );
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
-        Task<TEntity?> GetByFilter(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true);
-        Task<TOut?> GetByFilter<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where,
+        Task<TEntity?> GetByFilterAsync(Expression<Func<TEntity, bool>> Where, bool AsNoTracking = true);
+        Task<TOut?> GetByFilterAsync<TOut>(Expression<Func<TEntity, TOut>> Select, Expression<Func<TEntity, bool>> Where,
             bool AsNoTracking = true,string? include=null);
 
         Task<int> GetCount();

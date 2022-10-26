@@ -22,7 +22,7 @@ namespace Resturan.Application
 
         public async Task AddOrderHeader(OrderHeaderDto dto, IEnumerable<OrderDetailDto> orDto)
         {
-            var model = new OrderHeaderModel(dto.UserEmail!, dto.PickupName!, dto.PhoneNumber!, dto.Comments!, dto.OrderTotal,
+            var model = new OrderHeaderModel(dto.UserEmail!, dto.PickupName!, dto.PhoneNumber!, dto.Comments!, (float)dto.OrderTotal,
                 dto.Status!, dto.PickupTime, dto.PickupDate);
             await _unitOfWork.OrderHeader.AddAsync(model);
            foreach (var item in orDto)

@@ -15,5 +15,7 @@ namespace Resturan.Application.Service.ApplicationServices
         Task<bool> IsShoppingCartExist(OperationShoppingDto dto);
         Task<bool> DeIncrementCount(OperationShoppingDto dto);
         Task<bool> DeleteCart(OperationShoppingDto dto);
+        Task<IEnumerable<GetDetailsShoppingCart>> DetailsShoppingCart(OperationShoppingDto dto);
+        Task DeleteAllCart(DeleteAllCart dto);
     }
 }

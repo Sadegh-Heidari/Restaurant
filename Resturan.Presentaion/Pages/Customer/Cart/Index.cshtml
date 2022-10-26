@@ -2,7 +2,7 @@
 @using Microsoft.CodeAnalysis.VisualBasic.Syntax
 @model Resturan.Presentation.Pages.Customer.Cart.IndexModel
 @{
-    int TotalPrice = 0;
+    double TotalPrice = 0;
 }
 
 <form method="post">
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                        TotalPrice += (Convert.ToInt16(item.Price) * item.count);
+                        TotalPrice += (Convert.ToDouble(item.Price) * item.count);
                     }
 
                     <hr />
@@ -84,7 +84,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="col-12 col-lg-4 offset-lg-8 col-md-6 offset-md-6">
-                        <a class="btn btn-success form-control">Summary</a>
+                        <a asp-page="./Summary" class="btn btn-success form-control">Summary</a>
                     </div>
                 </div>
             </div>

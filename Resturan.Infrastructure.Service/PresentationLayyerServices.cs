@@ -24,6 +24,8 @@ namespace Resturan.Infrastructure.Service
             service.AddScoped<IApplicationMenuItem, ApplicationMenuItem>();
             service.AddScoped<IApplicationQuery, ApplicationQuery>();
             service.AddScoped<IApplicationShoppingCart, ApplicationShoppingCart>();
+            service.AddScoped<IApplicationOrder, ApplicationOrder>();
+            service.AddScoped<IApplicationStatus, ApplicationStatus>();
             service.AddDbContext<ApplicationContext>(x =>
                 x.UseSqlServer(connection));
         }

@@ -34,5 +34,19 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         {
             _context.Set<ShoppingCartModel>().Remove(model);
         }
+
+        public async Task<IEnumerable<ShoppingCartModel>> GetAllCart(Expression<Func<ShoppingCartModel, bool>> where, bool AsNoTracking = true)
+        {
+            IQueryable<ShoppingCartModel> query = _context.Set<ShoppingCartModel>();
+            if (AsNoTracking) query = query.AsNoTracking();
+            query=query.Where(where);
+            var result =await query.ToListAsync();
+            return result;
+        }
+
+        public void DeleteAllCart(IEnumerable<ShoppingCartModel> model)
+        {
+            _context.Set<ShoppingCartModel>().RemoveRange(model);
+        }
     }
 }

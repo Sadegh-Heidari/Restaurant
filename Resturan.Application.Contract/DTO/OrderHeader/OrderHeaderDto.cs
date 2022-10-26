@@ -12,7 +12,7 @@ namespace Resturan.Application.Service.DTO.OrderHeader
         public string? PickupName { get;  set; }
         public string? PhoneNumber { get;  set; }
         public string? Comments { get;  set; }
-        public float OrderTotal { get;  set; }
+        public double OrderTotal { get;  set; }
         public string? Status { get;  set; }
         public DateTime PickupTime { get;  set; }
         public DateTime PickupDate { get;  set; }

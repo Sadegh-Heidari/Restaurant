@@ -22,7 +22,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu.ViewModel
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesResource), ErrorMessageResourceName = "PriceRequired")]
         [Range(1, 1000, ErrorMessageResourceType = typeof(ErrorMessagesResource),ErrorMessageResourceName = "PriceRange")]
-        public string? Price { get; set; }
+        public double? Price { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesResource), ErrorMessageResourceName = "FoodTypeIdRequired")]
         [Display(Name = "Food Type")] 

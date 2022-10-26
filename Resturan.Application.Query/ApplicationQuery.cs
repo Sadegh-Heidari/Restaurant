@@ -32,7 +32,7 @@ namespace Resturan.Application.Query
 
         public async Task<CustomerDto?> GetMenuItemQueryByIdAsync(string id)
         {
-            var result = await _unitOfWork.MenuItemRepository.GetByFilter(x => new CustomerDto
+            var result = await _unitOfWork.MenuItemRepository.GetByFilterAsync(x => new CustomerDto
             {
                 id = x.Guid,
                 Price = x.Price,
@@ -47,7 +47,7 @@ namespace Resturan.Application.Query
         }
         public async Task<CustomerDto> GetPrice(CustomerDto dto)
         {
-            var result = await _unitOfWork.MenuItemRepository.GetByFilter(x => new CustomerDto()
+            var result = await _unitOfWork.MenuItemRepository.GetByFilterAsync(x => new CustomerDto()
             {
                 Price = x.Price
             }, x => x.Guid == dto.id);

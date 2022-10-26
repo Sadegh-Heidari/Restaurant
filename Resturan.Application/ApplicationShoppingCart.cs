@@ -43,7 +43,7 @@ namespace Resturan.Application
 
         public async Task<bool> IncrementCount(OperationShoppingDto dto)
         {
-            var shop = await _unitOfWork.ShoppingCartRepository.GetByFilter(x => x.Email == dto.UserEmail && x.MenuItemId == dto.MenuItemId);
+            var shop = await _unitOfWork.ShoppingCartRepository.GetByFilterAsync(x => x.Email == dto.UserEmail && x.MenuItemId == dto.MenuItemId);
             if (shop == null) return false;
 
             var result = (short)(shop.Count + dto.Count);
@@ -62,7 +62,7 @@ namespace Resturan.Application
 
         public async Task<bool> DeIncrementCount(OperationShoppingDto dto)
         {
-            var shop = await _unitOfWork.ShoppingCartRepository.GetByFilter(x => x.Email == dto.UserEmail && x.MenuItemId == dto.MenuItemId);
+            var shop = await _unitOfWork.ShoppingCartRepository.GetByFilterAsync(x => x.Email == dto.UserEmail && x.MenuItemId == dto.MenuItemId);
             if (shop == null) return false;
 
             var result = (short)(shop.Count - dto.Count);
@@ -81,12 +81,31 @@ namespace Resturan.Application
         public async Task<bool> DeleteCart(OperationShoppingDto dto)
         {
             var result = await 
-                _unitOfWork.ShoppingCartRepository.GetByFilter(x =>
+                _unitOfWork.ShoppingCartRepository.GetByFilterAsync(x =>
                     x.Email == dto.UserEmail && x.MenuItemId == dto.MenuItemId,false);
             if (result == null) return false;
             _unitOfWork.ShoppingCartRepository.DeleteCart(result);
             _unitOfWork.Save();
             return true;
+        }
+
+        public async Task<IEnumerable<GetDetailsShoppingCart>> DetailsShoppingCart(OperationShoppingDto dto)
+        {
+            var result = await _unitOfWork.ShoppingCartRepository.GetAllAsync(x => new GetDetailsShoppingCart
+            {
+                Count = x.Count,
+                MenuItemId = x.MenuItemId,
+                Name = x.MenuItem.Name,
+                Price = x.MenuItem.Price
+            }, x => x.Email == dto.UserEmail);
+            return result;
+        }
+
+        public async Task DeleteAllCart(DeleteAllCart dto)
+        {
+            var result = await _unitOfWork.ShoppingCartRepository.GetAllCart(x=>x.Email==dto.UserEmail);
+            _unitOfWork.ShoppingCartRepository.DeleteAllCart(result);
+            _unitOfWork.Save();
         }
 
         public void Dispose()

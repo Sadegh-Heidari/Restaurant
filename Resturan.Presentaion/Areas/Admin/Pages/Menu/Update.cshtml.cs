@@ -38,7 +38,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             {
                 UpdateView.Id = item.Id!;
                 UpdateView.Name = item.Name;
-                UpdateView.Price = item.Price;
+                UpdateView.Price = Convert.ToDouble(item.Price);
                 UpdateView.ImagePath = item.Image;
                 UpdateView.Description = item.Descriptaion;
                 UpdateView.ImagePath = item.Image;
@@ -96,7 +96,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             updateMenu.Descriptaion = UpdateView.Description;
             updateMenu.FoodTypeName = UpdateView.FoodTypeId;
             updateMenu.Image = pathImage;
-            updateMenu.Price = UpdateView.Price;
+            updateMenu.Price = UpdateView.Price.ToString();
             updateMenu.Id = UpdateView.Id!;
             var result = await _applicationMenu.UpdateItem(updateMenu);
             if (result) TempData["success"] = $"Menu Item {ErrorMessagesResource.EditedSuccessfully}";

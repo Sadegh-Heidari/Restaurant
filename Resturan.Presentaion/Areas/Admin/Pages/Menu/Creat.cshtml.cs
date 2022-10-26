@@ -75,7 +75,7 @@ namespace Resturan.Presentation.Areas.Admin.Pages.Menu
             creatMenu.Descriptaion = CreatView.Description;
             creatMenu.FoodTypeName = CreatView.FoodTypeId;
             creatMenu.Image = pathImage;
-            creatMenu.Price = CreatView.Price;
+            creatMenu.Price = CreatView.Price.ToString();
             await _applicationMenu.AddItem(creatMenu);
             TempData["success"] = $"Menu Item {ErrorMessagesResource.CreatedSuccessfully}";
             return RedirectToPage("./Index");
