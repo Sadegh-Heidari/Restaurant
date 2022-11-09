@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resturan.Application.Service.DTO.OrderHeader
+namespace Resturan.Application.Service.DTO.ShoppingCart
 {
-    public class GetOrderHeader:IDisposable
+    public class FindShopCartDto:IDisposable
     {
-        public string? OrderId { get; set; }
+        public string UserEmail { get; set; }
 
         public void Dispose()
         {

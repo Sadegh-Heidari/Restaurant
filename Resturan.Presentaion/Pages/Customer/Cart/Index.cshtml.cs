@@ -13,7 +13,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
         private IApplicationShoppingCart _shoppingCart { get; }
         private IUserApplication _userApplication { get; }
         public IEnumerable<ShoppingCartDto> ShoppingCarts { get; set; }
-        private GetShopCartDto _shoppingCartDto { get; set; }
+        private FindShopCartDto _shoppingCartDto { get; set; }
         private OperationShoppingDto _operationShoppingDto { get; set; }
         public IndexModel(IApplicationShoppingCart shoppingCart, IUserApplication userApplication)
         {

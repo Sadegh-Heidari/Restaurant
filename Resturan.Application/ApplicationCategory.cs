@@ -64,9 +64,9 @@ namespace Resturan.Application
             return result;
         }
 
-        public Task<CategoryDTO?> GetCategoryById(string id)
+        public async Task<CategoryDTO?> GetCategoryById(string id)
         {
-            var result = _unitOfWork.CategoryRepository.GetByFilterAsync(x => new CategoryDTO
+            var result = await _unitOfWork.CategoryRepository.GetByFilterAsync(x => new CategoryDTO
             {
                 GUID = x.Guid,
                 Name = x.Name,

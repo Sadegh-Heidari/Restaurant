@@ -6,6 +6,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart.ViewModels
 {
 	public class SummaryViewModels:IDisposable
 	{
+        
         [Display(Name = "Pick Up Name")]
         [Required]
         public string? PickupName { get; set; }

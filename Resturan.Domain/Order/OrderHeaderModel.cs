@@ -19,6 +19,8 @@ namespace Resturan.Domain.Order
         public DateTime OrderDate { get; private set; }
         public DateTime PickupTime { get; private set; }
         public DateTime PickupDate { get; private set; }
+        public string? SessionId { get; private set; }
+        public string? PaymentIntentId { get; private set; }
         public ICollection<OrderDetailModel> OrderDetail { get; private set; }
 
         public OrderHeaderModel(string email, string pickupName, string phoneNumber, string comments, float orderTotal, string status, DateTime pickupTime, DateTime pickupDate)
@@ -32,6 +34,17 @@ namespace Resturan.Domain.Order
             OrderDate = DateTime.Now;
             PickupTime = pickupTime;
             PickupDate = pickupDate;
+        }
+
+        public void AddPayment(string SessionId, string paymentIntentId)
+        {
+            this.SessionId = SessionId;
+            this.PaymentIntentId = paymentIntentId;
+        }
+
+        public void ChangeStatus(string Status)
+        {
+            this.Status = Status;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Resturan.Application
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddOrderHeader(OrderHeaderDto dto, IEnumerable<OrderDetailDto> orDto)
+        public async Task<string> AddOrder(OrderHeaderDto dto, IEnumerable<OrderDetailDto> orDto)
         {
             var model = new OrderHeaderModel(dto.UserEmail!, dto.PickupName!, dto.PhoneNumber!, dto.Comments!, (float)dto.OrderTotal,
                 dto.Status!, dto.PickupTime, dto.PickupDate);
@@ -31,7 +31,43 @@ namespace Resturan.Application
               await _unitOfWork.OrderDetail.AddAsync(order);
            }
             _unitOfWork.Save();
+            return model.Guid!;
         }
 
+        public async Task AddSessionPayment(AddSesionPaymentDto dto)
+        {
+            var findModel = await _unitOfWork.OrderHeader.GetOrderHeaderAsync(x => x.Guid == dto.OrderId);
+            findModel!.AddPayment(dto.SessionId,dto.PaymentIntentId);
+            _unitOfWork.OrderHeader.Update(findModel);
+            _unitOfWork.Save();
+        }
+
+        public async Task<OrderHeaderDto?> GetOrderHeader(GetOrderHeader dto)
+        {
+            var model = await _unitOfWork.OrderHeader.GetByFilterAsync(x => new OrderHeaderDto()
+            {
+                 Comments = x.Comments,
+                OrderTotal = x.OrderTotal,
+                PaymentIntentId = x.PaymentIntentId,
+                PickupTime = x.PickupTime,
+                PhoneNumber = x.PhoneNumber,
+                PickupDate = x.PickupDate,
+                PickupName = x.PickupName,
+                SeesionId = x.SessionId,
+                Status = x.Status,
+                UserEmail = x.Email
+            }, x => x.Guid == dto.OrderId);
+           
+           return model;
+        }
+
+        public async Task ChangeStatusOrderHeader(ChangeStatusOrder dto)
+        {
+            var model = await _unitOfWork.OrderHeader.GetOrderHeaderAsync(x => x.Guid == dto.OrderId);
+           model!.ChangeStatus(dto.Status);
+           _unitOfWork.OrderHeader.Update(model);
+           _unitOfWork.Save();
+
+        }
     }
 }

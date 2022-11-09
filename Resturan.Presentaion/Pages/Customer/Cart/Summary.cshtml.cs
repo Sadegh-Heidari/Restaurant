@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.OrderHeader;
 using Resturan.Application.Service.DTO.ShoppingCart;
+using Resturan.Infrastructure.Tools.Tools;
 using Resturan.Presentation.Pages.Customer.Cart.ViewModels;
+using Stripe;
+using Stripe.Checkout;
 
 namespace Resturan.Presentation.Pages.Customer.Cart
 {
@@ -17,10 +20,11 @@ namespace Resturan.Presentation.Pages.Customer.Cart
         private IApplicationStatus _status { get; }
         private IApplicationOrder _applicationOrder { get; }
         private IUserApplication _userApplication { get; }
-        private OperationShoppingDto _operationShoppingDto { get; set; }
+        private FindShopCartDto _findCart { get; set; }
         private OrderHeaderDto _orderHeader { get; set; }
         private List<OrderDetailDto> _orderDetail { get; set; }
         private DeleteAllCart _deleteAllCart { get; set; }
+        private AddSesionPaymentDto _addSesionPayment { get; set; }
        [BindProperty] public SummaryViewModels SummaryView { get; set; }
        public IEnumerable<GetDetailsShoppingCart> DetailsShoppingCarts { get; set; }
         public SummaryModel(IApplicationShoppingCart shoppingCart, IApplicationOrder applicationOrder, IUserApplication userApplication, IApplicationStatus status)
@@ -29,11 +33,12 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             _applicationOrder = applicationOrder;
             _userApplication = userApplication;
             _status = status;
-            _operationShoppingDto = new();
+            _findCart = new();
             SummaryView = new();
             _orderHeader = new();
             _orderDetail = new List<OrderDetailDto>();
             _deleteAllCart = new();
+            _addSesionPayment = new();
         }
 
         public async Task<IActionResult> OnGet()
@@ -44,8 +49,8 @@ namespace Resturan.Presentation.Pages.Customer.Cart
                 return BadRequest();
             }
 
-            _operationShoppingDto.UserEmail = user.Email;
-            DetailsShoppingCarts = await _shoppingCart.DetailsShoppingCart(_operationShoppingDto);
+            _findCart.UserEmail = user.Email;
+            DetailsShoppingCarts = await _shoppingCart.FindCart(_findCart);
             if (DetailsShoppingCarts.Count()==0) return BadRequest();
             SummaryView.PickupName = user.UserName;
             SummaryView.PhoneNumber = user.PhoneNumber;
@@ -61,8 +66,8 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             {
                 return BadRequest();
             }
-            _operationShoppingDto.UserEmail = user.Email;
-            DetailsShoppingCarts = await _shoppingCart.DetailsShoppingCart(_operationShoppingDto);
+            _findCart.UserEmail = user.Email;
+            DetailsShoppingCarts = await _shoppingCart.FindCart(_findCart);
             if (DetailsShoppingCarts.Count() == 0) return BadRequest();
             if (!ModelState.IsValid)
             {
@@ -92,10 +97,49 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             {
                 _orderHeader.Comments = SummaryView.Comments;
             }
-            await _applicationOrder.AddOrderHeader(_orderHeader, _orderDetail);
-            _deleteAllCart.UserEmail = user.Email!;
-            await _shoppingCart.DeleteAllCart(_deleteAllCart);
-            return RedirectToPage("/Customer/Home/Index");
+           var OrderId= await _applicationOrder.AddOrder(_orderHeader, _orderDetail);
+           var domain = "https://localhost:7023/";
+           StripeConfiguration.ApiKey = StripPayment.SecretKey;
+           var options = new SessionCreateOptions
+           {
+               LineItems = new List<SessionLineItemOptions>()
+               ,
+               PaymentMethodTypes = new List<string>
+               {
+                   "card",
+               },
+               Mode = "payment",
+               SuccessUrl = domain + $"Customer/Cart/OrderConfirmation?id={OrderId}",
+               CancelUrl = domain + "Customer/Cart/Index",
+           };
+
+           //add line items
+           foreach (var item in DetailsShoppingCarts)
+           {
+               var sessionLineItem = new SessionLineItemOptions
+               {
+                   PriceData = new SessionLineItemPriceDataOptions
+                   {
+                       //7.99->799
+                       UnitAmount = (long)(Convert.ToDouble(item.Price) * 100),
+                       Currency = "usd",
+                       ProductData = new SessionLineItemPriceDataProductDataOptions
+                       {
+                           Name = item.Name
+                       },
+                   },
+                   Quantity = item.Count
+               };
+               options.LineItems.Add(sessionLineItem);
+           }
+           var service = new SessionService();
+           Session session = service.Create(options);
+           Response.Headers.Add("Location", session.Url);
+           _addSesionPayment.OrderId = OrderId;
+           _addSesionPayment.SessionId = session.Id;
+           _addSesionPayment.PaymentIntentId = session.PaymentIntentId;
+           await _applicationOrder.AddSessionPayment(_addSesionPayment);
+           return new StatusCodeResult(303);
         }
     }
 }

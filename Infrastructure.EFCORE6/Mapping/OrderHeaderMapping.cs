@@ -19,6 +19,8 @@ namespace Resturan.Infrastructure.EFCORE6.Mapping
             builder.Property(x => x.PhoneNumber).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(200).IsRequired();
             builder.Property(x => x.PickupName).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.SessionId).HasMaxLength(200);
+            builder.Property(x => x.PaymentIntentId).HasMaxLength(200);
             builder.Property(x => x.Status).HasMaxLength(200).IsRequired();
             builder.Property(x => x.PickupDate).IsRequired();
             builder.Property(x => x.PickupTime).IsRequired();

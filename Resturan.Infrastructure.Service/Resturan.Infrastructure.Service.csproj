@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Resturan.Application.Query\Resturan.Application.Query.csproj" />
     <ProjectReference Include="..\Resturan.Application\Resturan.Application.csproj" />
     <ProjectReference Include="..\Resturan.Domain\Resturan.Domain.csproj" />
+    <ProjectReference Include="..\Resturan.Infrastructure.Tools\Resturan.Infrastructure.Tools.csproj" />
   </ItemGroup>
 
 </Project>

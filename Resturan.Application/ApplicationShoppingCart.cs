@@ -19,7 +19,7 @@ namespace Resturan.Application
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<ShoppingCartDto>> GetAllCart(GetShopCartDto dto)
+        public async Task<IEnumerable<ShoppingCartDto>> GetAllCart(FindShopCartDto dto)
         {
             var result = await _unitOfWork.ShoppingCartRepository.GetAllAsync(x => new ShoppingCartDto
             {
@@ -89,7 +89,7 @@ namespace Resturan.Application
             return true;
         }
 
-        public async Task<IEnumerable<GetDetailsShoppingCart>> DetailsShoppingCart(OperationShoppingDto dto)
+        public async Task<IEnumerable<GetDetailsShoppingCart>> FindCart(FindShopCartDto dto)
         {
             var result = await _unitOfWork.ShoppingCartRepository.GetAllAsync(x => new GetDetailsShoppingCart
             {

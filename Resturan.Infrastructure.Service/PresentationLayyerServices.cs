@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Resturan.Application;
 using Resturan.Application.Query;
@@ -8,6 +9,7 @@ using Resturan.Application.Service.DTO.Category;
 using Resturan.Domain.Services;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.EFCORE6.Repositories;
+using Resturan.Infrastructure.Tools.Tools;
 
 namespace Resturan.Infrastructure.Service
 {
@@ -15,6 +17,7 @@ namespace Resturan.Infrastructure.Service
     {
         public static void AddService(this IServiceCollection service,string connection)
         {
+            
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRepositoryCategory, RepositoryCategory>();
             service.AddScoped<IRepositoryFoodType, RepositoryFoodType>();

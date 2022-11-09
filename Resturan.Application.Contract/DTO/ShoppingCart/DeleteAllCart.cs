@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resturan.Application.Service.DTO.ShoppingCart
 {
-	public class DeleteAllCart:GetShopCartDto
+	public class DeleteAllCart:FindShopCartDto
 	{
 	}
 }

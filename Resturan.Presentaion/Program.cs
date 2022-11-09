@@ -1,7 +1,10 @@
 using Acc.Bootstraper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Resturan.Infrastructure.EFCORE6.Context;
 using Resturan.Infrastructure.Service;
+using Resturan.Infrastructure.Tools.Tools;
 using Resturan.Presentation.Filters;
 using Resturan.Presentation.Middelware;
 
@@ -12,6 +15,9 @@ builder.Services.AddRazorPages(op =>
     op.Conventions.AuthorizeAreaFolder("Admin", "/","AccessArea");
 });
 var ConnectionStrign = builder.Configuration["ConnectionString"];
+StripPayment.SecretKey = builder.Configuration.GetSection("Strip:SecretKey").Get<string>();
+StripPayment.PublishableKey = builder.Configuration.GetSection("Strip:PublishKey").Get<string>();
+builder.Services.Configure<StripPayment>(builder.Configuration.GetSection("Strip"));
 builder.Services.AddService(ConnectionStrign);
 builder.Services.AccService(ConnectionStrign, "/Reg/Login", "/Errors/AccessDenied/Access");
 builder.Services.AddAuthorization(op =>
@@ -46,7 +52,7 @@ app.UseCsp(option =>
 {
     option.ScriptSources(x =>
         x.Self().CustomSources(
-            "cdn.tiny.cloud", "cdn.jsdelivr.net"));
+            "cdn.tiny.cloud", "cdn.jsdelivr.net", "polyfill.io", "js.stripe.com"));
     
 });
 

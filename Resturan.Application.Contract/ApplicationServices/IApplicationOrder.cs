@@ -9,6 +9,9 @@ namespace Resturan.Application.Service.ApplicationServices
 {
     public interface IApplicationOrder
     {
-        Task AddOrderHeader(OrderHeaderDto dto,IEnumerable<OrderDetailDto> orDto);
+        Task<string> AddOrder(OrderHeaderDto dto,IEnumerable<OrderDetailDto> orDto);
+        Task AddSessionPayment(AddSesionPaymentDto dto);
+        Task<OrderHeaderDto?> GetOrderHeader(GetOrderHeader dto);
+        Task ChangeStatusOrderHeader(ChangeStatusOrder dto);
     }
 }
