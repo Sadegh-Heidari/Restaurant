@@ -10,20 +10,13 @@ using Resturan.Presentation.Middelware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-builder.Services.AddRazorPages(op =>
-{
-    op.Conventions.AuthorizeAreaFolder("Admin", "/","AccessArea");
-});
+builder.Services.AddRazorPages();
 var ConnectionStrign = builder.Configuration["ConnectionString"];
 StripPayment.SecretKey = builder.Configuration.GetSection("Strip:SecretKey").Get<string>();
 StripPayment.PublishableKey = builder.Configuration.GetSection("Strip:PublishKey").Get<string>();
 builder.Services.Configure<StripPayment>(builder.Configuration.GetSection("Strip"));
 builder.Services.AddService(ConnectionStrign);
 builder.Services.AccService(ConnectionStrign, "/Reg/Login", "/Errors/AccessDenied/Access");
-builder.Services.AddAuthorization(op =>
-{
-    op.AddPolicy("AccessArea", x=>x.RequireRole("Admin"));
-});
 //builder.Services.AddAccountServices(builder.Configuration.GetConnectionString("sql"));
 var app = builder.Build();
 app.Services.CreatDataBase();

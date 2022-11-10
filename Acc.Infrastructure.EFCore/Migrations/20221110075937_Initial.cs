@@ -4,7 +4,7 @@
 
 namespace Acc.Infrastructure.EFCore.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,37 +65,35 @@ namespace Acc.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "RoleName" },
                 values: new object[,]
                 {
-                    { "3062d373-692a-4719-af17-e539348cedf5", "Kitchen" },
-                    { "383cac8c-52db-4910-9d82-436ec592b223", "Admin" },
-                    { "7d873ea9-74df-417a-b56a-660d16d87a27", "FrontDesk" }
+                    { "59ef6387-d9d6-4abc-8d9b-d6866de4ad2a", "Admin" },
+                    { "8ffc6ae4-656b-4e9d-b50c-51478010667e", "FrontDesk" },
+                    { "e1263198-f41f-4b0c-86e1-ee8f409b588a", "Kitchen" }
                 });
-
+           
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Email", "Password", "PhoneConfirmed", "PhoneNumber", "UserName" },
                 values: new object[,]
                 {
-                    { "130447bc-a90b-418d-8e2c-fbc5a710dd80", "Kitchen@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "Kitchen" },
-                    { "c2fba437-1de8-440b-902d-8dda014454e0", "Admin@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "Manager" },
-                    { "ec5575d0-b739-46f1-b91b-d30e26db1491", "FrontDesk@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "FrontDesk" }
+                    { "046c8ee8-8d71-43f1-9a0a-72f7b72a82a2", "Admin@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "Manager" },
+                    { "553770b6-d36f-44df-9756-95149a04a5dc", "FrontDesk@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "FrontDesk" },
+                    { "b57448c6-f5c6-4e76-9d83-3b082af08123", "Kitchen@gmail.com", "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=", false, "111111", "Kitchen" }
+                });
+            migrationBuilder.InsertData(
+                table: "UserRole",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "59ef6387-d9d6-4abc-8d9b-d6866de4ad2a", "046c8ee8-8d71-43f1-9a0a-72f7b72a82a2" },
+                    { "8ffc6ae4-656b-4e9d-b50c-51478010667e", "553770b6-d36f-44df-9756-95149a04a5dc" },
+                    { "e1263198-f41f-4b0c-86e1-ee8f409b588a", "b57448c6-f5c6-4e76-9d83-3b082af08123" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRole_UserId",
-                table: "UserRole",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "UserRole");
-
-            migrationBuilder.DropTable(
-                name: "Role");
-
-            migrationBuilder.DropTable(
-                name: "User");
+            
         }
     }
 }

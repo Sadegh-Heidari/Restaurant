@@ -1,6 +1,7 @@
 using Acc.Domain.Models;
 using Acc.Services.DTO;
 using Acc.Services.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,8 @@ using Resturan.Presentation.Areas.Admin.Pages.Users.ViewModel;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Users
 {
+    [Authorize(Roles = "Admin")]
+
     public class AddRoleModel : PageModel
     {
         private UserDTO userDTO { get; set; }

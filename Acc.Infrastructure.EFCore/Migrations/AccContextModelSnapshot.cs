@@ -34,6 +34,23 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "59ef6387-d9d6-4abc-8d9b-d6866de4ad2a",
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "e1263198-f41f-4b0c-86e1-ee8f409b588a",
+                            RoleName = "Kitchen"
+                        },
+                        new
+                        {
+                            Id = "8ffc6ae4-656b-4e9d-b50c-51478010667e",
+                            RoleName = "FrontDesk"
+                        });
                 });
 
             modelBuilder.Entity("Acc.Domain.Models.UserRole", b =>
@@ -49,33 +66,6 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = "3062d373-692a-4719-af17-e539348cedf5",
-                            UserId = "c2fba437-1de8-440b-902d-8dda014454e0"
-                        },
-                        new
-                        {
-                            RoleId = "383cac8c-52db-4910-9d82-436ec592b223",
-                            UserId = "c2fba437-1de8-440b-902d-8dda014454e0"
-                        },
-                        new
-                        {
-                            RoleId = "7d873ea9-74df-417a-b56a-660d16d87a27",
-                            UserId = "c2fba437-1de8-440b-902d-8dda014454e0"
-                        },
-                        new
-                        {
-                            RoleId = "3062d373-692a-4719-af17-e539348cedf5",
-                            UserId = "130447bc-a90b-418d-8e2c-fbc5a710dd80"
-                        },
-                        new
-                        {
-                            RoleId = "7d873ea9-74df-417a-b56a-660d16d87a27",
-                            UserId = "ec5575d0-b739-46f1-b91b-d30e26db1491"
-                        });
                 });
 
             modelBuilder.Entity("Acc.Domain.Models.Users", b =>
@@ -109,6 +99,35 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "046c8ee8-8d71-43f1-9a0a-72f7b72a82a2",
+                            Email = "Admin@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "Manager"
+                        },
+                        new
+                        {
+                            Id = "b57448c6-f5c6-4e76-9d83-3b082af08123",
+                            Email = "Kitchen@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "Kitchen"
+                        },
+                        new
+                        {
+                            Id = "553770b6-d36f-44df-9756-95149a04a5dc",
+                            Email = "FrontDesk@gmail.com",
+                            Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
+                            PhoneConfirmed = false,
+                            PhoneNumber = "111111",
+                            UserName = "FrontDesk"
+                        });
                 });
 
             modelBuilder.Entity("Acc.Domain.Models.UserRole", b =>

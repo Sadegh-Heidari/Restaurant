@@ -12,8 +12,8 @@ using Resturan.Infrastructure.EFCORE6.Context;
 namespace Resturan.Infrastructure.EFCORE6.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221109101333_AddSession")]
-    partial class AddSession
+    [Migration("20221110061128_addorder")]
+    partial class addorder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,8 +115,11 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
 
             modelBuilder.Entity("Resturan.Domain.Order.OrderHeaderModel", b =>
                 {
-                    b.Property<string>("Guid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("OrderNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderNumber"), 1L, 1);
 
                     b.Property<string>("Comments")
                         .IsRequired()
@@ -131,6 +134,9 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("Guid")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -141,7 +147,6 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("PaymentIntentId")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -162,7 +167,6 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SessionId")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -171,7 +175,7 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Guid");
+                    b.HasKey("OrderNumber");
 
                     b.ToTable("OrderHeader", (string)null);
                 });
@@ -196,9 +200,8 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("OrderID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Price")
                         .IsRequired()

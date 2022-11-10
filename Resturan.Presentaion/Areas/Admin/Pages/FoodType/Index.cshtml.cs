@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application;
@@ -10,6 +11,7 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.FoodType
 {
+    [Authorize(Roles = "Admin")]
 
     public class IndexModel : PageModel
     {

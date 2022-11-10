@@ -10,6 +10,7 @@ namespace Resturan.Domain.Order
 {
     public class OrderHeaderModel:BaseModel
     {
+        public int OrderNumber { get; private set; }
         public string Email { get; private set; }
         public string PickupName { get; private set; }
         public string PhoneNumber { get; private set; }

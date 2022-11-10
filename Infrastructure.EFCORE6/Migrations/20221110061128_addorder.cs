@@ -5,16 +5,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Resturan.Infrastructure.EFCORE6.Migrations
 {
-    public partial class Order : Migration
+    public partial class addorder : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-          
+
             migrationBuilder.CreateTable(
                 name: "OrderHeader",
                 columns: table => new
                 {
-                    Guid = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PickupName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -24,20 +25,25 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PickupTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PickupDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderHeader", x => x.Guid);
+                    table.PrimaryKey("PK_OrderHeader", x => x.OrderNumber);
                 });
+
+            
 
             migrationBuilder.CreateTable(
                 name: "OrderDetail",
                 columns: table => new
                 {
                     Guid = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
                     MenuItemId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Count = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Price = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -57,30 +63,15 @@ namespace Resturan.Infrastructure.EFCORE6.Migrations
                         name: "FK_OrderDetail_OrderHeader_OrderID",
                         column: x => x.OrderID,
                         principalTable: "OrderHeader",
-                        principalColumn: "Guid",
+                        principalColumn: "OrderNumber",
                         onDelete: ReferentialAction.Cascade);
                 });
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "OrderDetail");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingCart");
-
-            migrationBuilder.DropTable(
-                name: "OrderHeader");
-
-            migrationBuilder.DropTable(
-                name: "MenuItem");
-
-            migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "FoodType");
+          
         }
     }
 }

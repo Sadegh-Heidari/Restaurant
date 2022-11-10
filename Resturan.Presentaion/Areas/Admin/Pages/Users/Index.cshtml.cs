@@ -1,10 +1,13 @@
 using Acc.Services.DTO;
 using Acc.Services.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Users
 {
+    [Authorize(Roles = "Admin")]
+
     public class IndexModel : PageModel
     {
         private IUserApplication _user { get; }

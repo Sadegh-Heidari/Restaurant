@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
@@ -6,6 +7,8 @@ using System.Drawing.Printing;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu
 {
+    [Authorize(Roles = "Admin")]
+
     public class IndexModel : PageModel
     {
         public Pageniation pagemodel { get; set; }

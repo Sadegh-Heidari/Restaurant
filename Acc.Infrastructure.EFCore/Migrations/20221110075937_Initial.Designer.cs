@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AccContext))]
-    [Migration("20221017130426_initial")]
-    partial class initial
+    [Migration("20221110075937_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,17 +40,17 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "383cac8c-52db-4910-9d82-436ec592b223",
+                            Id = "59ef6387-d9d6-4abc-8d9b-d6866de4ad2a",
                             RoleName = "Admin"
                         },
                         new
                         {
-                            Id = "3062d373-692a-4719-af17-e539348cedf5",
+                            Id = "e1263198-f41f-4b0c-86e1-ee8f409b588a",
                             RoleName = "Kitchen"
                         },
                         new
                         {
-                            Id = "7d873ea9-74df-417a-b56a-660d16d87a27",
+                            Id = "8ffc6ae4-656b-4e9d-b50c-51478010667e",
                             RoleName = "FrontDesk"
                         });
                 });
@@ -105,7 +105,7 @@ namespace Acc.Infrastructure.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c2fba437-1de8-440b-902d-8dda014454e0",
+                            Id = "046c8ee8-8d71-43f1-9a0a-72f7b72a82a2",
                             Email = "Admin@gmail.com",
                             Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
                             PhoneConfirmed = false,
@@ -114,7 +114,7 @@ namespace Acc.Infrastructure.EFCore.Migrations
                         },
                         new
                         {
-                            Id = "130447bc-a90b-418d-8e2c-fbc5a710dd80",
+                            Id = "b57448c6-f5c6-4e76-9d83-3b082af08123",
                             Email = "Kitchen@gmail.com",
                             Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
                             PhoneConfirmed = false,
@@ -123,7 +123,7 @@ namespace Acc.Infrastructure.EFCore.Migrations
                         },
                         new
                         {
-                            Id = "ec5575d0-b739-46f1-b91b-d30e26db1491",
+                            Id = "553770b6-d36f-44df-9756-95149a04a5dc",
                             Email = "FrontDesk@gmail.com",
                             Password = "ea661MuJdwQ2K0rmZRlEz7xcXpadVVD+FQ5prf2UBAA=",
                             PhoneConfirmed = false,

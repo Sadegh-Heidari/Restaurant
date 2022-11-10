@@ -14,7 +14,7 @@ namespace Resturan.Infrastructure.EFCORE6.Mapping
         public void Configure(EntityTypeBuilder<OrderHeaderModel> builder)
         {
             builder.ToTable("OrderHeader");
-            builder.HasKey(x => x.Guid);
+            builder.HasKey(x => x.OrderNumber);
             builder.Property(x => x.Comments).HasMaxLength(350);
             builder.Property(x => x.PhoneNumber).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(200).IsRequired();

@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,8 @@ using Resturan.Presentation.Filters;
 
 namespace Resturan.Presentation.Areas.Admin.Pages.Menu
 {
+    [Authorize(Roles = "Admin")]
+
     public class UpdateModel : PageModel
     {
         private IApplicationMenuItem _applicationMenu { get; }
