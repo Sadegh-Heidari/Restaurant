@@ -39,6 +39,7 @@ namespace Resturan.Presentation.Pages.Order
         {
             if(Ordernumber==null) return BadRequest();
             _changeStatus.Status = _applicationStatus.StatusCompleted;
+            _changeStatus.OrderId = Ordernumber;
             await _applicationOrder.ChangeStatusOrderHeader(_changeStatus);
             return RedirectToPage("./OrderList");
         }

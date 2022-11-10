@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using Resturan.Application.Service.ApplicationServices
+@using Resturan.Application.Service.DTO.ShoppingCart
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -23,7 +26,10 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link text-light " asp-page="/Customer/Cart/Index">
-                                <i class="bi bi-cart"></i>
+                                <i class="bi bi-cart">
+                                    
+                                    
+                                </i>
                             </a>
                         </li>
                         @{
@@ -38,6 +44,13 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-light"  asp-page="/Order/OrderList">Order List</a>
+                                </li>
+
+                            }
+                            if (User.IsInRole("Kitchen") || User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light"  asp-page="/Order/Kitchen">Kitchen</a>
                                 </li>
 
                             }

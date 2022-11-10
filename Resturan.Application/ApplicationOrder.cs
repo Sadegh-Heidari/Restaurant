@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.OrderHeader;
 using Resturan.Domain.Order;
@@ -14,10 +16,11 @@ namespace Resturan.Application
     public class ApplicationOrder:IApplicationOrder
     {
         private IUnitOfWork _unitOfWork { get; }
-
-        public ApplicationOrder(IUnitOfWork unitOfWork)
+        private IApplicationStatus _applicationStatus { get; }
+        public ApplicationOrder(IUnitOfWork unitOfWork, IApplicationStatus applicationStatus)
         {
             _unitOfWork = unitOfWork;
+            _applicationStatus = applicationStatus;
         }
 
         public async Task<string> AddOrder(OrderHeaderDto dto, IEnumerable<OrderDetailDto> orDto)
@@ -98,6 +101,7 @@ namespace Resturan.Application
                 OrderNumber = x.OrderNumber,
                 OrderTotal = x.OrderTotal.ToString(),
                 PickupTime = x.PickupTime.ToString(),
+                Status = x.Status,
             }, x => x.Status == Status);
             return result;
         }
@@ -111,6 +115,38 @@ namespace Resturan.Application
                 Price = x.Price,
             },x=>x.OrderID==Convert.ToInt32(OrderNumber));
             return model;
+        }
+
+        public async Task<IEnumerable<OrderKitchen>> GetOrderKitchen(string Status)
+        {
+            List<OrderKitchen> Kitchen = new List<OrderKitchen>();
+            var resultheadr = await _unitOfWork.OrderHeader.GetAllAsync(x => new GetOrderList
+            {
+                Comment = x.Comments,
+                Email = x.Email,
+                Name = x.PickupName,
+                OrderTotal = x.OrderTotal.ToString(),
+                PickupTime = x.PickupTime.ToString(),
+                PhoneNumber = x.PhoneNumber,
+                Status = x.Status,
+                OrderNumber = Convert.ToInt32(x.OrderNumber),
+            }, x => x.Status == Status||x.Status==_applicationStatus.StatusInProcess);
+            foreach (var item in resultheadr)
+            {
+                var de = await _unitOfWork.OrderDetail.GetAllAsync(x => new GetOrderDetails
+                {
+                    Count = x.Count,
+                    FoodName = x.MenuItem.Name,
+                    Price = x.Price
+                }, x => x.OrderID == item.OrderNumber);
+                var result = new OrderKitchen
+                {
+                    OrderList = item,
+                    OrderDetails = de
+                };
+                Kitchen.Add(result);
+            }
+            return Kitchen;
         }
     }
 }

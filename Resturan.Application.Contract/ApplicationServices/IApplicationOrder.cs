@@ -16,5 +16,6 @@ namespace Resturan.Application.Service.ApplicationServices
         Task ChangeStatusOrderHeader(ChangeStatusOrder dto);
         Task<IEnumerable<GetOrderList>> GetOrderHeaderList(string Status);
         Task<IEnumerable<GetOrderDetails>> GetOrderDetails(string OrderNumber);
+        Task<IEnumerable<OrderKitchen>> GetOrderKitchen(string Status);
     }
 }

@@ -99,10 +99,10 @@
                 @if (Model.OrderHeader.status == Status.StatusReady)
                 {
                     <div class="col-12 pb-2">
-                        <button type="submit" class="btn btn-primary form-control"
+                        <a type="submit" class="btn btn-primary form-control"
                                 asp-page-handler="OrderCompleted" asp-route-OrderNumber="@Model.OrderHeader.OrderNumber">
                             Complete Order
-                        </button>
+                        </a>
                     </div>
                 }
                 @if (Model.OrderHeader.status == Status.StatusReady || Model.OrderHeader.status == Status.StatusSubmitted || Model.OrderHeader.status == Status.StatusInProcess)

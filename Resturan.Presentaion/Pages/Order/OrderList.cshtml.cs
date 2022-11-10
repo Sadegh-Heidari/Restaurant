@@ -19,7 +19,7 @@ namespace Resturan.Presentation.Pages.Order
         }
 
         
-        public async Task OnGet([FromQuery] string status)
+        public async Task OnGet([FromQuery] string? status)
         {
 
             if (status == "cancelled")
@@ -41,12 +41,12 @@ namespace Resturan.Presentation.Pages.Order
                     
                     else
                     {
-                        if (status == "submited")
+                        if (status == "InProcess")
                         {
-                            OrderList= await _applicationOrder.GetOrderHeaderList(_applicationStatus.StatusSubmitted);
+                            OrderList= await _applicationOrder.GetOrderHeaderList(_applicationStatus.StatusInProcess);
                         }
                         else
-                            OrderList = await _applicationOrder.GetOrderHeaderList(_applicationStatus.StatusInProcess);
+                            OrderList = await _applicationOrder.GetOrderHeaderList(_applicationStatus.StatusSubmitted);
                     }
                 }
             }

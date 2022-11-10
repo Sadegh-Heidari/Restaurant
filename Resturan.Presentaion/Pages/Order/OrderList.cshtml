@@ -4,7 +4,7 @@
     var classAttributeCancelled = String.Empty;
     var classAttributeCompleted = String.Empty;
     var classAttributeReady = String.Empty;
-    var classAttributeSubmited = String.Empty;
+    var classAttributeInProcess = String.Empty;
     var classAttributeDeafult = String.Empty;
     var status = HttpContext.Request.Query["status"];
     if (String.IsNullOrWhiteSpace(status))
@@ -14,7 +14,7 @@
     else
     {
         if (status == "cancelled") { classAttributeCancelled = "active text-white"; }
-        if (status == "submited") { classAttributeSubmited = "active text-white"; }
+        if (status == "InProcess") { classAttributeInProcess = "active text-white"; }
         else if (status == "completed") { classAttributeCompleted = "active text-white"; }
         else if (status == "ready") { classAttributeReady = "active text-white"; }
     }
@@ -27,19 +27,19 @@
         <div class="p-2" >
             <ul class="list-group list-group-horizontal-sm">
                 <a style="text-decoration:none;"  asp-page="OrderList" asp-route-status="cancelled">
-                <li class="list-group-item @classAttributeCancelled" data-val-status="cancelled">Cancelled</li>
+                <li class="list-group-item @classAttributeCancelled" >Cancelled</li>
                 </a>
                 <a style="text-decoration:none;" asp-page="OrderList" asp-route-status="completed">
-                <li class="list-group-item @classAttributeCompleted" data-val-status="completed">Completed</li>
+                <li class="list-group-item @classAttributeCompleted" >Completed</li>
                 </a>
                 <a style="text-decoration:none;" asp-page="OrderList" asp-route-status="ready">
-                <li class="list-group-item @classAttributeReady" data-val-status="ready">Ready For PickUp</li>
+                <li class="list-group-item @classAttributeReady" >Ready For PickUp</li>
                 </a>
-                <a style="text-decoration:none;" asp-page="OrderList">
-                    <li class="list-group-item @classAttributeDeafult" data-val-status="cancelled">InProcess</li>
+                <a style="text-decoration:none;" asp-page="OrderList" asp-route-status="InProcess">
+                    <li class="list-group-item @classAttributeInProcess" >InProcess</li>
                 </a>
-                <a style="text-decoration:none;" asp-page="OrderList" asp-route-status="submited">
-                <li class="list-group-item @classAttributeSubmited" data-val-status="ready">Submited</li>
+                <a style="text-decoration:none;" asp-page="OrderList" >
+                <li class="list-group-item @classAttributeDeafult" >Submited</li>
                 </a>
             </ul>
         </div>

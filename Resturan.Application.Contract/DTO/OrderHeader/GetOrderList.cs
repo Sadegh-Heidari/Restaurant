@@ -14,6 +14,7 @@ namespace Resturan.Application.Service.DTO.OrderHeader
         public string OrderTotal { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
+        public string Status { get; set; }
         public string PickupTime { get; set; }
         public void Dispose()
         {
