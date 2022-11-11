@@ -108,6 +108,12 @@ namespace Resturan.Application
             _unitOfWork.Save();
         }
 
+        public async Task<int> GetCountCart(FindShopCartDto dto)
+        {
+            var result = await _unitOfWork.ShoppingCartRepository.GetCount(x=>x.Email==dto.UserEmail);
+            return result;
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

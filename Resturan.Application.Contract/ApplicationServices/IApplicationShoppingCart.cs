@@ -17,5 +17,6 @@ namespace Resturan.Application.Service.ApplicationServices
         Task<bool> DeleteCart(OperationShoppingDto dto);
         Task<IEnumerable<GetDetailsShoppingCart>> FindCart(FindShopCartDto dto);
         Task DeleteAllCart(DeleteAllCart dto);
+        Task<int> GetCountCart(FindShopCartDto dto);
     }
 }

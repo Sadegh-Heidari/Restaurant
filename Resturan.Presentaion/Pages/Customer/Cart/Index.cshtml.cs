@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.ShoppingCart;
+using Resturan.Presentation.Tools;
 
 namespace Resturan.Presentation.Pages.Customer.Cart
 {
@@ -12,13 +13,16 @@ namespace Resturan.Presentation.Pages.Customer.Cart
     {
         private IApplicationShoppingCart _shoppingCart { get; }
         private IUserApplication _userApplication { get; }
+        private CartShopCount _cartShopCount { get; }
+
         public IEnumerable<ShoppingCartDto> ShoppingCarts { get; set; }
         private FindShopCartDto _shoppingCartDto { get; set; }
         private OperationShoppingDto _operationShoppingDto { get; set; }
-        public IndexModel(IApplicationShoppingCart shoppingCart, IUserApplication userApplication)
+        public IndexModel(IApplicationShoppingCart shoppingCart, IUserApplication userApplication, CartShopCount cartShopCount)
         {
             _shoppingCart = shoppingCart;
             _userApplication = userApplication;
+            _cartShopCount = cartShopCount;
             _shoppingCartDto = new();
             _operationShoppingDto = new();
         }
@@ -29,6 +33,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             if(user == null) return BadRequest();
             _shoppingCartDto.UserEmail = user.Email!;
             ShoppingCarts = await _shoppingCart.GetAllCart(_shoppingCartDto);
+
             return Page();
         }
 
@@ -59,6 +64,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             _operationShoppingDto.UserEmail = user.Email;
             _operationShoppingDto.MenuItemId = id;
             var result = await _shoppingCart.DeleteCart(_operationShoppingDto);
+            await _cartShopCount.CountCartCooki(context: HttpContext);
             return RedirectToPage("./Index");
         }
     }

@@ -22,6 +22,6 @@ namespace Resturan.Domain.Services
             bool AsNoTracking = true,string? include=null);
 
         Task<int> GetCount();
-
+        Task<int> GetCount(Expression<Func<TEntity,bool>>where);
     }
 }

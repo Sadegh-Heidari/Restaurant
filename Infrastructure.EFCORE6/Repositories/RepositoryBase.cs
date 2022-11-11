@@ -144,6 +144,13 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
             return await dbset.CountAsync();
         }
 
+        public async Task<int> GetCount(Expression<Func<TEntity, bool>> where)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            query = query.Where(where);
+            var result = await query.CountAsync();
+            return result;
+        }
     }
 
 }

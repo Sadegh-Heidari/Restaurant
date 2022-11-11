@@ -1,6 +1,13 @@
 ﻿@using System.Security.Claims
 @using Resturan.Application.Service.ApplicationServices
 @using Resturan.Application.Service.DTO.ShoppingCart
+@using Resturan.Infrastructure.Tools.Tools
+@using Resturan.Presentation.Tools
+@{
+    
+    var Session = Context.Session.GetInt32("cart");
+    if (Session == null) Session = 0;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +34,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-light " asp-page="/Customer/Cart/Index">
                                 <i class="bi bi-cart">
-                                    
-                                    
+                                    (@Session)
                                 </i>
                             </a>
                         </li>

@@ -7,6 +7,7 @@ using Resturan.Infrastructure.Service;
 using Resturan.Infrastructure.Tools.Tools;
 using Resturan.Presentation.Filters;
 using Resturan.Presentation.Middelware;
+using Resturan.Presentation.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -17,6 +18,13 @@ StripPayment.PublishableKey = builder.Configuration.GetSection("Strip:PublishKey
 builder.Services.Configure<StripPayment>(builder.Configuration.GetSection("Strip"));
 builder.Services.AddService(ConnectionStrign);
 builder.Services.AccService(ConnectionStrign, "/Reg/Login", "/Errors/AccessDenied/Access");
+builder.Services.AddScoped<CartShopCount>();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 //builder.Services.AddAccountServices(builder.Configuration.GetConnectionString("sql"));
 var app = builder.Build();
 app.Services.CreatDataBase();
@@ -38,9 +46,8 @@ app.UseErrorNotFound();
 app.UseAuthentication();
 app.UseCheckIpClient();
 app.UseRouting();
-
 app.UseAuthorization();
-
+app.UseSession();
 app.UseCsp(option =>
 {
     option.ScriptSources(x =>
@@ -51,4 +58,5 @@ app.UseCsp(option =>
 
 app.MapRazorPages();
 app.MapControllers();
+
 app.Run();
