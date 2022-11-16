@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Restaurant.UsersApp.Core.Application.Services\Restaurant.UsersApp.Core.Application.Services.csproj" />
+	  <ProjectReference Include="..\..\Core\Restaurant.UsersApp.Core.Application\Restaurant.UsersApp.Core.Application.csproj" />
+	  <ProjectReference Include="..\..\Core\Restaurant.UsersApp.Core.Domain\Restaurant.UsersApp.Core.Domain.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Restaurant.MainApp.Core.Application.Contract\Restaurant.MainApp.Core.Application.Contract.csproj" />
+    <ProjectReference Include="..\..\Core\Restaurant.MainApp.Core.Application.Query\Restaurant.MainApp.Core.Application.Query.csproj" />
+    <ProjectReference Include="..\..\Core\Restaurant.MainApp.Core.Application\Restaurant.MainApp.Core.Application.csproj" />
+    <ProjectReference Include="..\..\Core\Restaurant.MainApp.Core.Domain\Restaurant.MainApp.Core.Domain.csproj" />
+    <ProjectReference Include="..\Restaurant.MainApp.Infrastructure.EFCORE6\Restaurant.MainApp.Infrastructure.EFCORE6.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,68 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Restaurant.MainApp.Core.Application.Contract.ApplicationServices
+@model Restaurant.MainApp.Presentation.Pages.Order.KitchenModel
+@{
+}
+@inject IApplicationStatus Status
+
+<h1 class="text-primary py-3">Manage Order's</h1>
+<form method="post">
+    <div class="container row bg-white p-2 mb-3 rounded">
+        @foreach (var item in Model.OredrKitchens)
+        {
+            <div class="col-12 pb-3 pt-3 mt-4 border  rounded">
+                <div class="row">
+                    <div class="col-4">
+                        Order Number : @item.OrderList.Name
+                       
+                        <ul class="text-info">
+                        @foreach (var det in item.OrderDetails)
+                        {
+                            <li>@det.FoodName x @det.Count</li>
+                        }
+                        </ul>
+                       
+                    </div>
+                    <div class="col-4 pb-2">
+                        <div class="input-group pb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-secondary border">Time</span>
+                            </div>
+                            <input type="text" class="form-control" readonly  value="@item.OrderList.PickupTime"/>
+                        </div>
+                        <textarea readonly class="rounded border form-control" rows="3">@item.OrderList.Comment</textarea>
+                    </div>
+                    <div class="col-3 offset-1 d-flex align-content-center">
+                        <div class="col-12">
+
+                            @if (item.OrderList.Status == Status.StatusSubmitted)
+                            {
+                                <button asp-page-handler="Cook" asp-route-OrderNumber="@item.OrderList.OrderNumber" type="submit" class="btn btn-primary form-control mb-3">
+                                    <i class="bi bi-check-square"></i> &nbsp; Start Cooking
+                                </button>
+
+                            }
+                           @if (item.OrderList.Status == Status.StatusInProcess)
+                           {
+                                <button asp-page-handler="Ready" asp-route-OrderNumber="@item.OrderList.OrderNumber" type="submit" class="btn btn-success form-control mb-3">
+                                   <i class="bi bi-emoji-laughing"></i> &nbsp; Order Ready
+                               </button>
+                           }
+
+                            <button asp-page-handler="Cancel" asp-route-OrderNumber="@item.OrderList.OrderNumber" type="submit" class="btn btn-warning form-control mb-3">
+                                <i class="bi bi-x-square-fill"></i> &nbsp; Cancel Order
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+ 
+
+    </div>
+
+</form>
+
+
