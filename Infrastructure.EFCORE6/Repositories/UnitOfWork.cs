@@ -18,77 +18,13 @@ namespace Resturan.Infrastructure.EFCORE6.Repositories
         private IShoppingCartRepository? _shoppingCartRepository;
         private IRepositoryOrderHeader? _orderHeader;
         private IRepositoryOrderDetail? _orderDetail;
-        public IRepositoryCategory CategoryRepository
-        {
-            get
-            {
-                if (_categoryRepository == null)
-                    _categoryRepository = new RepositoryCategory(_context!);
-                    return _categoryRepository;
-            }
-        }
-
-        public IRepositoryFoodType FoodTypeRepository
-        {
-            get
-            {
-                if(_foodTypeRepository == null) _foodTypeRepository = new RepositoryFoodType(_context!);
-                return _foodTypeRepository;
-            }
-        }
-
-        public IRepositoryMenuItem MenuItemRepository
-        {
-            get
-            {
-                if (_menuItemRepository == null)
-                {
-                    _menuItemRepository = new RepositoryMenuItem(_context!);
-                }
-
-                return _menuItemRepository;
-            }
-        }
-
-        public IShoppingCartRepository ShoppingCartRepository
-        {
-            get
-            {
-                if (_shoppingCartRepository == null)
-                {
-                    _shoppingCartRepository = new ShoppingCartRepository(_context!);
-                }
-
-                return _shoppingCartRepository;
-            }
-        }
-
-        public IRepositoryOrderHeader OrderHeader
-        {
-            get
-            {
-                if (_orderHeader == null)
-                {
-                    _orderHeader = new RepositoryOrderHeader(_context!);
-                }
-
-                return _orderHeader;
-            }
-        }
-
-        public IRepositoryOrderDetail OrderDetail
-        {
-            get
-            {
-                if (_orderDetail == null)
-                {
-                    _orderDetail = new RepositoryOrderDetail(_context!);
-                }
-
-                return _orderDetail;
-            }
-        }
-
+        public IRepositoryCategory CategoryRepository => _categoryRepository ??= new RepositoryCategory(_context!);
+        public IRepositoryFoodType FoodTypeRepository => _foodTypeRepository ??= new RepositoryFoodType(_context!);
+        public IRepositoryMenuItem MenuItemRepository => _menuItemRepository ??= new RepositoryMenuItem(_context!);
+        public IShoppingCartRepository ShoppingCartRepository =>
+            _shoppingCartRepository ??= new ShoppingCartRepository(_context!);
+        public IRepositoryOrderHeader OrderHeader => _orderHeader ??= new RepositoryOrderHeader(_context!);
+        public IRepositoryOrderDetail OrderDetail=>_orderDetail??=new RepositoryOrderDetail(_context!);
         public void Dispose()
         {
             Dispose(true);

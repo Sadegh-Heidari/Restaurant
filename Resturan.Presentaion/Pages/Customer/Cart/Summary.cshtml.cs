@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.OrderHeader;
 using Resturan.Application.Service.DTO.ShoppingCart;
@@ -17,6 +19,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
     public class SummaryModel : PageModel
     {
         private IApplicationShoppingCart _shoppingCart { get; }
+        private StripPayment strip { get; }
         private IApplicationStatus _status { get; }
         private IApplicationOrder _applicationOrder { get; }
         private IUserApplication _userApplication { get; }
@@ -27,7 +30,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
         private AddSesionPaymentDto _addSesionPayment { get; set; }
        [BindProperty] public SummaryViewModels SummaryView { get; set; }
        public IEnumerable<GetDetailsShoppingCart> DetailsShoppingCarts { get; set; }
-        public SummaryModel(IApplicationShoppingCart shoppingCart, IApplicationOrder applicationOrder, IUserApplication userApplication, IApplicationStatus status)
+        public SummaryModel(IOptions<StripPayment> strip,IApplicationShoppingCart shoppingCart, IApplicationOrder applicationOrder, IUserApplication userApplication, IApplicationStatus status)
         {
             _shoppingCart = shoppingCart;
             _applicationOrder = applicationOrder;
@@ -39,6 +42,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             _orderDetail = new List<OrderDetailDto>();
             _deleteAllCart = new();
             _addSesionPayment = new();
+            this.strip = strip.Value;
         }
 
         public async Task<IActionResult> OnGet()
@@ -99,7 +103,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             }
            var OrderId= await _applicationOrder.AddOrder(_orderHeader, _orderDetail);
            var domain = "https://localhost:7023/";
-           StripeConfiguration.ApiKey = StripPayment.SecretKey;
+           StripeConfiguration.ApiKey = strip.SecretKey;
            var options = new SessionCreateOptions
            {
                LineItems = new List<SessionLineItemOptions>()

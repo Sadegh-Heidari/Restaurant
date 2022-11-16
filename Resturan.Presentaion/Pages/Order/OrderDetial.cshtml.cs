@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.OrderHeader;
 using Resturan.Infrastructure.Tools.Tools;
@@ -11,6 +12,7 @@ namespace Resturan.Presentation.Pages.Order
     [Authorize(Roles = "Admin,FrontDesk")]
     public class OrderDetialModel : PageModel
     {
+        private StripPayment strip { get; }
         private IApplicationOrder _applicationOrder { get; }
         private IApplicationStatus _applicationStatus { get; }
         private ChangeStatusOrder _changeStatus { get; set; }
@@ -18,12 +20,13 @@ namespace Resturan.Presentation.Pages.Order
 
         public IEnumerable<GetOrderDetails> OrderDetails { get; set; }
 
-        public OrderDetialModel(IApplicationOrder applicationOrder, IApplicationStatus applicationStatus)
+        public OrderDetialModel(IOptions<StripPayment> strip,IApplicationOrder applicationOrder, IApplicationStatus applicationStatus)
         {
             _applicationOrder = applicationOrder;
             _applicationStatus = applicationStatus;
             OrderHeader = new();
             _changeStatus = new();
+            this.strip = strip.Value;
         }
 
         public async Task<IActionResult> OnGet([FromQuery] string OrderNumber)
@@ -55,7 +58,7 @@ namespace Resturan.Presentation.Pages.Order
         public async Task<IActionResult> OnGetRefundOrder([FromQuery] string OrderNumber)
         {
             var order = await _applicationOrder.GetOrderHeader(OrderNumber);
-            StripeConfiguration.ApiKey = StripPayment.SecretKey;
+            StripeConfiguration.ApiKey = strip.SecretKey;
 
             var options = new RefundCreateOptions
             {

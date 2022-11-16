@@ -14,17 +14,21 @@ namespace Resturan.Presentation.Tools
             _shoppingCart = shoppingCart;
         }
 
-        public async Task CountCartCooki(HttpContext context)
+        public async Task<string?> CountCartCooki(HttpContext context)
         {
             var claim = context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
             if (claim != null)
             {
-                var  result = await _shoppingCart.GetCountCart(new FindShopCartDto { UserEmail = claim.Value });
-                context.Session.SetInt32("cart",result);
-                return;
+              
+                var count = await _shoppingCart.GetCountCart(new FindShopCartDto
+                {
+                    UserEmail = claim.Value
+                });
+                context.Response.Cookies.Append("cart",count.ToString());
+                return count.ToString();
             }
 
-            return;
+            return null;
         }
     }
 }

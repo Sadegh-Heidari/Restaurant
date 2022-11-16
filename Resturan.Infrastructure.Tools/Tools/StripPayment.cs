@@ -8,8 +8,8 @@ namespace Resturan.Infrastructure.Tools.Tools
 {
     public  class StripPayment
     {
-        public static string PublishableKey { get; set; }
-        public static string SecretKey { get; set; }
+        public  string PublishableKey { get; set; }
+        public  string SecretKey { get; set; }
 
 
     }

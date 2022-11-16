@@ -45,6 +45,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             _operationShoppingDto.MenuItemId = id;
             _operationShoppingDto.Count = 1;
             var result = await _shoppingCart.DeIncrementCount(_operationShoppingDto);
+            TempData["cart"] = await _cartShopCount.CountCartCooki(HttpContext);
             return RedirectToPage("./Index");
         }
         public async Task<IActionResult> OnPostIncrement([FromQuery(Name = "menu")] string? id)
@@ -64,7 +65,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
             _operationShoppingDto.UserEmail = user.Email;
             _operationShoppingDto.MenuItemId = id;
             var result = await _shoppingCart.DeleteCart(_operationShoppingDto);
-            await _cartShopCount.CountCartCooki(context: HttpContext);
+            TempData["cart"] = await _cartShopCount.CountCartCooki(HttpContext);
             return RedirectToPage("./Index");
         }
     }

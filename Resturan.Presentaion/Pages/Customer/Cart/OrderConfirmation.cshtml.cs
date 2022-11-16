@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 using Resturan.Application.Service.ApplicationServices;
 using Resturan.Application.Service.DTO.OrderHeader;
 using Resturan.Application.Service.DTO.ShoppingCart;
 using Resturan.Infrastructure.Tools.Tools;
+using Resturan.Presentation.Tools;
 using Stripe;
 using Stripe.Checkout;
 using Session = Stripe.Checkout.Session;
@@ -14,20 +16,24 @@ namespace Resturan.Presentation.Pages.Customer.Cart
     [Authorize]
     public class OrderConfirmationModel : PageModel
     {
+        private StripPayment strip { get; }
         private IApplicationOrder _applicationOrder { get; }
         private IApplicationStatus _applicationStatus { get; }
         private IApplicationShoppingCart _applicationShoppingCart { get; }
         public GetOrderHeader orderHeader { get; set; }
         private ChangeStatusOrder _changeStatusOrder { get; set; }
         private DeleteAllCart _deleteAllCart { get; set; }
-        public OrderConfirmationModel(IApplicationOrder applicationOrder, IApplicationStatus applicationStatus, IApplicationShoppingCart applicationShoppingCart)
+        private CartShopCount _cartShop { get; }
+        public OrderConfirmationModel(IOptions<StripPayment> strip,IApplicationOrder applicationOrder, IApplicationStatus applicationStatus, IApplicationShoppingCart applicationShoppingCart, CartShopCount cartShop)
         {
             _applicationOrder = applicationOrder;
             _applicationStatus = applicationStatus;
             _applicationShoppingCart = applicationShoppingCart;
+            _cartShop = cartShop;
             _deleteAllCart = new();
             orderHeader = new();
             _changeStatusOrder = new();
+            this.strip = strip.Value;
         }
 
         public async Task<IActionResult> OnGet([FromQuery]string id)
@@ -40,7 +46,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
                 return BadRequest();
             }
             var service = new SessionService();
-            StripeConfiguration.ApiKey = StripPayment.SecretKey;
+            StripeConfiguration.ApiKey = strip.SecretKey;
              Session session =  service.Get(find.SeesionId);
              if (session.PaymentStatus.ToLower() == "paid")
              {
@@ -53,6 +59,7 @@ namespace Resturan.Presentation.Pages.Customer.Cart
 
              _deleteAllCart.UserEmail = find.UserEmail!;
             await _applicationShoppingCart.DeleteAllCart(_deleteAllCart);
+            TempData["cart"] = await _cartShop.CountCartCooki(HttpContext);
             return Page();
         }
     }

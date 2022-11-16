@@ -20,9 +20,9 @@ namespace Resturan.Presentation.Pages.Customer
 
         public async Task OnGet()
         {
-            await _cartShopCount.CountCartCooki(HttpContext);
-            
-            var result = await _applicationQuery.GetMenuItemQueryAsync();
+           
+            TempData["cart"]= await _cartShopCount.CountCartCooki(HttpContext);
+        var result = await _applicationQuery.GetMenuItemQueryAsync();
             Customer = result?.GroupBy(x=>x.CategoryName);
         }
     }

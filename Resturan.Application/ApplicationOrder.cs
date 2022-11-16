@@ -13,7 +13,7 @@ using Resturan.Domain.Services;
 
 namespace Resturan.Application
 {
-    public class ApplicationOrder:IApplicationOrder
+    public class ApplicationOrder:IApplicationOrder,IDisposable
     {
         private IUnitOfWork _unitOfWork { get; }
         private IApplicationStatus _applicationStatus { get; }
@@ -147,6 +147,11 @@ namespace Resturan.Application
                 Kitchen.Add(result);
             }
             return Kitchen;
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }
