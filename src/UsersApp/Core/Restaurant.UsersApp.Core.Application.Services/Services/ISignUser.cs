@@ -1,7 +1,6 @@
 ﻿using Restaurant.UsersApp.Core.Application.Services.DTO;
-using Restaurant.UsersApp.Core.Application.Services.Services;
 
-namespace Restaurant.UsersApp.Infrastructure.Autnen
+namespace Restaurant.UsersApp.Core.Application.Services.Services
 {
     public interface ISignUser:IDisposable
     {
